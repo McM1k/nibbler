@@ -9,7 +9,6 @@
 /*   Updated: 2018/12/06 15:27:26 by gboudrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "IEntity.hpp"
 #include <dlfcn.h>
 #include <iostream>
 
@@ -31,6 +30,8 @@ void doStuff(void *dl_handle){
 
     stuffA_ptr();
     stuffB_ptr();
+    dlclose(dl_handle);
+    stuffA_ptr();
 }
 
 int main() {
@@ -42,7 +43,6 @@ int main() {
 
     dl_handle = dlopen("libs/lib2.so", RTLD_LAZY | RTLD_LOCAL);
     doStuff(dl_handle);
-    dlclose(dl_handle);
 
     return 1;
 }

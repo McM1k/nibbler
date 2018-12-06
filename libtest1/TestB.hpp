@@ -14,9 +14,8 @@
 # define TESTB_HPP
 
 # include <iostream>
-#include "../sources/IEntity.hpp"
 
-class TestB : public IEntity{
+class TestB {
 public:
     TestB(void) = default;
     TestB(TestB const &src) = default;
