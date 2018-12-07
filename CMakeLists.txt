@@ -48,7 +48,11 @@ PREPEND(sourcesProject ${prefixSources} ${sourcesFiles})
 
 add_executable(nibbler ${sourcesProject})
 
-# links
+# add includes
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/includes)
+
+# set libs and executable properties
 
 #set_target_properties(lib1 lib2 PROPERTIES
 #        LIBRARY_OUTPUT_DIRECTORY ${libDirectory}
@@ -57,7 +61,7 @@ add_executable(nibbler ${sourcesProject})
 
 set_target_properties(nibbler PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/includes)
+# links
 
 #TARGET_LINK_LIBRARIES(nibbler lib1)
 
