@@ -22,7 +22,11 @@ ENDFUNCTION(PREPEND)
 
 # sources
 
-set(sourcesFiles main.cpp)
+set(sourcesFiles
+        main.cpp
+        Map.cpp
+        Bloc.cpp
+        )
 
 PREPEND(sourcesProject ${prefixSources} ${sourcesFiles})
 
