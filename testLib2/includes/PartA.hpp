@@ -2,25 +2,18 @@
 #ifndef NIBBLER_PARTA_HPP
 #define NIBBLER_PARTA_HPP
 
-
 #include <iostream>
 
 class PartA {
 public:
-    PartA();
+    PartA() = default;
 
-    PartA(int);
-
-    PartA(PartA const &src);
-
-    virtual ~PartA();
-
-    PartA &operator=(PartA const &);
-
-private:
+    std::string returnString();
 };
 
-std::ostream &operator<<(std::ostream &o, PartA const &i);
+extern "C" std::string saySomethingA();
+
+std::ostream & operator<<(std::ostream & o, PartA const & i);
 
 
 #endif
