@@ -19,14 +19,16 @@ std::ostream &operator<<(std::ostream &o, PartA const &instance) {
 /*            Functions            */
 /* ******************************* */
 
-std::string PartA::returnString() {
-    return "PartA";
+std::string PartA::saySomething() const {
+    return "Something";
 }
 
-extern "C" std::string saySomethingA() {
-    PartA partA;
+PartA   *newPartA() {
+    return new PartA();
+}
 
-    return partA.returnString();
+void    destroyPartA(PartA *partA) {
+    delete partA;
 }
 
 /* ******************************* */

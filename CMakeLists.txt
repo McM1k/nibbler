@@ -34,7 +34,7 @@ PREPEND(sourcesLib1 ${prefixLib1} ${lib1Files})
 
 # lib 2
 
-set(lib2Files PartA.cpp)
+set(lib2Files PartA.cpp PartB.cpp)
 
 PREPEND(sourcesLib2 ${prefixLib2} ${lib2Files})
 

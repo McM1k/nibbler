@@ -1,40 +1,16 @@
 
-#include "PartB.hpp"
+#include "../includes/PartB.hpp"
 
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
 
-PartB::PartB() {
-
-}
-
-PartB::PartB(int) {
-
-}
-
-PartB::PartB(PartB const &src) {
-    *this = src;
-}
-
-PartB::~PartB() {
-
-}
-
 /* ******************************* */
 /*       operators  overload       */
 /* ******************************* */
 
-PartB &PartB::operator=(PartB const &rhs) {
-    if (this != &rhs) {
-
-    }
-
-    return *this;
-}
-
 std::ostream &operator<<(std::ostream &o, PartB const &instance) {
-    o << "The value of  is : ";
+    o << "partB";
 
     return o;
 }
@@ -43,7 +19,15 @@ std::ostream &operator<<(std::ostream &o, PartB const &instance) {
 /*            Functions            */
 /* ******************************* */
 
+std::string PartB::returnString() {
+    return "PartB";
+}
 
+extern "C" std::string saySomethingB() {
+    PartB partB;
+
+    return partB.returnString();
+}
 
 /* ******************************* */
 /*            Accessors            */

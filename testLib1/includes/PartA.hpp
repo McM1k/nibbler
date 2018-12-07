@@ -3,16 +3,23 @@
 #define NIBBLER_PARTA_HPP
 
 #include <iostream>
+#include "IPartA.hpp"
 
-class PartA {
+class PartA : public IPartA {
 public:
     PartA() = default;
 
-    std::string returnString();
+    ~PartA() = default;
+
+    std::string saySomething() const;
 };
 
-extern "C" std::string saySomethingA();
+extern "C" {
+    PartA   *newPartA();
 
-std::ostream & operator<<(std::ostream & o, PartA const & i); 
+    void    destroyPartA(PartA *partA);
+}
+
+std::ostream & operator<<(std::ostream & o, PartA const & i);
 
 #endif

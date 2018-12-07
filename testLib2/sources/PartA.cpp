@@ -5,36 +5,12 @@
 /*    Constructors & destructor    */
 /* ******************************* */
 
-PartA::PartA() {
-
-}
-
-PartA::PartA(int) {
-
-}
-
-PartA::PartA(PartA const &src) {
-    *this = src;
-}
-
-PartA::~PartA() {
-
-}
-
 /* ******************************* */
 /*       operators  overload       */
 /* ******************************* */
 
-PartA &PartA::operator=(PartA const &rhs) {
-    if (this != &rhs) {
-
-    }
-
-    return *this;
-}
-
 std::ostream &operator<<(std::ostream &o, PartA const &instance) {
-    o << "The value of  is : ";
+    o << "partA";
 
     return o;
 }
@@ -43,7 +19,17 @@ std::ostream &operator<<(std::ostream &o, PartA const &instance) {
 /*            Functions            */
 /* ******************************* */
 
+std::string PartA::saySomething() const {
+    return "Something";
+}
 
+PartA   *newPartA() {
+    return new PartA();
+}
+
+void    destroyPartA(PartA *partA) {
+    delete partA;
+}
 
 /* ******************************* */
 /*            Accessors            */
@@ -54,4 +40,3 @@ std::ostream &operator<<(std::ostream &o, PartA const &instance) {
 /* ******************************* */
 /*            Exceptions           */
 /* ******************************* */
-
