@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 # Files paths
 
 set(prefixSources project/sources/)
+set(prefixTests tests/)
 #set(prefixLib1 testLib1/sources/)
 #set(prefixLib2 testLib2/sources/)
 set(libDirectory ${CMAKE_CURRENT_SOURCE_DIR}/libs)
@@ -23,12 +24,19 @@ ENDFUNCTION(PREPEND)
 # sources
 
 set(sourcesFiles
-        main.cpp
+        UI.cpp
+        exceptions/UIExceptions.cpp
         Map.cpp
         Bloc.cpp
         )
 
 PREPEND(sourcesProject ${prefixSources} ${sourcesFiles})
+
+# tests
+
+set(sourcesTests UITests.cpp)
+
+PREPEND(tests ${prefixTests} ${sourcesTests})
 
 # lib1
 
@@ -50,7 +58,11 @@ PREPEND(sourcesProject ${prefixSources} ${sourcesFiles})
 
 # exe
 
-add_executable(nibbler ${sourcesProject})
+add_executable(nibbler project/sources/main.cpp ${sourcesProject})
+
+# tests
+
+add_executable(testAll ${sourcesProject} ${tests})
 
 # add includes
 
