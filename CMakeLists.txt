@@ -23,7 +23,9 @@ ENDFUNCTION(PREPEND)
 
 # sources
 
-set(sourcesFiles UI.cpp exceptions/UIExceptions.cpp)
+set(sourcesFiles /
+        UI.cpp /
+        exceptions/UIExceptions.cpp)
 
 PREPEND(sourcesProject ${prefixSources} ${sourcesFiles})
 
