@@ -14,18 +14,32 @@
 #define NIBBLER_UI_HPP
 
 #include <iostream>
+#include "eGameState.hpp"
+#include "exceptions/UIExceptions.hpp"
 
 class UI {
 public:
     UI();
-    UI(int);
-    UI(UI const & src);
-    virtual ~UI();
-    
-    UI & operator=(UI const &);
+
+    virtual ~UI() = default;
+
+    int getScore() const;
+
+    void setScore(int score);
+
+    void addScore(int scoreToADd);
+
+    const eGameState &getGameState() const;
+
+    void setGameState(const eGameState &gameState);
+
 private:
+    UI(UI const &src) = default;
+
+    UI &operator=(UI const &) = default;
+
     int score;
-    GameState
+    eGameState gameState;
 
 };
 

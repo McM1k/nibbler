@@ -10,25 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "UI.hpp"
+#include "../includes/UI.hpp"
 
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
 
-UI::UI() {
-
-}
-
-UI::UI(int) {
-
-}
-
-UI::UI(UI const &src) {
-    *this = src;
-}
-
-UI::~UI() {
+UI::UI() : score(0), gameState(eGameState::Game) {
 
 }
 
@@ -36,16 +24,18 @@ UI::~UI() {
 /*       operators  overload       */
 /* ******************************* */
 
-UI &UI::operator=(UI const &rhs) {
-    if (this != &rhs) {
-
-    }
-
-    return *this;
-}
-
 std::ostream &operator<<(std::ostream &o, UI const &instance) {
-    o << "The value of  is : ";
+    std::string gameStates[4];
+
+    gameStates[0] = "Menu";
+    gameStates[1] = "Game";
+    gameStates[2] = "Pause";
+    gameStates[3] = "GameOver";
+
+    o << "UI :" << std::endl;
+    o << "Score :" << instance.getScore() << std::endl;
+    o << "State of the game :" << static_cast<int>(instance.getGameState()) << " ";
+    o << gameStates[static_cast<int>(instance.getGameState())] << std::endl;
 
     return o;
 }
@@ -54,15 +44,38 @@ std::ostream &operator<<(std::ostream &o, UI const &instance) {
 /*            Functions            */
 /* ******************************* */
 
+void UI::addScore(int scoreToADd) {
+    if (scoreToADd >= 0)
+        score += scoreToADd;
+    else
+        throw UIExceptions::WrongScoreException();
+}
 
 
 /* ******************************* */
 /*            Accessors            */
 /* ******************************* */
 
+int UI::getScore() const {
+    return score;
+}
 
+void UI::setScore(int score) {
+    if (score < 0)
+        throw UIExceptions::WrongScoreException();
+    this->score = score;
+}
+
+const eGameState &UI::getGameState() const {
+    return gameState;
+}
+
+void UI::setGameState(const eGameState &gameState) {
+    this->gameState = gameState;
+}
 
 /* ******************************* */
 /*            Exceptions           */
 /* ******************************* */
+
 
