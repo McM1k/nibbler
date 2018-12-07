@@ -43,8 +43,12 @@ std::ostream &operator<<(std::ostream &o, TestA const &i) {
 /*
  * Other
  */
-void stuffA() {
-    std::cout << "doing stuffA in the first lib" << std::endl;
+void TestA::printStuff() {
+    std::cout << "fiuwbfbjdfb" << std::endl;
+}
+
+ITestA *stuffA() {
+    return new TestA();
 }
 /*
  * Exceptions

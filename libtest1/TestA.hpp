@@ -13,20 +13,21 @@
 #ifndef TESTA_HPP
 # define TESTA_HPP
 
+# include "ITestA.hpp"
 # include <iostream>
 
-class TestA{
+class TestA : public ITestA{
 public:
     TestA(void) = default;
     TestA(TestA const &src) = default;
     virtual ~TestA(void) = default;
     TestA &operator=(TestA const &rhs) = default; //equals
-
+    void printStuff();
 private:
-
+    
 };
 
-extern "C" void stuffA();
+extern "C" ITestA *stuffA();
 
 std::ostream &operator<<(std::ostream &o, TestA const &i);
 

@@ -10,13 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <dlfcn.h>
+#include "../libtest1/ITestA.hpp"
 #include <iostream>
 
-void doStuff(void *dl_handle){
-    void    (*stuffA_ptr)(void);
+ITestA *doStuff(void *dl_handle){
+    ITestA  *(*stuffA_ptr)(void);
     void    (*stuffB_ptr)(void);
 
-    stuffA_ptr = (void (*)(void))(dlsym(dl_handle, "stuffA"));
+    stuffA_ptr = (ITestA *(*)(void))(dlsym(dl_handle, "stuffA"));
     if (!stuffA_ptr) {
         std::cerr << "Error : " << dlerror() << std::endl;
         exit(EXIT_FAILURE);
@@ -28,21 +29,20 @@ void doStuff(void *dl_handle){
         exit(EXIT_FAILURE);
     }
 
-    stuffA_ptr();
     stuffB_ptr();
     dlclose(dl_handle);
-    stuffA_ptr();
+    return stuffA_ptr();
 }
 
 int main() {
     void    *dl_handle;
 
     dl_handle = dlopen("libs/lib1.so", RTLD_LAZY | RTLD_LOCAL);
-    doStuff(dl_handle);
+    ITestA *test = doStuff(dl_handle);
     dlclose(dl_handle);
-
-    dl_handle = dlopen("libs/lib2.so", RTLD_LAZY | RTLD_LOCAL);
-    doStuff(dl_handle);
+    test->printStuff();
+//    dl_handle = dlopen("libs/lib2.so", RTLD_LAZY | RTLD_LOCAL);
+//    doStuff(dl_handle);
 
     return 1;
 }
