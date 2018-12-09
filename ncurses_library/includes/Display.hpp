@@ -1,6 +1,7 @@
 
 #ifndef DISPLAY_HPP
 # define DISPLAY_HPP
+
 # include "../../project/includes/IEntity.hpp"
 # include "../../project/includes/Map.hpp"
 # include "../../project/includes/UI.hpp"
