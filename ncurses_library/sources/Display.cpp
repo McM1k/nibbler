@@ -12,15 +12,14 @@
 /* ******************************* */
 /*       operators  overload       */
 /* ******************************* */
-std::ostream Display::&operator<<(std::ostream &o) {
-    o << "no attributes" << std::endl;
-    return o;
-}
+
 
 /* ******************************* */
 /*            Functions            */
 /* ******************************* */
+void Display::display(const Map &map, const UI &gameInfo) const {
 
+}
 /* ******************************* */
 /*            Exceptions           */
 /* ******************************* */

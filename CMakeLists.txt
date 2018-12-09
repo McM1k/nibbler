@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 11)
 
 # Files paths
 
-set(prefixSources project/sources/)
-set(prefixNcurses ncurses_library/sources/)
+set(prefixSources ${CMAKE_CURRENT_SOURCE_DIR}/project/sources/)
+set(prefixNcurses ${CMAKE_CURRENT_SOURCE_DIR}/ncurses_library/sources/)
 #set(prefixLib2 testLib2/sources/)
 set(libDirectory ${CMAKE_CURRENT_SOURCE_DIR}/libs)
 
@@ -22,7 +22,9 @@ ENDFUNCTION(PREPEND)
 
 # sources
 
-set(sourcesFiles main.cpp)
+set(sourcesFiles
+        main.cpp
+        )
 
 PREPEND(sourcesProject ${prefixSources} ${sourcesFiles})
 
