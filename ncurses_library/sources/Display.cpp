@@ -5,6 +5,7 @@
 /*    Constructors & destructor    */
 /* ******************************* */
 Display::Display(int x, int y) {
+    setlocale(LC_ALL, "");
     this->window = newwin(x + 2, y + 7, 0, 0);
     this->red_colour = (COLOR_RED, COLOR_BLACK);
     this->yellow_colour = (COLOR_YELLOW, COLOR_BLACK);
@@ -27,6 +28,8 @@ Display::~Display() {
 /*            Functions            */
 /* ******************************* */
 void Display::printSnake(const std::list<Bloc *> snake) {
+    /*
+    */
     for (Bloc *snake_part : snake){
         mvaddch(snake_part->getY() + 1, snake_part->getX() + 1, GENERIC_SNAKE_PART);
     }
