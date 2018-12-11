@@ -48,6 +48,7 @@ PROJ_DIR =      project
 LIB1_DIR =      ncurses_library
 LIB2_DIR =
 LIB3_DIR =
+LIBS_DIR =      libs
 
 # libs
 
@@ -95,7 +96,8 @@ $(PROJ_DIR)/$(OBJ_DIR)/%.o: $(PROJ_DIR)/$(SRC_DIR)/%.cpp
 
 
 $(LIB1) :                   $(LIB1_SRC) $(LIB1_OBJ)
-	                        @$(CC) $(SFLAGS) $(LIB1_OBJ) -o $@
+	                        @mkdir -p $(LIBS_DIR) 2> /dev/null || true
+	                        @$(CC) $(SFLAGS) $(LIB1_OBJ) -o $(LIBS_DIR)/$@
 	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(LIB1) "$(CLEAR)$(LIG)"
 
 $(LIB1_DIR)/$(OBJ_DIR)/%.o: $(LIB1_DIR)/$(SRC_DIR)/%.cpp
@@ -105,7 +107,8 @@ $(LIB1_DIR)/$(OBJ_DIR)/%.o: $(LIB1_DIR)/$(SRC_DIR)/%.cpp
 
 
 $(LIB2) :                   $(LIB2_SRC) $(LIB2_OBJ)
-	                        @$(CC) $(SFLAGS) $(LIB2_OBJ) -o $@
+	                        @mkdir -p $(LIBS_DIR) 2> /dev/null || true
+	                        @$(CC) $(SFLAGS) $(LIB2_OBJ) -o $(LIBS_DIR)/$@
 	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(LIB2) "$(CLEAR)$(LIG)"
 
 $(LIB2_DIR)/$(OBJ_DIR)/%.o: $(LIB2_DIR)/$(SRC_DIR)/%.cpp
@@ -115,7 +118,8 @@ $(LIB2_DIR)/$(OBJ_DIR)/%.o: $(LIB2_DIR)/$(SRC_DIR)/%.cpp
 
 
 $(LIB3) :                   $(LIB3_SRC) $(LIB3_OBJ)
-	                        @$(CC) $(SFLAGS) $(LIB3_OBJ) -o $@
+	                        @mkdir -p $(LIBS_DIR) 2> /dev/null || true
+	                        @$(CC) $(SFLAGS) $(LIB3_OBJ) -o $(LIBS_DIR)/$@
 	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(LIB3) "$(CLEAR)$(LIG)"
 
 $(LIB3_DIR)/$(OBJ_DIR)/%.o: $(LIB3_DIR)/$(SRC_DIR)/%.cpp
@@ -129,11 +133,21 @@ meteo :
 
 clean :
 	            @echo "$(CLEAR)$(TRA)$(RED)  Cleaning Object $(CLEAR)$(TRA)"
-	            @$(RM) $(OBJ)
-	            @rmdir $(OBJ_DIR) 2> /dev/null || true
+	            @$(RM) $(PROJ_OBJ)
+	            @$(RM) $(LIB1_OBJ)
+	            @$(RM) $(LIB2_OBJ)
+	            @$(RM) $(LIB3_OBJ)
+	            @rmdir $(PROJ_DIR)/$(OBJ_DIR) 2> /dev/null || true
+	            @rmdir $(LIB1_DIR)/$(OBJ_DIR) 2> /dev/null || true
+	            @rmdir $(LIB2_DIR)/$(OBJ_DIR) 2> /dev/null || true
+	            @rmdir $(LIB3_DIR)/$(OBJ_DIR) 2> /dev/null || true
 
 fclean :	    clean
 	            @echo "$(CLEAR)$(TRA)$(RED)  Removing Binary $(CLEAR)$(TRA)"
+	            @$(RM) $(LIBS_DIR)/$(LIB1)
+	            #@$(RM) $(LIBS_DIR)/$(LIB2)
+	            #@$(RM) $(LIBS_DIR)/$(LIB3)
+	            @rmdir $(LIBS_DIR) 2> /dev/null || true
 	            @$(RM) $(EXE)
 
 re :		    fclean all
