@@ -8,9 +8,11 @@
 /* ******************************* */
 /*            Accessors            */
 /* ******************************* */
-int Inputs::getInput() {
- return 0;
+
+int Inputs::getInput() const {
+    return getch();
 }
+
 /* ******************************* */
 /*       operators  overload       */
 /* ******************************* */

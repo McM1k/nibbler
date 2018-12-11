@@ -4,16 +4,19 @@
 
 # include "../../project/includes/IInput.hpp"
 # include <iostream>
+# include <ncurses.h>
 
 class Inputs : public IInput{
 public:
     Inputs(void) = default;
-    Inputs(Inputs const &src) = default;
     virtual ~Inputs(void) = default;
-    Inputs &operator=(Inputs const &rhs) = default;
 
-    int getInput();
+    int getInput() const;
+
 private:
+    Inputs(Inputs const &src) = default;
+
+    Inputs &operator=(Inputs const &rhs) = default;
 
 };
 

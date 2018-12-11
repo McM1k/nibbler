@@ -25,7 +25,7 @@ ENDFUNCTION(PREPEND)
 
 set(sourcesFiles
         UI.cpp
-        exceptions/UIExceptions.cpp
+        UIExceptions.cpp
         Map.cpp
         Bloc.cpp
         )
@@ -39,13 +39,6 @@ set(sourcesTests UITests.cpp)
 PREPEND(tests ${prefixTests} ${sourcesTests})
 
 # ncurses
-set(ncurses_URL "https://invisible-island.net/datafiles/release/ncurses.tar.gz")
-
-add_custom_command(
-        OUTPUT "${LibDirectory}"
-        COMMAND file(DOWNLOAD "${ncurses_URL}" "${LibDirectory}")
-        COMMAND tar xvzf ${libDirectory}/ncurses.tar.gz ${libDirectory}
-        DEPENDS ${LibDirectory})
 
 set(ncursesFiles
         Display.cpp
