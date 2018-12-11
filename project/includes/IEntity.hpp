@@ -3,6 +3,8 @@
 # define IENTITY_HPP
 
 # include <iostream>
+# include "Map.hpp"
+# include "UI.hpp"
 
 class IEntity {
 public:
