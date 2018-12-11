@@ -34,26 +34,41 @@ CC =		clang++
 CFLAGS =	-Wall -Wextra -Werror -std=c++11
 
 # binaries
-EXE =       AbstractVM
-LIB_A =
+EXE =       nibbler
+LIB1 =     libncurses
+LIB2 =
+LIB3 =
 
 # dir
-SRC_DIR =	    sources
-OBJ_DIR =	    objs
-INC_DIR =	    includes
+SRC_DIR =       sources
+INC_DIR =       includes
+PROJ_DIR =   project
+LIB1_DIR =  ncurses_library
+LIB2_DIR =
+LIB3_DIR =
 
 # libs
 
 # sources
-SRC_NAME =	    main.cpp
+PROJ_SRC = 	main.cpp \
+            Map.cpp \
+            UI.cpp \
+            Bloc.cpp \
+            exceptions/UIExceptions.cpp
+
+LIB1_SRC =
+LIB2_SRC =
+LIB3_SRC =
+
 
 # objects
-OBJ_NAME =		$(SRC_NAME:.cpp=.o)
-
+OBJ_FILE =	$(SRC_FILE:.cpp=.o)
 
 #paths
-SRC =		    $(addprefix $(SRC_DIR)/, $(SRC_NAME))
-OBJ =		    $(addprefix $(OBJ_DIR)/, $(OBJ_NAME))
+SRC =		$(addprefix $(SRC_DIR)/, $(SRC_NAME))
+OBJ =		$(addprefix $(OBJ_DIR)/, $(OBJ_NAME))
+
+################################################################################
 
 all :		    $(EXE)
 
