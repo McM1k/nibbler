@@ -25,8 +25,8 @@ public:
 
     bool operator==(Bloc const &rhs);
 
-    const int getX() const;
-    const int getY() const;
+    int getX() const;
+    int getY() const;
 
 private:
     Bloc(void) = default;

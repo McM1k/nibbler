@@ -15,7 +15,7 @@
 
 #include <iostream>
 #include "eGameState.hpp"
-#include "exceptions/UIExceptions.hpp"
+#include "UIExceptions.hpp"
 
 class UI {
 public:

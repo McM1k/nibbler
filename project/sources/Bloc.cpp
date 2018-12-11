@@ -24,11 +24,11 @@ Bloc::Bloc(const int x, const int y) : x(x), y(y) {}
 /*
  * Getters
  */
-const int Bloc::getX() const {
+int Bloc::getX() const {
     return x;
 }
 
-const int Bloc::getY() const {
+int Bloc::getY() const {
     return y;
 }
 

@@ -32,57 +32,100 @@ CR_DL =	\xe2\x95\x9a
 # comp
 CC =		clang++
 CFLAGS =	-Wall -Wextra -Werror -std=c++11
+SFLAGS =    -shared -fPIC
 
 # binaries
 EXE =       nibbler
-LIB1 =     libncurses
+LIB1 =      libncurses.so
 LIB2 =
 LIB3 =
 
 # dir
 SRC_DIR =       sources
 INC_DIR =       includes
-PROJ_DIR =   project
-LIB1_DIR =  ncurses_library
+OBJ_DIR =       obj
+PROJ_DIR =      project
+LIB1_DIR =      ncurses_library
 LIB2_DIR =
 LIB3_DIR =
 
 # libs
 
 # sources
-PROJ_SRC = 	main.cpp \
-            Map.cpp \
-            UI.cpp \
-            Bloc.cpp \
-            exceptions/UIExceptions.cpp
+PROJ_SRC_LIST = main.cpp \
+                Map.cpp \
+                UI.cpp \
+                Bloc.cpp \
+                UIExceptions.cpp
 
-LIB1_SRC =
-LIB2_SRC =
-LIB3_SRC =
+LIB1_SRC_LIST = Display.cpp \
+                Inputs.cpp
 
+LIB2_SRC_LIST =
+LIB3_SRC_LIST =
 
 # objects
-OBJ_FILE =	$(SRC_FILE:.cpp=.o)
+PROJ_OBJ_LIST = $(PROJ_SRC_LIST:.cpp=.o)
+LIB1_OBJ_LIST = $(LIB1_SRC_LIST:.cpp=.o)
+LIB2_OBJ_LIST = $(LIB2_SRC_LIST:.cpp=.o)
+LIB3_OBJ_LIST = $(LIB3_SRC_LIST:.cpp=.o)
 
 #paths
-SRC =		$(addprefix $(SRC_DIR)/, $(SRC_NAME))
-OBJ =		$(addprefix $(OBJ_DIR)/, $(OBJ_NAME))
+PROJ_SRC =	$(addprefix $(PROJ_DIR)/$(SRC_DIR)/, $(PROJ_SRC_LIST))
+PROJ_OBJ =	$(addprefix $(PROJ_DIR)/$(OBJ_DIR)/, $(PROJ_OBJ_LIST))
+LIB1_SRC =	$(addprefix $(LIB1_DIR)/$(SRC_DIR)/, $(LIB1_SRC_LIST))
+LIB1_OBJ =	$(addprefix $(LIB1_DIR)/$(OBJ_DIR)/, $(LIB1_OBJ_LIST))
+LIB2_SRC =	$(addprefix $(LIB2_DIR)/$(SRC_DIR)/, $(LIB2_SRC_LIST))
+LIB2_OBJ =	$(addprefix $(LIB2_DIR)/$(OBJ_DIR)/, $(LIB2_OBJ_LIST))
+LIB3_SRC =	$(addprefix $(LIB3_DIR)/$(SRC_DIR)/, $(LIB3_SRC_LIST))
+LIB3_OBJ =	$(addprefix $(LIB3_DIR)/$(OBJ_DIR)/, $(LIB3_OBJ_LIST))
 
 ################################################################################
 
 all :		    $(EXE)
 
-$(EXE) :        $(SRC) $(OBJ)
-	            @$(CC) $(OBJ) -o $@
-                @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(EXE) "$(CLEAR)$(LIG)"
+$(EXE) :                    $(LIB1) $(PROJ_SRC) $(PROJ_OBJ)
+	                        @$(CC) $(PROJ_OBJ) -o $@
+	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(EXE) "$(CLEAR)$(LIG)"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	            @mkdir -p $(OBJ_DIR) 2> /dev/null || true
-	            @$(CC) $(CFLAGS) -o $@ -c $<
-	            @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$< "$(CLEAR)$(LIG)"
+$(PROJ_DIR)/$(OBJ_DIR)/%.o: $(PROJ_DIR)/$(SRC_DIR)/%.cpp
+	                        @mkdir -p $(PROJ_DIR)/$(OBJ_DIR) 2> /dev/null || true
+	                        @$(CC) $(CFLAGS) -o $@ -c $<
+	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$< "$(CLEAR)$(LIG)"
+
+
+$(LIB1) :                   $(LIB1_SRC) $(LIB1_OBJ)
+	                        @$(CC) $(SFLAGS) $(LIB1_OBJ) -o $@
+	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(LIB1) "$(CLEAR)$(LIG)"
+
+$(LIB1_DIR)/$(OBJ_DIR)/%.o: $(LIB1_DIR)/$(SRC_DIR)/%.cpp
+	                        @mkdir -p $(LIB1_DIR)/$(OBJ_DIR) 2> /dev/null || true
+	                        @$(CC) $(CFLAGS) -o $@ -c $<
+	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$< "$(CLEAR)$(LIG)"
+
+
+$(LIB2) :                   $(LIB2_SRC) $(LIB2_OBJ)
+	                        @$(CC) $(SFLAGS) $(LIB2_OBJ) -o $@
+	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(LIB2) "$(CLEAR)$(LIG)"
+
+$(LIB2_DIR)/$(OBJ_DIR)/%.o: $(LIB2_DIR)/$(SRC_DIR)/%.cpp
+	                        @mkdir -p $(LIB2_DIR)/$(OBJ_DIR) 2> /dev/null || true
+	                        @$(CC) $(CFLAGS) -o $@ -c $<
+	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$< "$(CLEAR)$(LIG)"
+
+
+$(LIB3) :                   $(LIB3_SRC) $(LIB3_OBJ)
+	                        @$(CC) $(SFLAGS) $(LIB3_OBJ) -o $@
+	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(LIB3) "$(CLEAR)$(LIG)"
+
+$(LIB3_DIR)/$(OBJ_DIR)/%.o: $(LIB3_DIR)/$(SRC_DIR)/%.cpp
+	                        @mkdir -p $(LIB3_DIR)/$(OBJ_DIR) 2> /dev/null || true
+	                        @$(CC) $(CFLAGS) -o $@ -c $<
+	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$< "$(CLEAR)$(LIG)"
 
 meteo :
 	            @curl http://wttr.in/Paris
+	            @curl http://wttr.in/Moon
 
 clean :
 	            @echo "$(CLEAR)$(TRA)$(RED)  Cleaning Object $(CLEAR)$(TRA)"

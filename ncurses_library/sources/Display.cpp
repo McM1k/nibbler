@@ -16,7 +16,7 @@
 /* ******************************* */
 /*            Functions            */
 /* ******************************* */
-void Display::display(const Map &map, const UI &gameInfo) const {
+void Display::display(const Map &, const UI &) const {
 
 }
 /* ******************************* */

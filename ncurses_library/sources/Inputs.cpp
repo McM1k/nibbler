@@ -9,7 +9,7 @@
 /*            Accessors            */
 /* ******************************* */
 int Inputs::getInput() {
-
+ return 0;
 }
 /* ******************************* */
 /*       operators  overload       */

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/exceptions/UIExceptions.hpp"
+#include "../includes/UIExceptions.hpp"
 
 /* ******************************* */
 /*    Constructors & destructor    */
