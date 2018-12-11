@@ -5,11 +5,11 @@ set(CMAKE_CXX_STANDARD 11)
 
 # Files paths
 
-set(prefixSources project/sources/)
-set(prefixTests tests/)
-#set(prefixLib1 testLib1/sources/)
+set(prefixSources   ${CMAKE_CURRENT_SOURCE_DIR}/project/sources/)
+set(prefixTests     ${CMAKE_CURRENT_SOURCE_DIR}/tests/)
+set(prefixNcurses   ${CMAKE_CURRENT_SOURCE_DIR}/ncurses_library/sources/)
 #set(prefixLib2 testLib2/sources/)
-set(libDirectory ${CMAKE_CURRENT_SOURCE_DIR}/libs)
+set(libDirectory    ${CMAKE_CURRENT_SOURCE_DIR}/libs)
 
 # prepend path to files
 
@@ -38,11 +38,21 @@ set(sourcesTests UITests.cpp)
 
 PREPEND(tests ${prefixTests} ${sourcesTests})
 
-# lib1
+# ncurses
+set(ncurses_URL "https://invisible-island.net/datafiles/release/ncurses.tar.gz")
 
-#set(lib1Files PartA.cpp PartB.cpp)
+add_custom_command(
+        OUTPUT "${LibDirectory}"
+        COMMAND file(DOWNLOAD "${ncurses_URL}" "${LibDirectory}")
+        COMMAND tar xvzf ${libDirectory}/ncurses.tar.gz ${libDirectory}
+        DEPENDS ${LibDirectory})
 
-#PREPEND(sourcesLib1 ${prefixLib1} ${lib1Files})
+set(ncursesFiles
+        Display.cpp
+        Inputs.cpp
+        )
+
+PREPEND(sourcesNcurses ${prefixNcurses} ${ncursesFiles})
 
 # lib 2
 
@@ -52,7 +62,7 @@ PREPEND(tests ${prefixTests} ${sourcesTests})
 
 # libraries
 
-#add_library(lib1 SHARED ${sourcesLib1})
+add_library(ncurses SHARED ${sourcesNcurses})
 
 #add_library(lib2 SHARED ${sourcesLib2})
 
@@ -70,15 +80,15 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/includes)
 
 # set libs and executable properties
 
-#set_target_properties(lib1 lib2 PROPERTIES
-#        LIBRARY_OUTPUT_DIRECTORY ${libDirectory}
-#        PREFIX ""
-#        SUFFIX ".so")
+set_target_properties(ncurses PROPERTIES
+        LIBRARY_OUTPUT_DIRECTORY ${libDirectory}
+        PREFIX ""
+        SUFFIX ".so")
 
 set_target_properties(nibbler PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 # links
 
-#TARGET_LINK_LIBRARIES(nibbler lib1)
+TARGET_LINK_LIBRARIES(nibbler ncurses)
 
 #TARGET_LINK_LIBRARIES(nibbler lib2)
