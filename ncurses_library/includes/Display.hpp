@@ -11,9 +11,11 @@
 # define NE_CORNER_BORDER '\u259C'
 # define SE_CORNER_BORDER '\u259F'
 # define SW_CORNER_BORDER '\u2599'
+
 # define GRASS ' '
 # define FRUIT '\''
 # define OBSTACLE '@'
+
 # define GENERIC_SNAKE_PART '*'
 # define HORIZONTAL_SNAKE_PART '\u2501'
 # define VERTICAL_SNAKE_PART '\u2503'
@@ -21,6 +23,7 @@
 # define NE_SNAKE_PART '\u2517'
 # define SE_SNAKE_PART '\u250F'
 # define SW_SNAKE_PART '\u2513'
+
 # define NE_SNAKE_HEAD '\u2BA1'
 # define NS_SNAKE_HEAD '\u2B63'
 # define NW_SNAKE_HEAD '\u2BA0'
@@ -53,6 +56,10 @@ public:
     void display(Map const &map, UI const &gameInfo);
 
     class UnableToDeleteWindowException : public std::exception {
+    public:
+        virtual const char *what() const throw();
+    };
+    class BrokenSnakeException : public std::exception {
     public:
         virtual const char *what() const throw();
     };
