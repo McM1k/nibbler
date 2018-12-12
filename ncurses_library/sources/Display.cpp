@@ -7,9 +7,10 @@
 Display::Display(int x, int y) {
     setlocale(LC_ALL, "");
     this->window = newwin(x + 2, y + 7, 0, 0);
-    this->red_colour = (COLOR_RED, COLOR_BLACK);
-    this->yellow_colour = (COLOR_YELLOW, COLOR_BLACK);
-    this->green_colour = (COLOR_GREEN, COLOR_BLACK);
+    start_color();
+    this->red_colour = init_pair(1, COLOR_RED, COLOR_BLACK);
+    this->yellow_colour = init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+    this->green_colour = init_pair(3, COLOR_GREEN, COLOR_BLACK);
 }
 
 Display::~Display() {
@@ -95,7 +96,7 @@ void Display::printObstacles(const std::list<Bloc *> &obstacles) {
     }
 }
 
-void Display::display(const Map &map, const UI &gameInfo) {
+void Display::display(const Map &map, const UI &) {
     wclear(this->window);
     wborder(this->window, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER);
     //wborder(this->window, LEFT_BORDER, RIGHT_BORDER, UP_BORDER, DOWN_BORDER,
@@ -114,4 +115,13 @@ const char* Display::UnableToDeleteWindowException::what() const throw(){
 
 const char* Display::BrokenSnakeException::what() const throw(){
     return "Snake is broken";
+}
+
+Display *newDisplay(int x, int y){
+    return new Display(x, y);
+}
+
+
+void deleteDisplay(Display *display){
+    delete display;
 }

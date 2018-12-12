@@ -75,4 +75,7 @@ private:
 
 };
 
+extern "C" Display *newDisplay(int x, int y);
+extern "C" void deleteDisplay(Display *display);
+
 #endif
