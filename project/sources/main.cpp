@@ -21,27 +21,32 @@ ptr_newDisplay handleDisplay(){
     ptr_newDisplay  ptr;
     void            *dl_handle;
 
-    dl_handle = dlopen("libs/libncurses.so", RTLD_LAZY | RTLD_LOCAL);
+    dl_handle = dlopen("libs/libncurses.so", RTLD_NOW | RTLD_LOCAL);
     if (!dl_handle){
         std::cerr << "Error : " << dlerror() << std::endl;
         exit(EXIT_FAILURE);
     }
 
-    ptr = (ptr_newDisplay)(dlsym(dl_handle, "newDisplay"));
+    ptr = reinterpret_cast<ptr_newDisplay>(dlsym(dl_handle, "newDisplay"));
     if (!ptr){
         std::cerr << "Error : " << dlerror() << std::endl;
         exit(EXIT_FAILURE);
     }
 
-    dlclose(dl_handle);
+    //dlclose(dl_handle);
     return ptr;
 }
 
 int main() {
+    std::cout << "1" << std::endl;
     ptr_newDisplay newDisplay = handleDisplay();
+    std::cout << "2" << std::endl;
     IEntity *display = newDisplay(10, 10);
+    std::cout << "3" << std::endl;
     auto ui = new UI();
+    std::cout << "4" << std::endl;
     auto map = new Map(10, 10);
+    std::cout << "5" << std::endl;
     auto snake = new std::list<Bloc *>();
     snake->push_back(new Bloc(1,1));
     snake->push_back(new Bloc(1,2));
@@ -56,6 +61,8 @@ int main() {
     map->setObstacles(*obstacles);
     map->setFruit(new Bloc(9,9));
 
-    display->display(*map, *ui);
+    while (newDisplay){
+        display->display(*map, *ui);
+    }
     return 1;
 }

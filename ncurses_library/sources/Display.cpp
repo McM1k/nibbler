@@ -5,7 +5,8 @@
 /*    Constructors & destructor    */
 /* ******************************* */
 Display::Display(int x, int y) {
-    setlocale(LC_ALL, "");
+//    setlocale(LC_ALL, "");
+    initscr();
     this->window = newwin(x + 2, y + 7, 0, 0);
     start_color();
     this->red_colour = init_pair(1, COLOR_RED, COLOR_BLACK);
@@ -104,6 +105,7 @@ void Display::display(const Map &map, const UI &) {
     printSnake(map.getSnake());
     printObstacles(map.getObstacles());
     printFruit(map.getFruit());
+    refresh();
 }
 
 /* ******************************* */

@@ -32,7 +32,7 @@ CR_DL =	\xe2\x95\x9a
 # comp
 CC =		clang++
 CFLAGS =	-Wall -Wextra -Werror -std=c++11
-SFLAGS =    -shared -fPIC
+SFLAGS =    -shared -fPIC -undefined dynamic_lookup
 
 # binaries
 EXE =       nibbler
@@ -97,7 +97,7 @@ $(PROJ_DIR)/$(OBJ_DIR)/%.o: $(PROJ_DIR)/$(SRC_DIR)/%.cpp
 
 $(LIB1) :                   $(LIB1_SRC) $(LIB1_OBJ)
 	                        @mkdir -p $(LIBS_DIR) 2> /dev/null || true
-	                        @$(CC) $(SFLAGS) $(LIB1_OBJ) -o $(LIBS_DIR)/$@nm
+	                        @$(CC) $(SFLAGS) $(LIB1_OBJ) -o $(LIBS_DIR)/$@ -lncurses
 	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(LIB1) "$(CLEAR)$(LIG)"
 
 $(LIB1_DIR)/$(OBJ_DIR)/%.o: $(LIB1_DIR)/$(SRC_DIR)/%.cpp

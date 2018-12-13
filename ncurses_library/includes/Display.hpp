@@ -41,8 +41,11 @@
 # include "../../project/includes/Map.hpp"
 # include "../../project/includes/UI.hpp"
 # include <iostream>
+
+extern "C" {
 # include <ncurses.h>
-# include <locale.h>
+//# include <locale.h>
+}
 
 class Display : public IEntity{
 public:
