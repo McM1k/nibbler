@@ -5,7 +5,7 @@
 /*    Constructors & destructor    */
 /* ******************************* */
 Display::Display(int x, int y) {
-//    setlocale(LC_ALL, "");
+    setlocale(LC_ALL, "");
     initscr();
     this->window = newwin(x + 2, y + 7, 0, 0);
     start_color();
@@ -17,6 +17,7 @@ Display::Display(int x, int y) {
 Display::~Display() {
     if (!delwin(this->window))
         throw UnableToDeleteWindowException();
+    endwin();
 }
 /* ******************************* */
 /*            Accessors            */
