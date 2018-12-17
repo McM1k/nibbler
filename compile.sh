@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "Brew Update";
 #brew update;
 echo "Done";

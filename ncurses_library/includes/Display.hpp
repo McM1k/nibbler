@@ -49,32 +49,36 @@ extern "C" {
 
 class Display : public IEntity{
 public:
-    Display(void) = default;
+    Display() = default;
     Display(Display const &src) = default;
-    virtual ~Display(void);
+
+    virtual ~Display();
     Display &operator=(Display const &rhs) = default;
 
     Display(int x, int y);
 
-    void display(Map const &map, UI const &gameInfo);
+    void display(Map const &map, UI const &gameInfo) override;
 
     class UnableToDeleteWindowException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        const char *what() const noexcept override;
     };
+
     class BrokenSnakeException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        const char *what() const noexcept override;
     };
 private:
-    void printSnake(const std::list<Bloc *> snake);
+    void printSnake(std::list<Bloc *> snake);
+
     void printFruit(const Bloc *fruit);
+
     void printObstacles(const std::list<Bloc *> &obstacles);
 
-    WINDOW      *window;
-    int         red_colour;
-    int         green_colour;
-    int         yellow_colour;
+    WINDOW *window{};
+    int red_colour{};
+    int green_colour{};
+    int yellow_colour{};
 
 };
 

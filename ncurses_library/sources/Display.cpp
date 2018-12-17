@@ -81,7 +81,7 @@ void Display::printSnake(const std::list<Bloc *> snake) {
         throw BrokenSnakeException();
 
     */
-    for (Bloc *snake_part : snake){
+    for (Bloc *snake_part : snake) {
         mvaddch(snake_part->getY() + 1, snake_part->getX() + 1, GENERIC_SNAKE_PART);
     }
 }
@@ -93,14 +93,15 @@ void Display::printFruit(const Bloc *fruit) {
 }
 
 void Display::printObstacles(const std::list<Bloc *> &obstacles) {
-    for (Bloc *obstacle_part : obstacles){
+    for (Bloc *obstacle_part : obstacles) {
         mvaddch(obstacle_part->getY() + 1, obstacle_part->getX() + 1, OBSTACLE);
     }
 }
 
 void Display::display(const Map &map, const UI &) {
     wclear(this->window);
-    wborder(this->window, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER);
+    wborder(this->window, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER,
+            GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER);
     //wborder(this->window, LEFT_BORDER, RIGHT_BORDER, UP_BORDER, DOWN_BORDER,
     //        NW_CORNER_BORDER, NE_CORNER_BORDER, SW_CORNER_BORDER, SE_CORNER_BORDER);
     printSnake(map.getSnake());
@@ -112,19 +113,19 @@ void Display::display(const Map &map, const UI &) {
 /* ******************************* */
 /*            Exceptions           */
 /* ******************************* */
-const char* Display::UnableToDeleteWindowException::what() const throw(){
+const char *Display::UnableToDeleteWindowException::what() const noexcept {
     return "Unable to delete nCurses window";
 }
 
-const char* Display::BrokenSnakeException::what() const throw(){
+const char *Display::BrokenSnakeException::what() const noexcept {
     return "Snake is broken";
 }
 
-Display *newDisplay(int x, int y){
+Display *newDisplay(int x, int y) {
     return new Display(x, y);
 }
 
 
-void deleteDisplay(Display *display){
+void deleteDisplay(Display *display) {
     delete display;
 }

@@ -6,7 +6,7 @@
 
 class IInput {
 public:
-    virtual int getInput() = 0;
+    virtual int getInput() const = 0;
 };
 
 #endif

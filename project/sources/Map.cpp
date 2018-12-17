@@ -15,8 +15,7 @@
 /*
  * Constructors
  */
-Map::Map(int xSize, int ySize) : xSize(xSize), ySize(ySize), obstacles(), snake() {
-    fruit = nullptr;
+Map::Map(int xSize, int ySize) : xSize(xSize), ySize(ySize), obstacles(), snake(), fruit(nullptr) {
 }
 
 /*
@@ -34,7 +33,7 @@ const Bloc *Map::getFruit() const {
     return fruit;
 }
 
-const std::list<Bloc *> &Map::getSnake() const{
+const std::list<Bloc *> &Map::getSnake() const {
     return snake;
 }
 
@@ -70,7 +69,7 @@ void Map::setSnake(std::list<Bloc *> &snake) {
 bool Map::addObstacle(int x, int y) {
     if (x < 0 || x >= this->xSize || y < 0 || y >= this->ySize)
         return false;
-    Bloc *newObstacle = new Bloc(x, y);
+    auto *newObstacle = new Bloc(x, y);
 
     for (Bloc *snake_part : this->snake){
         if (*snake_part == *newObstacle)
