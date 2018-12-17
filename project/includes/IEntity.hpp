@@ -8,7 +8,7 @@
 
 class IEntity {
 public:
-    virtual void display(Map const &map, UI const &gameInfo) const = 0;
+    virtual void display(Map const &map, UI const &gameInfo) = 0;
 };
 
 
