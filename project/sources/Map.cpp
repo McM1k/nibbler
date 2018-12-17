@@ -62,7 +62,7 @@ void Map::setFruit(Bloc *fruit) {
 bool Map::addObstacle(int x, int y) {
     if (x < 0 || x >= this->xSize || y < 0 || y >= this->ySize)
         return false;
-    Bloc *newObstacle = new Bloc(x, y);
+    auto *newObstacle = new Bloc(x, y);
 
     for (Bloc *snake_part : this->snake){
         if (*snake_part == *newObstacle)

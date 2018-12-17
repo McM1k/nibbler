@@ -9,12 +9,13 @@
 
 class Display : public IEntity{
 public:
-    Display(void) = default;
+    Display() = default;
     Display(Display const &src) = default;
-    virtual ~Display(void) = default;
+
+    virtual ~Display() = default;
     Display &operator=(Display const &rhs) = default;
 
-    void display(Map const &map, UI const &gameInfo) const;
+    void display(Map const &map, UI const &gameInfo) const override;
 private:
 
 };

@@ -19,10 +19,13 @@
 
 class Map {
 public:
+    Map() = delete;
     Map(int _xSize, int _ySize);
     Map(Map const &src) = default;
-    virtual ~Map(void) = default;
-    Map &operator=(Map const &rhs);
+
+    virtual ~Map() = default;
+
+    Map &operator=(Map const &rhs) = delete;
 
     bool addObstacle(int x, int y);
     std::ostream &operator<<(std::ostream &o);
@@ -34,13 +37,12 @@ public:
     void setFruit(Bloc *fruit);
 
 private:
-    Map(void) = default;
 
-    int                 const   xSize;
-    int                 const   ySize;
+    int const xSize{};
+    int const ySize{};
     std::list<Bloc *>           obstacles;
     std::list<Bloc *>           snake;
-    Bloc                        *fruit;
+    Bloc *fruit{};
 };
 
 
