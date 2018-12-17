@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <iostream>
+#include <iostream>
 #include "../includes/LibLoader.hpp"
 #include "../includes/IInputs.hpp"
 

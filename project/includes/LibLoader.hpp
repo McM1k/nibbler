@@ -41,10 +41,10 @@ public:
     }
 
 private:
-    const int LIBSNUMBER;
     void *dl_handle;
     char *libs[3];
     const eLibs libName;
+    const int LIBSNUMBER;
 
 };
 
