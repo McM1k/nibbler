@@ -28,6 +28,7 @@ set(sourcesFiles
         UIExceptions.cpp
         Map.cpp
         Bloc.cpp
+        GameManager.cpp
         LibLoader.cpp)
 
 PREPEND(sourcesProject ${prefixSources} ${sourcesFiles})
@@ -82,7 +83,6 @@ set_target_properties(nibbler PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURREN
 
 # links
 
-#TARGET_LINK_LIBRARIES(nibbler ncurses)
-
+TARGET_LINK_LIBRARIES(nibbler ncurses)
 
 #TARGET_LINK_LIBRARIES(nibbler lib2)
