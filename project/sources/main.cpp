@@ -21,5 +21,9 @@ int main() {
     } catch (LibLoader::DLExceptions const &e) {
         std::cout << e.what() << std::endl;
     }
+
+    //while (newDisplay) {
+    //    display->display(*map, *ui);
+    //}
     return 1;
 }
