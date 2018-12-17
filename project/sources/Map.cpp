@@ -34,15 +34,23 @@ const Bloc *Map::getFruit() const {
     return fruit;
 }
 
+const std::list<Bloc *> &Map::getSnake() const{
+    return snake;
+}
+
 /*
  * Setters
  */
-void Map::setObstacles(const std::list<Bloc *> &obstacles) {
+void Map::setObstacles(std::list<Bloc *> &obstacles) {
     this->obstacles = obstacles;
 }
 
 void Map::setFruit(Bloc *fruit) {
     this->fruit = fruit;
+}
+
+void Map::setSnake(std::list<Bloc *> &snake) {
+    Map::snake = snake;
 }
 
 /*

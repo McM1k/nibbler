@@ -32,9 +32,11 @@ public:
 
     const std::list<Bloc *> &getObstacles() const;
     const Bloc *getFruit() const;
+    const std::list<Bloc *> &getSnake() const;
 
-    void setObstacles(const std::list<Bloc *> &obstacles);
+    void setObstacles(std::list<Bloc *> &obstacles);
     void setFruit(Bloc *fruit);
+    void setSnake(std::list<Bloc *> &snake);
 
 private:
 

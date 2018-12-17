@@ -39,7 +39,6 @@ set(sourcesTests UITests.cpp)
 PREPEND(tests ${prefixTests} ${sourcesTests})
 
 # ncurses
-
 set(ncursesFiles
         Display.cpp
         Inputs.cpp
