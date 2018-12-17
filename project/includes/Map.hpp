@@ -23,7 +23,7 @@ public:
     Map(int _xSize, int _ySize);
     Map(Map const &src) = default;
 
-    virtual ~Map() = default;
+    virtual ~Map();
 
     Map &operator=(Map const &rhs) = delete;
 
@@ -42,8 +42,8 @@ private:
 
     int const xSize{};
     int const ySize{};
-    std::list<Bloc *>           obstacles;
-    std::list<Bloc *>           snake;
+    std::list<Bloc *>           *obstacles;
+    std::list<Bloc *>           *snake;
     Bloc *fruit{};
 };
 
