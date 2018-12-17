@@ -57,7 +57,8 @@ PROJ_SRC_LIST = main.cpp \
                 Map.cpp \
                 UI.cpp \
                 Bloc.cpp \
-                UIExceptions.cpp
+                UIExceptions.cpp \
+                LibLoader.cpp
 
 LIB1_SRC_LIST = Display.cpp \
                 Inputs.cpp
@@ -97,7 +98,7 @@ $(PROJ_DIR)/$(OBJ_DIR)/%.o: $(PROJ_DIR)/$(SRC_DIR)/%.cpp
 
 $(LIB1) :                   $(LIB1_SRC) $(LIB1_OBJ)
 	                        @mkdir -p $(LIBS_DIR) 2> /dev/null || true
-	                        @$(CC) $(SFLAGS) $(LIB1_OBJ) -o $(LIBS_DIR)/$@
+	                        @$(CC) $(SFLAGS) $(LIB1_OBJ) -o $(LIBS_DIR)/$@ -lncurses
 	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(LIB1) "$(CLEAR)$(LIG)"
 
 $(LIB1_DIR)/$(OBJ_DIR)/%.o: $(LIB1_DIR)/$(SRC_DIR)/%.cpp

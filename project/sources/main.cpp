@@ -11,8 +11,16 @@
 /* ************************************************************************** */
 
 # include <iostream>
+#include "../includes/LibLoader.hpp"
+#include "../includes/IInputs.hpp"
 
 int main() {
-    std::cout << "Hello World!" << std::endl;
+    LibLoader libLoader(LibLoader::eLibs::ncursesLib);
+
+    try {
+        libLoader.loadFunction<IInputs *(*)()>("newInputs");
+    } catch (LibLoader::DLExceptions const &e) {
+        std::cout << e.what() << std::endl;
+    }
     return 1;
 }

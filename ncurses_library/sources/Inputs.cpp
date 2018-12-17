@@ -21,6 +21,15 @@ int Inputs::getInput() const {
 /*            Functions            */
 /* ******************************* */
 
+Inputs *newInputs() {
+    return new Inputs();
+}
+
+
+void deleteInputs(Inputs *inputs) {
+    delete inputs;
+}
+
 /* ******************************* */
 /*            Exceptions           */
 /* ******************************* */

@@ -28,13 +28,14 @@ set(sourcesFiles
         UIExceptions.cpp
         Map.cpp
         Bloc.cpp
-        )
+        LibLoader.cpp)
 
 PREPEND(sourcesProject ${prefixSources} ${sourcesFiles})
 
 # tests
 
-set(sourcesTests UITests.cpp)
+set(sourcesTests UITests.cpp
+        LibLoaderTests.cpp)
 
 PREPEND(tests ${prefixTests} ${sourcesTests})
 
@@ -83,5 +84,6 @@ set_target_properties(nibbler PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURREN
 # links
 
 TARGET_LINK_LIBRARIES(nibbler ncurses)
+
 
 #TARGET_LINK_LIBRARIES(nibbler lib2)
