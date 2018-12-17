@@ -32,7 +32,7 @@ CR_DL =	\xe2\x95\x9a
 # comp
 CC =		clang++
 CFLAGS =	-Wall -Wextra -Werror -std=c++11
-SFLAGS =    -shared -fPIC
+SFLAGS =    -shared -fPIC -undefined dynamic_lookup
 
 # binaries
 EXE =       nibbler

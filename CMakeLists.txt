@@ -83,7 +83,7 @@ set_target_properties(nibbler PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURREN
 
 # links
 
-TARGET_LINK_LIBRARIES(nibbler ncurses)
+#TARGET_LINK_LIBRARIES(nibbler ncurses)
 
 
 #TARGET_LINK_LIBRARIES(nibbler lib2)
