@@ -25,7 +25,7 @@ Map::Map(int xSize, int ySize) : xSize(xSize), ySize(ySize), obstacles(), snake(
 Map::~Map() {
     delete fruit;
     delete obstacles;
-    delete fruit;
+    delete snake;
 }
 /*
  * Getters
@@ -45,7 +45,7 @@ const std::list<Bloc *> &Map::getSnake() const{
 /*
  * Setters
  */
-void Map::setObstacles(const std::list<Bloc *> &obstacles) {
+void Map::setObstacles(std::list<Bloc *> &obstacles) {
     *(this->obstacles) = obstacles;
 }
 
