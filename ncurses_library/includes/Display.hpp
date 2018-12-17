@@ -3,6 +3,8 @@
 # define DISPLAY_HPP
 
 # define GENERIC_BORDER '#'
+# define VERTICAL_BORDER '|'
+# define HORIZONTAL_BORDER '-'
 # define LEFT_BORDER '\u258C'
 # define RIGHT_BORDER '\u2590'
 # define UP_BORDER '\u2580'
@@ -17,24 +19,24 @@
 # define OBSTACLE '@'
 
 # define GENERIC_SNAKE_PART '*'
-# define HORIZONTAL_SNAKE_PART '\u2501'
-# define VERTICAL_SNAKE_PART '\u2503'
-# define NW_SNAKE_PART '\u251B'
-# define NE_SNAKE_PART '\u2517'
-# define SE_SNAKE_PART '\u250F'
-# define SW_SNAKE_PART '\u2513'
+# define HORIZONTAL_SNAKE_PART u8"\u2501"
+# define VERTICAL_SNAKE_PART u8"\u2503"
+# define NW_SNAKE_PART u8"\u251B"
+# define NE_SNAKE_PART u8"\u2517"
+# define SE_SNAKE_PART u8"\u250F"
+# define SW_SNAKE_PART u8"\u2513"
 
 # define NE_SNAKE_HEAD '\u2BA1'
-# define NS_SNAKE_HEAD '\u2B63'
+# define NS_SNAKE_HEAD u8"\u2B63"
 # define NW_SNAKE_HEAD '\u2BA0'
 # define EN_SNAKE_HEAD '\u2BA4'
 # define ES_SNAKE_HEAD '\u2BA4'
-# define EW_SNAKE_HEAD '\u2B60'
-# define SN_SNAKE_HEAD '\u2B61'
+# define EW_SNAKE_HEAD u8"\u2B60"
+# define SN_SNAKE_HEAD u8"\u2B61"
 # define SE_SNAKE_HEAD '\u2BA3'
 # define SW_SNAKE_HEAD '\u2BA2'
 # define WN_SNAKE_HEAD '\u2BA5'
-# define WE_SNAKE_HEAD '\u2B62'
+# define WE_SNAKE_HEAD u8"\u2B62"
 # define WS_SNAKE_HEAD '\u2BA7'
 
 # include "../../project/includes/IEntity.hpp"
@@ -42,10 +44,8 @@
 # include "../../project/includes/UI.hpp"
 # include <iostream>
 
-extern "C" {
 # include <ncurses.h>
-//# include <locale.h>
-}
+# include <locale.h>
 
 class Display : public IEntity{
 public:
@@ -67,14 +67,17 @@ public:
         virtual const char *what() const throw();
     };
 private:
-    void printSnake(const std::list<Bloc *> snake);
+    void printSnake(std::list<Bloc *> snake);
     void printFruit(const Bloc *fruit);
     void printObstacles(const std::list<Bloc *> &obstacles);
+    void printBorders(int x, int y);
 
     WINDOW      *window;
     int         red_colour;
     int         green_colour;
     int         yellow_colour;
+    int         xSize;
+    int         ySize;
 
 };
 

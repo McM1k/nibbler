@@ -4,10 +4,10 @@
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-Display::Display(int x, int y) {
+Display::Display(int x, int y) : xSize(x), ySize(y){
     setlocale(LC_ALL, "");
     initscr();
-    this->window = newwin(x + 2, y + 7, 0, 0);
+    this->window = newwin(y + 7, x + 2, 0, 0);
     start_color();
     this->red_colour = init_pair(1, COLOR_RED, COLOR_BLACK);
     this->yellow_colour = init_pair(2, COLOR_YELLOW, COLOR_BLACK);
@@ -30,8 +30,7 @@ Display::~Display() {
 /* ******************************* */
 /*            Functions            */
 /* ******************************* */
-void Display::printSnake(const std::list<Bloc *> snake) {
-    /*
+void Display::printSnake(std::list<Bloc *> snake) {/*
     std::list<Bloc *>::const_iterator prev = snake.begin();
     std::list<Bloc *>::const_iterator next = snake.begin();
     next++;
@@ -79,8 +78,8 @@ void Display::printSnake(const std::list<Bloc *> snake) {
         mvaddch((*next)->getY() + 1, (*next)->getX() + 1, WE_SNAKE_HEAD);
     else
         throw BrokenSnakeException();
+*/
 
-    */
     for (Bloc *snake_part : snake){
         mvaddch(snake_part->getY() + 1, snake_part->getX() + 1, GENERIC_SNAKE_PART);
     }
@@ -98,11 +97,22 @@ void Display::printObstacles(const std::list<Bloc *> &obstacles) {
     }
 }
 
+void Display::printBorders(int x, int y) {
+    for (int i = 0; i < x + 2; i++) {
+        mvaddch(0, i, GENERIC_BORDER);
+        mvaddch(y + 1, i, GENERIC_BORDER);
+    }
+    for (int j = 0; j < y + 2; j++) {
+        mvaddch(j, 0, GENERIC_BORDER);
+        mvaddch(j, x + 1, GENERIC_BORDER);
+    }
+}
+
 void Display::display(const Map &map, const UI &) {
     wclear(this->window);
-    wborder(this->window, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER, GENERIC_BORDER);
-    //wborder(this->window, LEFT_BORDER, RIGHT_BORDER, UP_BORDER, DOWN_BORDER,
-    //        NW_CORNER_BORDER, NE_CORNER_BORDER, SW_CORNER_BORDER, SE_CORNER_BORDER);
+//    wborder(this->window, LEFT_BORDER, RIGHT_BORDER, UP_BORDER, DOWN_BORDER,
+  //          NW_CORNER_BORDER, NE_CORNER_BORDER, SW_CORNER_BORDER, SE_CORNER_BORDER);
+    printBorders(this->xSize, this->ySize);
     printSnake(map.getSnake());
     printObstacles(map.getObstacles());
     printFruit(map.getFruit());
