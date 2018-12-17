@@ -17,9 +17,10 @@
 
 class Bloc {
 public:
-    Bloc(const int x, const int y);
+    Bloc(int x, int y);
     Bloc(Bloc const &src) = default;
-    virtual ~Bloc(void) = default;
+
+    virtual ~Bloc() = default;
     Bloc &operator=(Bloc const &rhs);
     std::ostream &operator<<(std::ostream &o);
 
@@ -29,10 +30,10 @@ public:
     int getY() const;
 
 private:
-    Bloc(void) = default;
+    Bloc() = default;
 
-    int     x;
-    int     y;
+    int x{};
+    int y{};
 
 };
 

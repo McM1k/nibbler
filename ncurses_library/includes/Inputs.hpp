@@ -8,10 +8,11 @@
 
 class Inputs : public IInput{
 public:
-    Inputs(void) = default;
-    virtual ~Inputs(void) = default;
+    Inputs() = default;
 
-    int getInput() const;
+    virtual ~Inputs() = default;
+
+    int getInput() const override;
 
 private:
     Inputs(Inputs const &src) = default;
