@@ -28,6 +28,7 @@ set(sourcesFiles
         UIExceptions.cpp
         Map.cpp
         Bloc.cpp
+        GameManager.cpp
         )
 
 PREPEND(sourcesProject ${prefixSources} ${sourcesFiles})
