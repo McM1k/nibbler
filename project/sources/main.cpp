@@ -15,10 +15,12 @@
 #include "../includes/IInputs.hpp"
 
 int main() {
-    LibLoader libLoader(LibLoader::eLibs::ncursesLib);
-
     try {
-        libLoader.loadFunction<IInputs *(*)()>("newInputs");
+        LibLoader libLoader(LibLoader::eLibs::ncursesLib);
+        //auto test =  libLoader.loadFunction<IInputs *(*)()>("newInputs");
+
+        //if (!test)
+        //std::cout << "ta grosse mere" << std::endl;
     } catch (LibLoader::DLExceptions const &e) {
         std::cout << e.what() << std::endl;
     }
