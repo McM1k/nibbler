@@ -57,7 +57,8 @@ PROJ_SRC_LIST = main.cpp \
                 Map.cpp \
                 UI.cpp \
                 Bloc.cpp \
-                UIExceptions.cpp
+                UIExceptions.cpp \
+                LibLoader.cpp
 
 LIB1_SRC_LIST = Display.cpp \
                 Inputs.cpp
