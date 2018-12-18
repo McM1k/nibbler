@@ -34,12 +34,20 @@ const std::list<Bloc *> &Map::getObstacles() const {
     return *obstacles;
 }
 
-const Bloc *Map::getFruit() const {
-    return fruit;
+const Bloc &Map::getFruit() const {
+    return *fruit;
 }
 
 const std::list<Bloc *> &Map::getSnake() const{
-    return snake;
+    return *snake;
+}
+
+int Map::getXSize() const {
+    return xSize;
+}
+
+int Map::getYSize() const {
+    return ySize;
 }
 
 /*
@@ -49,12 +57,12 @@ void Map::setObstacles(std::list<Bloc *> &obstacles) {
     *(this->obstacles) = obstacles;
 }
 
-void Map::setFruit(Bloc *fruit) {
-    this->fruit = fruit;
+void Map::setFruit(Bloc &fruit) {
+    *(this->fruit) = fruit;
 }
 
 void Map::setSnake(std::list<Bloc *> &snake) {
-    Map::snake = snake;
+    *(this->snake) = snake;
 }
 
 /*
@@ -71,27 +79,6 @@ void Map::setSnake(std::list<Bloc *> &snake) {
 /*
  * Other
  */
-bool Map::addObstacle(int x, int y) {
-    if (x < 0 || x >= this->xSize || y < 0 || y >= this->ySize)
-        return false;
-    auto *newObstacle = new Bloc(x, y);
-
-    for (Bloc *snake_part : *(this->snake)){
-        if (*snake_part == *newObstacle)
-            return false;
-    }
-
-    for (Bloc *obstacles_part : *(this->snake)){
-        if (*obstacles_part == *newObstacle)
-            return false;
-    }
-
-    if (this->fruit == newObstacle)
-        return false;
-
-    this->obstacles.push_front(newObstacle);
-    return true;
-}
 
 /*
  * Exceptions

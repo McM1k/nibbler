@@ -16,7 +16,7 @@
 /*    Constructors & destructor    */
 /* ******************************* */
 
-UI::UI() : score(0), gameState(GameManager::eGameState::Game) {
+UI::UI() : score(0), gameState(eGameState::Game) {
 
 }
 
@@ -66,11 +66,11 @@ void UI::setScore(int score) {
     this->score = score;
 }
 
-const GameManager::eGameState &UI::getGameState() const {
+const eGameState &UI::getGameState() const {
     return gameState;
 }
 
-void UI::setGameState(const GameManager::eGameState &gameState) {
+void UI::setGameState(const eGameState &gameState) {
     this->gameState = gameState;
 }
 

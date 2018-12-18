@@ -14,7 +14,8 @@
 #define NIBBLER_UI_HPP
 
 #include <iostream>
-#include "LibLoader.hpp"
+#include "eGameState.hpp"
+#include "eSharedLibs.hpp"
 
 class UI {
 public:
@@ -28,9 +29,9 @@ public:
 
     void addScore(int scoreToADd);
 
-    const LibLoader::eGameState &getGameState() const;
+    const eGameState &getGameState() const;
 
-    void setGameState(const LibLoader::eGameState &gameState);
+    void setGameState(const eGameState &gameState);
 
     class WrongScoreException : public std::exception {
     public:
@@ -43,7 +44,7 @@ private:
     UI &operator=(UI const &) = default;
 
     int score;
-    LibLoader::eGameState gameState;
+    eGameState gameState;
 
 };
 

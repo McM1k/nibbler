@@ -25,11 +25,9 @@ ENDFUNCTION(PREPEND)
 
 set(sourcesFiles
         UI.cpp
-        UIExceptions.cpp
         Map.cpp
         Bloc.cpp
-        GameManager.cpp
-        LibLoader.cpp)
+        LibLoader.cpp
         GameManager.cpp
         )
 
