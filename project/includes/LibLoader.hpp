@@ -1,19 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   LibLoader.hpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboudrie <gboudrie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/18 14:08:52 by gboudrie          #+#    #+#             */
+/*   Updated: 2018/12/18 14:08:52 by gboudrie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef NIBBLER_LIBLOADER_HPP
 #define NIBBLER_LIBLOADER_HPP
 
 #include <dlfcn.h>
 #include <iostream>
+#include "eSharedLibs.hpp"
 
 class LibLoader {
 public:
-    typedef enum {
-        ncursesLib
-    } eLibs;
 
     LibLoader() = delete;
 
-    explicit LibLoader(eLibs _libName);
+    explicit LibLoader(eSharedLibs _libName);
 
     LibLoader(LibLoader const &src) = delete;
 
@@ -21,7 +30,7 @@ public:
 
     LibLoader &operator=(LibLoader const &) = delete;
 
-    eLibs getLibName() const;
+    eSharedLibs getLibName() const;
 
     char *const *getLibs() const;
 
@@ -43,7 +52,7 @@ public:
 private:
     void *dl_handle;
     char *libs[3];
-    const eLibs libName;
+    const eSharedLibs libName;
     const int LIBSNUMBER;
 
 };

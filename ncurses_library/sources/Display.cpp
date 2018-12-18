@@ -115,7 +115,7 @@ void Display::display(const Map &map, const UI &) {
     printBorders(this->xSize, this->ySize);
     printSnake(map.getSnake());
     printObstacles(map.getObstacles());
-    printFruit(map.getFruit());
+    printFruit(&(map.getFruit()));
     refresh();
 }
 

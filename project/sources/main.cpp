@@ -16,7 +16,7 @@
 
 int main() {
     try {
-        LibLoader libLoader(LibLoader::eLibs::ncursesLib);
+        LibLoader libLoader(eSharedLibs::ncursesLib);
         //auto test =  libLoader.loadFunction<IInputs *(*)()>("newInputs");
 
         //if (!test)

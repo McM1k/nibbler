@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   LibLoader.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboudrie <gboudrie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/18 14:08:42 by gboudrie          #+#    #+#             */
+/*   Updated: 2018/12/18 14:08:42 by gboudrie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/LibLoader.hpp"
 
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
 
-LibLoader::LibLoader(eLibs _libName) : libName(_libName), LIBSNUMBER(4) {
+LibLoader::LibLoader(eSharedLibs _libName) : libName(_libName), LIBSNUMBER(4) {
     char *libs[LIBSNUMBER];
 
-    libs[eLibs::ncursesLib] = const_cast<char *>("libs/libncurses.so");
+    libs[eSharedLibs::ncursesLib] = const_cast<char *>("libs/libncurses.so");
 
     dl_handle = dlopen(libs[libName], RTLD_NOW | RTLD_LOCAL);
 
@@ -38,7 +50,7 @@ std::ostream &operator<<(std::ostream &o, LibLoader const &instance) {
 /*            Accessors            */
 /* ******************************* */
 
-LibLoader::eLibs LibLoader::getLibName() const {
+eSharedLibs LibLoader::getLibName() const {
     return libName;
 }
 

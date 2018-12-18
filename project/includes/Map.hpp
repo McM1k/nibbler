@@ -27,15 +27,16 @@ public:
 
     Map &operator=(Map const &rhs) = delete;
 
-    bool addObstacle(int x, int y);
     std::ostream &operator<<(std::ostream &o);
 
     const std::list<Bloc *> &getObstacles() const;
-    const Bloc *getFruit() const;
+    const Bloc &getFruit() const;
     const std::list<Bloc *> &getSnake() const;
+    int getXSize() const;
+    int getYSize() const;
 
     void setObstacles(std::list<Bloc *> &obstacles);
-    void setFruit(Bloc *fruit);
+    void setFruit(Bloc &fruit);
     void setSnake(std::list<Bloc *> &snake);
 
 private:
