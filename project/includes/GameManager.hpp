@@ -23,10 +23,13 @@
 
 class GameManager {
 public:
-    GameManager(void) = delete;
-    GameManager(GameManager const &src) = default;
-    virtual ~GameManager(void);
-    GameManager &operator=(GameManager const &rhs) = default;
+    GameManager() = delete;
+
+    GameManager(GameManager const &src) = delete;
+
+    virtual ~GameManager();
+
+    GameManager &operator=(GameManager const &rhs) = delete;
     GameManager(int x, int y);
 
     eGameState getState() const;
@@ -44,7 +47,7 @@ private:
     LibLoader           *libLoader;
     eGameState          state;
     IEntity             *display;
-    IInputs             *input;
+    IInputs *inputs;
     Map                 map;
    // UI                  ui; //TODO init
 
