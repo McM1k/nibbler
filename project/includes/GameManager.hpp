@@ -23,26 +23,28 @@
 
 class GameManager {
 public:
-    GameManager(void);
+    GameManager(void) = delete;
     GameManager(GameManager const &src) = default;
-    virtual ~GameManager(void){};
+    virtual ~GameManager(void);
     GameManager &operator=(GameManager const &rhs) = default;
-
+    GameManager(int x, int y);
 
     eGameState getState() const;
 
-    void startGame(int x, int y);
     void spawnFruit();
     void spawnSnake();
 //    void spawnObstacle();
     void update();
     void render();
-   // IEntity *changeLib(eSharedLibs lib);
+    void changeLib(eSharedLibs lib);
+    void instantiateFromLib(eSharedLibs lib);
+    void freeLib();
 
 private:
-    eGameState          state; //TODO init
-  //  IEntity             *display; //TODO init
-   // IInputs             *input; //TODO init
+    LibLoader           *libLoader;
+    eGameState          state;
+    IEntity             *display;
+    IInputs             *input;
     Map                 *map;
    // UI                  *ui; //TODO init
 

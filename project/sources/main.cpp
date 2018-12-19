@@ -17,10 +17,7 @@
 int main() {
     try {
         LibLoader libLoader(eSharedLibs::ncursesLib);
-        //auto test =  libLoader.loadFunction<IInputs *(*)()>("newInputs");
 
-        //if (!test)
-        //std::cout << "ta grosse mere" << std::endl;
     } catch (LibLoader::DLExceptions const &e) {
         std::cout << e.what() << std::endl;
     }

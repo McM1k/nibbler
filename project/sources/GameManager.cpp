@@ -15,7 +15,16 @@
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-GameManager::GameManager() : state(eGameState::Menu) {}
+GameManager::GameManager(int x, int y) : state(eGameState::Menu) {
+    instantiateFromLib(eSharedLibs::ncursesLib);
+    this->map = new Map(x, y);
+    spawnSnake();
+    spawnFruit();
+}
+
+GameManager::~GameManager() {
+    freeLib();
+}
 
 /* ******************************* */
 /*            Accessors            */
@@ -31,11 +40,6 @@ eGameState GameManager::getState() const {
 /* ******************************* */
 /*            Functions            */
 /* ******************************* */
-void GameManager::startGame(int x, int y) {
-    this->map = new Map(x, y);
-    spawnSnake();
-    spawnFruit();
-}
 
 void GameManager::spawnSnake() {
     auto newSnake = new std::list<Bloc *>();
@@ -68,9 +72,27 @@ void GameManager::spawnFruit() {
     this->map->setFruit(*(new Bloc(x, y)));
 }
 
-//IEntity *GameManager::changeLib(eSharedLibs libs) {
+void GameManager::freeLib() {
+    if (this->display)
+        this->libLoader->loadFunction<void (*)(IEntity *)>("deleteDisplay")(this->display);
+    if (this->input)
+        this->libLoader->loadFunction<void (*)(IInputs *)>("deleteInputs")(this->input);
+    delete this->libLoader;
+}
 
-//}
+void GameManager::instantiateFromLib(eSharedLibs lib) {
+    this->libLoader = new LibLoader(lib);
+    this->display = this->libLoader->loadFunction<IEntity *(*)(int, int)>("newDisplay")(map->getXSize(), map->getYSize());
+    this->input = this->libLoader->loadFunction<IInputs *(*)()>("newInputs")();
+}
+
+void GameManager::changeLib(eSharedLibs lib) {
+    if (lib == libLoader->getLibName())
+        return;
+    state = eGameState::Pause;
+    freeLib();
+    instantiateFromLib(lib);
+}
 
 void GameManager::update() {
     while (this->getState() == eGameState::Game)
