@@ -15,7 +15,7 @@
 
 #include <iostream>
 #include "eGameState.hpp"
-#include "UIExceptions.hpp"
+#include "eSharedLibs.hpp"
 
 class UI {
 public:
@@ -32,6 +32,11 @@ public:
     const eGameState &getGameState() const;
 
     void setGameState(const eGameState &gameState);
+
+    class WrongScoreException : public std::exception {
+    public:
+        const char *what() const noexcept override;
+    };
 
 private:
     UI(UI const &src) = default;

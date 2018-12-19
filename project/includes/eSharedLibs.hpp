@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   eSharedLibs.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboudrie <gboudrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/07 15:30:14 by gboudrie          #+#    #+#             */
-/*   Updated: 2018/12/07 15:30:14 by gboudrie         ###   ########.fr       */
+/*   Created: 2018/12/18 14:09:13 by gboudrie          #+#    #+#             */
+/*   Updated: 2018/12/18 14:09:13 by gboudrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#ifndef ESHAREDLIBS_HPP
+# define ESHAREDLIBS_HPP
 
-#include <iostream>
-#include "../includes/LibLoader.hpp"
-#include "../includes/IInputs.hpp"
+typedef enum {
+    ncursesLib
+} eSharedLibs;
 
-int main() {
-    try {
-        LibLoader libLoader(eSharedLibs::ncursesLib);
-
-    } catch (LibLoader::DLExceptions const &e) {
-        std::cout << e.what() << std::endl;
-    }
-    return 1;
-}
+#endif

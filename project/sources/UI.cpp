@@ -48,7 +48,7 @@ void UI::addScore(int scoreToADd) {
     if (scoreToADd >= 0)
         score += scoreToADd;
     else
-        throw UIExceptions::WrongScoreException();
+        throw UI::WrongScoreException();
 }
 
 
@@ -62,7 +62,7 @@ int UI::getScore() const {
 
 void UI::setScore(int score) {
     if (score < 0)
-        throw UIExceptions::WrongScoreException();
+        throw UI::WrongScoreException();
     this->score = score;
 }
 
@@ -77,5 +77,7 @@ void UI::setGameState(const eGameState &gameState) {
 /* ******************************* */
 /*            Exceptions           */
 /* ******************************* */
-
+const char *UI::WrongScoreException::what() const noexcept {
+    return "You have to add positive value to score.";
+}
 

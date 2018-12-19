@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.9)
 project(nibbler)
 
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lncurses -undefined dynamic_lookup")
 
 # Files paths
 
@@ -25,10 +26,11 @@ ENDFUNCTION(PREPEND)
 
 set(sourcesFiles
         UI.cpp
-        UIExceptions.cpp
         Map.cpp
         Bloc.cpp
-        LibLoader.cpp)
+        LibLoader.cpp
+        GameManager.cpp
+        )
 
 PREPEND(sourcesProject ${prefixSources} ${sourcesFiles})
 
@@ -82,7 +84,6 @@ set_target_properties(nibbler PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURREN
 
 # links
 
-#TARGET_LINK_LIBRARIES(nibbler ncurses)
-
+TARGET_LINK_LIBRARIES(nibbler ncurses)
 
 #TARGET_LINK_LIBRARIES(nibbler lib2)

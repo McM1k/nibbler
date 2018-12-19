@@ -73,11 +73,11 @@ TEST_CASE("Score is not added with wrong value") {
 
     ui.setScore(0);
 
-    REQUIRE_THROWS_AS(ui.addScore(-1), UIExceptions::WrongScoreException);
+    REQUIRE_THROWS_AS(ui.addScore(-1), UI::WrongScoreException);
 }
 
 TEST_CASE("Score is not set with wrong value") {
     UI ui;
 
-    REQUIRE_THROWS_AS(ui.setScore(-1), UIExceptions::WrongScoreException);
+    REQUIRE_THROWS_AS(ui.setScore(-1), UI::WrongScoreException);
 }
