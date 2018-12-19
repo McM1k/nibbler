@@ -15,31 +15,25 @@
 /*
  * Constructors
  */
-Map::Map(int xSize, int ySize) : xSize(xSize), ySize(ySize), obstacles(), snake() {
-    fruit = nullptr;
-}
+Map::Map(int xSize, int ySize) : xSize(xSize), ySize(ySize), fruit(-1, -1) {}
 
 /*
  * Destructors
  */
-Map::~Map() {
-    delete fruit;
-    delete obstacles;
-    delete snake;
-}
+
 /*
  * Getters
  */
-const std::list<Bloc *> &Map::getObstacles() const {
-    return *obstacles;
+const std::list<Bloc *> Map::getObstacles() const {
+    return obstacles;
 }
 
-const Bloc &Map::getFruit() const {
-    return *fruit;
+const Bloc Map::getFruit() const {
+    return fruit;
 }
 
-const std::list<Bloc *> &Map::getSnake() const{
-    return *snake;
+const std::list<Bloc *> Map::getSnake() const{
+    return snake;
 }
 
 int Map::getXSize() const {
@@ -53,16 +47,16 @@ int Map::getYSize() const {
 /*
  * Setters
  */
-void Map::setObstacles(std::list<Bloc *> &obstacles) {
-    *(this->obstacles) = obstacles;
+void Map::setObstacles(std::list<Bloc *> obstacles) {
+    this->obstacles = obstacles;
 }
 
-void Map::setFruit(Bloc &fruit) {
-    *(this->fruit) = fruit;
+void Map::setFruit(Bloc fruit) {
+    this->fruit = fruit;
 }
 
-void Map::setSnake(std::list<Bloc *> &snake) {
-    *(this->snake) = snake;
+void Map::setSnake(std::list<Bloc *> snake) {
+    this->snake = snake;
 }
 
 /*
@@ -70,8 +64,8 @@ void Map::setSnake(std::list<Bloc *> &snake) {
  */
  std::ostream& Map::operator<<(std::ostream &o) {
     o << "xSize = " << this->xSize << ", ySize = " << this->ySize;
-    for (Bloc *obstacles_part : *(this->obstacles)) { o << ", obstacles = " << obstacles_part; }
-    for (Bloc *snake_part : *(this->snake)) { o << ", snake = " << snake_part; }
+    for (auto obstacles_part : this->obstacles) { o << ", obstacles = " << obstacles_part; }
+    for (auto snake_part : this->snake) { o << ", snake = " << snake_part; }
     o << ", fruit = " << &(this->fruit) << std::endl;
     return o;
 }
