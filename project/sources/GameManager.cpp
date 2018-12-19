@@ -74,15 +74,16 @@ void GameManager::spawnFruit() {
 void GameManager::freeLib() {
     if (this->display)
         this->libLoader->loadFunction<void (*)(IEntity *)>("deleteDisplay")(this->display);
-    if (this->input)
-        this->libLoader->loadFunction<void (*)(IInputs *)>("deleteInputs")(this->input);
+    if (this->inputs)
+        this->libLoader->loadFunction < void(*)
+    (IInputs *) > ("deleteInputs")(this->inputs);
     delete this->libLoader;
 }
 
 void GameManager::instantiateFromLib(eSharedLibs lib) {
     this->libLoader = new LibLoader(lib);
     this->display = this->libLoader->loadFunction<IEntity *(*)(int, int)>("newDisplay")(map.getXSize(), map.getYSize());
-    this->input = this->libLoader->loadFunction<IInputs *(*)()>("newInputs")();
+    this->inputs = this->libLoader->loadFunction<IInputs *(*)()>("newInputs")();
 }
 
 void GameManager::changeLib(eSharedLibs lib) {
