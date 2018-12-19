@@ -5,7 +5,7 @@
 /*    Constructors & destructor    */
 /* ******************************* */
 Display::Display(int x, int y) : xSize(x), ySize(y){
-    setlocale(LC_ALL, "");
+//    setlocale(LC_ALL, "");
     initscr();
     this->window = newwin(y + 7, x + 2, 0, 0);
     start_color();
@@ -15,8 +15,7 @@ Display::Display(int x, int y) : xSize(x), ySize(y){
 }
 
 Display::~Display() {
-    if (!delwin(this->window))
-        throw UnableToDeleteWindowException();
+    delwin(this->window);
     endwin();
 }
 /* ******************************* */
@@ -80,19 +79,19 @@ void Display::printSnake(std::list<Bloc *> snake) {/*
         throw BrokenSnakeException();
 */
 
-    for (Bloc *snake_part : snake){
+    for (auto snake_part : snake){
         mvaddch(snake_part->getY() + 1, snake_part->getX() + 1, GENERIC_SNAKE_PART);
     }
 }
 
-void Display::printFruit(const Bloc *fruit) {
-    if (fruit->getX() >= 0 && fruit->getY() >= 0) {
-        mvaddch(fruit->getY() + 1, fruit->getX() + 1, FRUIT);
+void Display::printFruit(Bloc fruit) {
+    if (fruit.getX() >= 0 && fruit.getY() >= 0) {
+        mvaddch(fruit.getY() + 1, fruit.getX() + 1, FRUIT);
     }
 }
 
-void Display::printObstacles(const std::list<Bloc *> &obstacles) {
-    for (Bloc *obstacle_part : obstacles){
+void Display::printObstacles(std::list<Bloc *> obstacles) {
+    for (auto obstacle_part : obstacles){
         mvaddch(obstacle_part->getY() + 1, obstacle_part->getX() + 1, OBSTACLE);
     }
 }
@@ -115,7 +114,7 @@ void Display::display(const Map &map, const UI &) {
     printBorders(this->xSize, this->ySize);
     printSnake(map.getSnake());
     printObstacles(map.getObstacles());
-    printFruit(&(map.getFruit()));
+    printFruit(map.getFruit());
     refresh();
 }
 
