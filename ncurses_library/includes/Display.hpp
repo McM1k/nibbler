@@ -68,8 +68,8 @@ public:
     };
 private:
     void printSnake(std::list<Bloc *> snake);
-    void printFruit(const Bloc *fruit);
-    void printObstacles(const std::list<Bloc *> &obstacles);
+    void printFruit(Bloc fruit);
+    void printObstacles(std::list<Bloc *> obstacles);
     void printBorders(int x, int y);
 
     WINDOW      *window;

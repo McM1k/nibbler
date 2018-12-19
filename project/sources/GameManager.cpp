@@ -15,9 +15,8 @@
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-GameManager::GameManager(int x, int y) : state(eGameState::Menu) {
+GameManager::GameManager(int x, int y) : state(eGameState::Menu), map(x, y) {
     instantiateFromLib(eSharedLibs::ncursesLib);
-    this->map = new Map(x, y);
     spawnSnake();
     spawnFruit();
 }
@@ -42,34 +41,34 @@ eGameState GameManager::getState() const {
 /* ******************************* */
 
 void GameManager::spawnSnake() {
-    auto newSnake = new std::list<Bloc *>();
-    newSnake->push_back(new Bloc(3,6));
-    newSnake->push_back(new Bloc(3,5));
-    newSnake->push_back(new Bloc(3,4));
+    std::list<Bloc *> newSnake;
+    newSnake.push_back(new Bloc(3,6));
+    newSnake.push_back(new Bloc(3,5));
+    newSnake.push_back(new Bloc(3,4));
 
-    this->map->setSnake(*newSnake);
+    this->map.setSnake(newSnake);
 }
 
 void GameManager::spawnFruit() {
     int x = -1, y = -1;
     std::random_device generator;
-    auto snake = map->getSnake();
-    auto obstacles = map->getObstacles();
+    auto snake = map.getSnake();
+//    auto obstacles = map.getObstacles();
 
     while (x == -1 || y == -1){
-        x = (generator())%(this->map->getXSize());
-        y = (generator())%(this->map->getYSize());
+        x = (generator())%(this->map.getXSize());
+        y = (generator())%(this->map.getYSize());
 
         for (auto part : snake) {
             if (part->getX() == x && part->getY() == y)
                 x = y = -1;
         }
-        for (auto part : obstacles) {
-            if (part->getX() == x && part->getY() == y)
-                x = y = -1;
-        }
+//        for (auto part : obstacles) {
+//            if (part->getX() == x && part->getY() == y)
+//                x = y = -1;
+//        }
     }
-    this->map->setFruit(*(new Bloc(x, y)));
+    this->map.setFruit(Bloc(x, y));
 }
 
 void GameManager::freeLib() {
@@ -82,7 +81,7 @@ void GameManager::freeLib() {
 
 void GameManager::instantiateFromLib(eSharedLibs lib) {
     this->libLoader = new LibLoader(lib);
-    this->display = this->libLoader->loadFunction<IEntity *(*)(int, int)>("newDisplay")(map->getXSize(), map->getYSize());
+    this->display = this->libLoader->loadFunction<IEntity *(*)(int, int)>("newDisplay")(map.getXSize(), map.getYSize());
     this->input = this->libLoader->loadFunction<IInputs *(*)()>("newInputs")();
 }
 

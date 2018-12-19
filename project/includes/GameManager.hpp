@@ -45,8 +45,8 @@ private:
     eGameState          state;
     IEntity             *display;
     IInputs             *input;
-    Map                 *map;
-   // UI                  *ui; //TODO init
+    Map                 map;
+   // UI                  ui; //TODO init
 
 };
 
