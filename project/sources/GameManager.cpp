@@ -36,6 +36,10 @@ eGameState GameManager::getState() const {
 /*       operators  overload       */
 /* ******************************* */
 
+IInputs *GameManager::getInputs() const {
+    return inputs;
+}
+
 /* ******************************* */
 /*            Functions            */
 /* ******************************* */
