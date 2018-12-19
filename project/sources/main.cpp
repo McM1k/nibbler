@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <iostream>
+#include <ncurses.h>
 #include "../includes/LibLoader.hpp"
 #include "../includes/IInputs.hpp"
 #include "../includes/GameManager.hpp"
@@ -22,7 +23,10 @@ int main(int argc, const char **argv) {
             GameManager gameManager(std::stoi(argv[1]), std::stoi(argv[2]));
             IInputs *inputs = gameManager.getInputs();
 
-            std::cout << inputs->getInput() << std::endl;
+            int c = inputs->getInput();
+            while (c != 27) {
+                c = inputs->getInput();
+            }
 
         } catch (LibLoader::DLExceptions const &e) {
             std::cout << e.what() << std::endl;
