@@ -16,6 +16,7 @@
 # include "Bloc.hpp"
 # include <list>
 # include <iostream>
+# include <random>
 
 class Map {
 public:
@@ -38,6 +39,12 @@ public:
     void setFruit(Bloc fruit);
     void setSnake(std::list<Bloc *> snake);
 
+    void spawnFruit();
+    void spawnSnake();
+//    void spawnObstacle();
+
+    typedef enum {left, right, up, down} direction;
+    void moveSnake(direction dir);
 private:
 
     int const xSize{};

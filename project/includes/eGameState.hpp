@@ -16,7 +16,8 @@ typedef enum {
     Menu,
     Game,
     Pause,
-    GameOver
+    GameOver,
+    Quit
 } eGameState;
 
 #endif

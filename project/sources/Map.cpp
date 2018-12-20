@@ -74,6 +74,41 @@ void Map::setSnake(std::list<Bloc *> snake) {
  * Other
  */
 
+void Map::spawnSnake() {
+    std::list<Bloc *> newSnake;
+    newSnake.push_back(new Bloc(3,6));
+    newSnake.push_back(new Bloc(3,5));
+    newSnake.push_back(new Bloc(3,4));
+
+    this->snake = newSnake;
+}
+
+void Map::spawnFruit() {
+    int x = -1, y = -1;
+    std::random_device generator;
+    auto snake = this->snake;
+//    auto obstacles = map.getObstacles();
+
+    while (x == -1 || y == -1){
+        x = (generator())%(this->xSize);
+        y = (generator())%(this->ySize);
+
+        for (auto part : snake) {
+            if (part->getX() == x && part->getY() == y)
+                x = y = -1;
+        }
+//        for (auto part : obstacles) {
+//            if (part->getX() == x && part->getY() == y)
+//                x = y = -1;
+//        }
+    }
+    this->fruit = Bloc(x, y);
+}
+
+void Map::moveSnake(Map::direction dir) {
+
+}
+
 /*
  * Exceptions
  */
