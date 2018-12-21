@@ -15,7 +15,8 @@
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-GameManager::GameManager(int x, int y) : state(eGameState::Pause), map(x, y), ms_per_frame(1000), intended_direction(Map::direction::up) {
+GameManager::GameManager(int x, int y) : state(eGameState::Pause), map(x, y), ms_per_frame(16),
+    intended_direction(Map::direction::up), frame_required_for_a_move(62), current_frame(0) {
     instantiateFromLib(eSharedLibs::ncursesLib);
     map.spawnSnake();
     map.spawnFruit();

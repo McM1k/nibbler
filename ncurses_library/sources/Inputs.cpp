@@ -9,8 +9,8 @@
 /*            Accessors            */
 /* ******************************* */
 
-int Inputs::getInput() const {
-    return getch();
+eInputs Inputs::getInput() const {
+    return static_cast<eInputs>(getch());
 }
 
 /* ******************************* */

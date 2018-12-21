@@ -14,10 +14,10 @@
 # define IINPUT_HPP
 
 # include <iostream>
-
+# include "eInputs.hpp"
 class IInputs {
 public:
-    virtual int getInput() const = 0;
+    virtual eInputs getInput() const = 0;
 };
 
 #endif

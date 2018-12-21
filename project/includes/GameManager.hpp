@@ -62,6 +62,8 @@ public:
     typedef void (GameManager::*ft_state)();
 
 private:
+    int                                     frame_required_for_a_move;
+    int                                     current_frame;
     Map::direction                          intended_direction;
     std::map<eInputs, ft_input>             map_inputs;
     std::map<eGameState, ft_state>          map_states;

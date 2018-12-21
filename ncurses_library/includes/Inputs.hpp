@@ -12,7 +12,7 @@ public:
 
     virtual ~Inputs() = default;
 
-    int getInput() const override;
+    eInputs getInput() const override;
 
 private:
     Inputs(Inputs const &src) = default;
