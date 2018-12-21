@@ -40,7 +40,7 @@ GameManager::GameManager(int x, int y) : state(eGameState::Pause), map(x, y) {
 /*            Accessors            */
 /* ******************************* */
 eGameState GameManager::getState() const {
-    return state;
+    return this->state;
 }
 
 /* ******************************* */
@@ -81,18 +81,11 @@ void GameManager::newGame() {
     map.spawnFruit();
 }
 
-void GameManager::update() {
+void GameManager::update() {this->map.moveSnake(this->intended_direction);}
 
+void GameManager::render() {display->display(map, ui);}
 
-
-
-}
-
-void GameManager::render() {
-    display->display(map, ui);
-}
-
-void GameManager::gamePause() {}
+void GameManager::gamePause() {this->ui.setGameState(this->state);}
 
 void GameManager::gameRun() {
     this->current_frame ++;
@@ -104,7 +97,7 @@ void GameManager::gameRun() {
 
 void GameManager::gameQuit() {freeLib();}
 
-void GameManager::gameOver() {}
+void GameManager::gameOver() {this->ui.setGameState(this->state);}
 
 void GameManager::inputQuit() {this->state = eGameState::Quit;}
 
