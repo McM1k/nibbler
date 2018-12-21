@@ -43,8 +43,8 @@ public:
     void spawnSnake();
 //    void spawnObstacle();
 
-    typedef enum {left, right, up, down} direction;
-    void moveSnake(direction dir);
+    typedef enum {left, right, up, down} eDirection;
+    bool moveSnake(eDirection dir);
 private:
 
     int const xSize{};

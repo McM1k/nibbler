@@ -105,7 +105,18 @@ void Map::spawnFruit() {
     this->fruit = Bloc(x, y);
 }
 
-void Map::moveSnake(Map::direction dir) {
+bool Map::moveSnake(Map::eDirection dir) {
+    auto currHead = this->snake.back();
+    Bloc *newHead;
+    if (dir == Map::eDirection::up)
+        newHead = new Bloc(currHead->getX(), currHead->getY() - 1);
+    else if (dir == Map::eDirection::down)
+        newHead = new Bloc(currHead->getX(), currHead->getY() + 1);
+    else if (dir == Map::eDirection::left)
+        newHead = new Bloc(currHead->getX() - 1, currHead->getY());
+    else if (dir == Map::eDirection::right)
+        newHead = new Bloc(currHead->getX() + 1, currHead->getY());
+
 
 }
 
