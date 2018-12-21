@@ -77,8 +77,6 @@ void GameManager::newGame() {
     this->intended_direction = Map::eDirection::up;
     this->frame_required_for_a_move = 62;
     this->current_frame = 0;
-    map.spawnSnake();
-    map.spawnFruit();
 }
 
 void GameManager::update() {

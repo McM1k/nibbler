@@ -37,7 +37,6 @@ public:
 
     void spawnFruit();
     void spawnSnake();
-
     void spawnObstacles();
 
     typedef enum {left, right, up, down} eDirection;
