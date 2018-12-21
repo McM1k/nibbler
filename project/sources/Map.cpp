@@ -97,8 +97,8 @@ void Map::setSnake(const std::list<Bloc *> &_snake) {
 
 void Map::spawnSnake() {
     std::list<Bloc *> newSnake;
-    int middleX = xSize / 2;
-    int middleY = ySize / 2;
+    auto middleX = xSize / 2;
+    auto middleY = ySize / 2;
 
     newSnake.push_back(new Bloc(middleX, middleY - 1));
     newSnake.push_back(new Bloc(middleX, middleY));
@@ -109,7 +109,7 @@ void Map::spawnSnake() {
 }
 
 void Map::spawnFruit() {
-    int x = -1, y = -1;
+    auto x = -1, y = -1;
     std::random_device generator;
     auto snake = getSnake();
 //    auto obstacles = getObstacles();
@@ -131,26 +131,30 @@ void Map::spawnFruit() {
 }
 
 void Map::spawnObstacles() {
-    int maxObstacles = (xSize + ySize) / 16 * minObstacles;
-    int x = -1, y = -1;
+    auto maxObstacles = (xSize * ySize) / 64 * minObstacles;
+    auto x = -1, y = -1;
     std::random_device generator;
 
-    int numberObstacles = generator() % maxObstacles;
-    auto snake = this->snake;
+    auto numberOfObstacles = generator() % maxObstacles;
 
-    while (x == -1 || y == -1) {
-        x = generator() % this->xSize;
-        y = generator() % this->ySize;
-        if (x == 0 || y == 0)
-            x = y = -1;
-        else {
+    auto currentObstaclesCount = 0;
+    while (currentObstaclesCount <)
+        while (x == -1 || y == -1) {
+            x = generator() % this->xSize;
+            y = generator() % this->ySize;
 
-            for (auto part : snake) {
-                if (part->getX() == x && part->getY() == y)
-                    x = y = -1;
+            auto obstacleSize = generator() % 3 + 1;
+
+            if (x == 0 || y == 0)
+                x = y = -1;
+            else {
+
+                for (auto part : snake) {
+                    if (part->getX() == x && part->getY() == y)
+                        x = y = -1;
+                }
             }
         }
-    }
     setFruit(Bloc(x, y));
 }
 
@@ -181,4 +185,4 @@ const char *Map::OutOfMapException::what() const noexcept {
     return "Bloc is out of the map.";
 }
 
-int Map::minObstacles = 5;
+int Map::minObstacles = 4;
