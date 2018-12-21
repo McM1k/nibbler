@@ -41,6 +41,7 @@ public:
     void instantiateFromLib(eSharedLibs lib);
     void freeLib();
     void loopGame();
+    void newGame();
 
     void gamePause();
     void gameRun();

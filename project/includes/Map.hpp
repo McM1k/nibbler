@@ -40,8 +40,8 @@ public:
 
     void spawnObstacles();
 
-    typedef enum {left, right, up, down} direction;
-    void moveSnake(direction dir);
+    typedef enum {left, right, up, down} eDirection;
+    bool moveSnake(eDirection dir);
 
     class MapTooSmallException : public std::exception {
     public:
@@ -52,7 +52,6 @@ public:
     public:
         const char *what() const noexcept override;
     };
-
 private:
 
     void setObstacles(const std::list<Bloc *> &obstacles);

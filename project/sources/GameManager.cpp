@@ -15,9 +15,9 @@
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-GameManager::GameManager(int x, int y) : state(eGameState::Pause), map(x, y), ms_per_frame(16),
-    intended_direction(Map::direction::up), frame_required_for_a_move(62), current_frame(0) {
+GameManager::GameManager(int x, int y) : state(eGameState::Pause), map(x, y) {
     instantiateFromLib(eSharedLibs::ncursesLib);
+    newGame();
 
     map_states.insert(std::pair<eGameState, ft_state >(eGameState::Pause, &GameManager::gamePause));
     map_states.insert(std::pair<eGameState, ft_state >(eGameState::Game, &GameManager::gameRun));
@@ -72,6 +72,15 @@ void GameManager::changeLib(eSharedLibs lib) {
     instantiateFromLib(lib);
 }
 
+void GameManager::newGame() {
+    this->ms_per_frame = std::chrono::duration<int, std::milli>(16);
+    this->intended_direction = Map::eDirection::up;
+    this->frame_required_for_a_move = 62;
+    this->current_frame = 0;
+    map.spawnSnake();
+    map.spawnFruit();
+}
+
 void GameManager::update() {
 
 
@@ -86,7 +95,11 @@ void GameManager::render() {
 void GameManager::gamePause() {}
 
 void GameManager::gameRun() {
-    update();
+    this->current_frame ++;
+    if (current_frame >= frame_required_for_a_move) {
+        update();
+        this->current_frame = 0;
+    }
 }
 
 void GameManager::gameQuit() {freeLib();}
@@ -104,23 +117,23 @@ void GameManager::inputLib3() {changeLib(eSharedLibs::ncursesLib);}// TODO chang
 void GameManager::inputPause() {this->state = (this->state == eGameState::Pause ? eGameState::Game : eGameState::Pause);}
 
 void GameManager::inputUp() {
-    if (this->intended_direction != Map::direction::down)
-        this->intended_direction = Map::direction::up;
+    if (this->intended_direction != Map::eDirection::down)
+        this->intended_direction = Map::eDirection::up;
 }
 
 void GameManager::inputDown() {
-    if (this->intended_direction != Map::direction::up)
-        this->intended_direction = Map::direction::down;
+    if (this->intended_direction != Map::eDirection::up)
+        this->intended_direction = Map::eDirection::down;
 }
 
 void GameManager::inputLeft() {
-    if (this->intended_direction != Map::direction::right)
-        this->intended_direction = Map::direction::left;
+    if (this->intended_direction != Map::eDirection::right)
+        this->intended_direction = Map::eDirection::left;
 }
 
 void GameManager::inputRight() {
-    if (this->intended_direction != Map::direction::left)
-        this->intended_direction = Map::direction::right;
+    if (this->intended_direction != Map::eDirection::left)
+        this->intended_direction = Map::eDirection::right;
 }
 
 void GameManager::inputNo() {}
