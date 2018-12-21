@@ -18,8 +18,6 @@
 GameManager::GameManager(int x, int y) : state(eGameState::Pause), map(x, y), ms_per_frame(16),
     intended_direction(Map::direction::up), frame_required_for_a_move(62), current_frame(0) {
     instantiateFromLib(eSharedLibs::ncursesLib);
-    map.spawnSnake();
-    map.spawnFruit();
 
     map_states.insert(std::pair<eGameState, ft_state >(eGameState::Pause, &GameManager::gamePause));
     map_states.insert(std::pair<eGameState, ft_state >(eGameState::Game, &GameManager::gameRun));

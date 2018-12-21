@@ -45,27 +45,30 @@
 # include <iostream>
 
 # include <ncurses.h>
-# include <locale.h>
+# include <clocale>
 
 class Display : public IEntity{
 public:
-    Display(void) = default;
+    Display() = default;
     Display(Display const &src) = default;
-    virtual ~Display(void);
+
+    virtual ~Display();
     Display &operator=(Display const &rhs) = default;
 
     Display(int x, int y);
 
-    void display(Map const &map, UI const &gameInfo);
+    void display(Map const &map, UI const &gameInfo) override;
 
     class UnableToDeleteWindowException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        const char *what() const noexcept override;
     };
+
     class BrokenSnakeException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        const char *what() const noexcept override;
     };
+
 private:
     void printSnake(std::list<Bloc *> snake);
     void printFruit(Bloc fruit);
