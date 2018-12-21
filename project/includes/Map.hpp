@@ -27,17 +27,17 @@ public:
 
     Map &operator=(Map const &rhs) = delete;
 
-    std::ostream &operator<<(std::ostream &o);
 
-    const std::list<Bloc *> getObstacles() const;
-    const Bloc getFruit() const;
-    const std::list<Bloc *> getSnake() const;
+
+    std::list<Bloc> getObstacles() const;
+    Bloc getFruit() const;
+    std::list<Bloc> getSnake() const;
     int getXSize() const;
     int getYSize() const;
 
-    void setObstacles(std::list<Bloc *> obstacles);
+    void setObstacles(std::list<Bloc> obstacles);
     void setFruit(Bloc fruit);
-    void setSnake(std::list<Bloc *> snake);
+    void setSnake(std::list<Bloc> snake);
 
     void spawnFruit();
     void spawnSnake();
@@ -47,13 +47,13 @@ public:
     bool moveSnake(eDirection dir);
 private:
 
-    int const xSize{};
-    int const ySize{};
-    std::list<Bloc *>           obstacles;
-    std::list<Bloc *>           snake;
-    Bloc fruit;
+    int const           xSize{};
+    int const           ySize{};
+    std::list<Bloc>     obstacles;
+    std::list<Bloc>     snake;
+    Bloc                fruit;
 };
 
-
+std::ostream &operator<<(std::ostream &o, Map &i);
 
 #endif

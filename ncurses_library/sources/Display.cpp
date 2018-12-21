@@ -9,7 +9,7 @@ Display::Display(int x, int y) : xSize(x), ySize(y){
     initscr();
     this->window = newwin(y + 7, x + 2, 0, 0);
     start_color();
-    this->red_colour = init_pair(1, COLOR_RED, COLOR_BLACK);
+    this->red_colour = init_pair(1, COLOR_RED, COLOR_BLACK); // TODO use colours
     this->yellow_colour = init_pair(2, COLOR_YELLOW, COLOR_BLACK);
     this->green_colour = init_pair(3, COLOR_GREEN, COLOR_BLACK);
 }
@@ -29,7 +29,7 @@ Display::~Display() {
 /* ******************************* */
 /*            Functions            */
 /* ******************************* */
-void Display::printSnake(std::list<Bloc *> snake) {/*
+void Display::printSnake(std::list<Bloc> snake) {/*
     std::list<Bloc *>::const_iterator prev = snake.begin();
     std::list<Bloc *>::const_iterator next = snake.begin();
     next++;
@@ -80,7 +80,7 @@ void Display::printSnake(std::list<Bloc *> snake) {/*
 */
 
     for (auto snake_part : snake){
-        mvaddch(snake_part->getY() + 1, snake_part->getX() + 1, GENERIC_SNAKE_PART);
+        mvaddch(snake_part.getY() + 1, snake_part.getX() + 1, GENERIC_SNAKE_PART);
     }
 }
 
@@ -90,9 +90,9 @@ void Display::printFruit(Bloc fruit) {
     }
 }
 
-void Display::printObstacles(std::list<Bloc *> obstacles) {
+void Display::printObstacles(std::list<Bloc> obstacles) {
     for (auto obstacle_part : obstacles){
-        mvaddch(obstacle_part->getY() + 1, obstacle_part->getX() + 1, OBSTACLE);
+        mvaddch(obstacle_part.getY() + 1, obstacle_part.getX() + 1, OBSTACLE);
     }
 }
 

@@ -67,9 +67,9 @@ public:
         virtual const char *what() const throw();
     };
 private:
-    void printSnake(std::list<Bloc *> snake);
+    void printSnake(std::list<Bloc> snake);
     void printFruit(Bloc fruit);
-    void printObstacles(std::list<Bloc *> obstacles);
+    void printObstacles(std::list<Bloc> obstacles);
     void printBorders(int x, int y);
 
     WINDOW      *window;

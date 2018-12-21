@@ -51,8 +51,8 @@ bool Bloc::operator==(Bloc const &rhs) {
     return this->x == rhs.getX() && this->y == rhs.getY();
 }
 
-std::ostream& Bloc::operator<<(std::ostream &o) {
-    o << "x = " << this->x << ", y = " << this->y << std::endl;
+std::ostream& operator<<(std::ostream &o, Bloc &i) {
+    o << "x = " << i.getX() << ", y = " << i.getY() << std::endl;
     return o;
 }
 
