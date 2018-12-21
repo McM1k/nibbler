@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <zconf.h>
 #include "../includes/GameManager.hpp"
 
 /* ******************************* */
@@ -19,6 +20,40 @@ GameManager::GameManager(int x, int y) : state(eGameState::Menu), map(x, y) {
     instantiateFromLib(eSharedLibs::ncursesLib);
     spawnSnake();
     spawnFruit();
+    UI ui;
+
+
+    const double maxFPS = 60.0;
+    const double maxPeriod = 1.0 / maxFPS;
+
+// approx ~ 16.666 ms
+
+    bool running = true;
+    clock_t lastTime = 0;
+
+    while (running) {
+        clock_t time = clock();
+        clock_t deltaTime = time - lastTime;
+
+        if (deltaTime >= maxPeriod) {
+            lastTime = time;
+            display->display(map, ui);
+        }
+    }
+
+    clock_t current_ticks, delta_ticks;
+    clock_t fps = 0;
+    while (true)// your main loop. could also be the idle() function in glut or whatever
+    {
+        current_ticks = clock();
+
+        display->display(map, ui);
+
+        delta_ticks = clock() - current_ticks; //the time, in ms, that took to render the scene
+        if (delta_ticks > 0)
+            fps = CLOCKS_PER_SEC / delta_ticks;
+        std::cout << fps << std::endl;
+    }
 }
 
 GameManager::~GameManager() {

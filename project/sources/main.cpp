@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "../includes/LibLoader.hpp"
-#include "../includes/IInputs.hpp"
+#include "../includes/GameManager.hpp"
 
-int main() {
-    try {
-        LibLoader libLoader(eSharedLibs::ncursesLib);
-
-    } catch (LibLoader::DLExceptions const &e) {
-        std::cout << e.what() << std::endl;
+int main(int argc, const char **argv) {
+    if (argc == 3) {
+        try {
+            GameManager gameManager(std::stoi(argv[1]), std::stoi(argv[2]));
+        } catch (LibLoader::DLExceptions const &e) {
+            std::cout << e.what() << std::endl;
+        }
     }
     return 1;
 }

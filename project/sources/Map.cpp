@@ -15,7 +15,9 @@
 /*
  * Constructors
  */
-Map::Map(int xSize, int ySize) : xSize(xSize), ySize(ySize), fruit(-1, -1) {}
+Map::Map(int xSize, int ySize) : xSize(xSize), ySize(ySize), fruit(-1, -1) {
+
+}
 
 /*
  * Destructors

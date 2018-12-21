@@ -1,4 +1,5 @@
 
+#include <zconf.h>
 #include "../includes/Display.hpp"
 
 /* ******************************* */
@@ -107,15 +108,40 @@ void Display::printBorders(int x, int y) {
     }
 }
 
-void Display::display(const Map &map, const UI &) {
+void Display::printBorders(WINDOW *screen) {
+    int x, y, i;
+    getmaxyx(screen, y, x);
+    //4 corners
+    mvwprintw(screen, 0, 0, "+");
+    mvwprintw(screen, y - 1, 0, "+");
+    mvwprintw(screen, 0, x - 1, "+");
+    mvwprintw(screen, y - 1, x - 1, "+");
+    // sides
+    for (i = 1; i < (y - 1); i++) {
+        mvwprintw(screen, i, 0, "|");
+        mvwprintw(screen, i, x - 1, "|");
+    }
+    // top and bottom
+    for (i = 1; i < (x - 1); i++) {
+        mvwprintw(screen, 0, i, "-");
+        mvwprintw(screen, y - 1, i, "-");
+    }
+}
+
+void Display::display(const Map &, const UI &) {
     wclear(this->window);
 //    wborder(this->window, LEFT_BORDER, RIGHT_BORDER, UP_BORDER, DOWN_BORDER,
   //          NW_CORNER_BORDER, NE_CORNER_BORDER, SW_CORNER_BORDER, SE_CORNER_BORDER);
-    printBorders(this->xSize, this->ySize);
-    printSnake(map.getSnake());
-    printObstacles(map.getObstacles());
-    printFruit(map.getFruit());
-    refresh();
+    printBorders(this->window);
+
+    //printSnake(map.getSnake());
+    //printObstacles(map.getObstacles());
+    //printFruit(map.getFruit());
+    getch();
+    //usleep(500);
+    xSize = xSize + 1 - 1;
+    ySize = ySize + 1 - 1;
+    //printBorders(xSize, ySize);
 }
 
 /* ******************************* */

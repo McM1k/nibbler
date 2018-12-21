@@ -88,7 +88,7 @@ all :		    $(EXE)
 
 $(EXE) :                    $(LIB1) $(PROJ_SRC) $(PROJ_OBJ)
 	                        @$(CC) $(PROJ_OBJ) -o $@
-	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(EXE) "$(CLEAR)$(LIG)"
+	                        #@echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(EXE) "$(CLEAR)$(LIG)"
 
 $(PROJ_DIR)/$(OBJ_DIR)/%.o: $(PROJ_DIR)/$(SRC_DIR)/%.cpp
 	                        @mkdir -p $(PROJ_DIR)/$(OBJ_DIR) 2> /dev/null || true
@@ -99,7 +99,7 @@ $(PROJ_DIR)/$(OBJ_DIR)/%.o: $(PROJ_DIR)/$(SRC_DIR)/%.cpp
 $(LIB1) :                   $(LIB1_SRC) $(LIB1_OBJ)
 	                        @mkdir -p $(LIBS_DIR) 2> /dev/null || true
 	                        @$(CC) $(SFLAGS) $(LIB1_OBJ) -o $(LIBS_DIR)/$@ -lncurses
-	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(LIB1) "$(CLEAR)$(LIG)"
+	                        #@echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(LIB1) "$(CLEAR)$(LIG)"
 
 $(LIB1_DIR)/$(OBJ_DIR)/%.o: $(LIB1_DIR)/$(SRC_DIR)/%.cpp
 	                        @mkdir -p $(LIB1_DIR)/$(OBJ_DIR) 2> /dev/null || true

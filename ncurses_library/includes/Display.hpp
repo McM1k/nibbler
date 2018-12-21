@@ -72,6 +72,8 @@ private:
     void printObstacles(std::list<Bloc *> obstacles);
     void printBorders(int x, int y);
 
+    void printBorders(WINDOW *);
+
     WINDOW      *window;
     int         red_colour;
     int         green_colour;
