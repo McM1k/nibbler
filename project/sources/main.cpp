@@ -13,13 +13,17 @@
 #include <iostream>
 #include "../includes/LibLoader.hpp"
 #include "../includes/IInputs.hpp"
+#include "../includes/GameManager.hpp"
 
-int main() {
+int main(int ac, char **av) {
+    if (ac != 3)
+        return 1;
     try {
-        LibLoader libLoader(eSharedLibs::ncursesLib);
-
-    } catch (LibLoader::DLExceptions const &e) {
-        std::cout << e.what() << std::endl;
+        auto x = std::stoi(av[1]);
+        auto y = std::stoi(av[2]);
+        GameManager(x, y);
     }
-    return 1;
+    catch (std::invalid_argument &e) {std::cout << e.what() << std::endl;}
+    catch (std::exception &e)        {std::cout << e.what() << std::endl;}
+    return 0;
 }

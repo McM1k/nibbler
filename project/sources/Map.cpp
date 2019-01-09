@@ -66,7 +66,8 @@ void Map::setSnake(std::list<Bloc> snake) {
     o << "xSize = " << i.getXSize() << ", ySize = " << i.getYSize();
     for (auto obstacles_part : i.getObstacles()) { o << ", obstacles = " << obstacles_part; }
     for (auto snake_part : i.getSnake()) { o << ", snake = " << snake_part; }
-    o << ", fruit = " << i.getFruit() << std::endl;
+    auto fruit = i.getFruit();
+    o << ", fruit = " << fruit << std::endl;
     return o;
 }
 

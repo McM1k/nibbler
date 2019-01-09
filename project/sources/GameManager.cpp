@@ -17,7 +17,6 @@
 /* ******************************* */
 GameManager::GameManager(int x, int y) : state(eGameState::Pause), map(x, y) {
     instantiateFromLib(eSharedLibs::ncursesLib);
-    newGame();
 
     map_states.insert(std::pair<eGameState, ft_state >(eGameState::Pause, &GameManager::gamePause));
     map_states.insert(std::pair<eGameState, ft_state >(eGameState::Game, &GameManager::gameRun));
@@ -34,6 +33,8 @@ GameManager::GameManager(int x, int y) : state(eGameState::Pause), map(x, y) {
     map_inputs.insert(std::pair<eInputs, ft_input >(eInputs::right, &GameManager::inputRight));
     map_inputs.insert(std::pair<eInputs, ft_input >(eInputs::down, &GameManager::inputDown));
     map_inputs.insert(std::pair<eInputs, ft_input >(eInputs::noInput, &GameManager::inputNo));
+
+    newGame();
 }
 
 /* ******************************* */
@@ -79,9 +80,16 @@ void GameManager::newGame() {
     this->current_frame = 0;
     map.spawnSnake();
     map.spawnFruit();
+
+    loopGame();
 }
 
-void GameManager::update() {this->map.moveSnake(this->intended_direction);}
+void GameManager::update() {
+    auto snakeSize = this->map.getSnake().size();
+    this->map.moveSnake(this->intended_direction);
+    if (this->map.getSnake().size() != snakeSize)
+        this->ui.addScore(100);
+}
 
 void GameManager::render() {display->display(map, ui);}
 
@@ -89,7 +97,7 @@ void GameManager::gamePause() {this->ui.setGameState(this->state);}
 
 void GameManager::gameRun() {
     this->current_frame ++;
-    if (current_frame >= frame_required_for_a_move) {
+    if (this->current_frame >= this->frame_required_for_a_move) {
         update();
         this->current_frame = 0;
     }
@@ -107,7 +115,14 @@ void GameManager::inputLib2() {changeLib(eSharedLibs::ncursesLib);}//TODO change
 
 void GameManager::inputLib3() {changeLib(eSharedLibs::ncursesLib);}// TODO change lib used
 
-void GameManager::inputPause() {this->state = (this->state == eGameState::Pause ? eGameState::Game : eGameState::Pause);}
+void GameManager::inputPause() {
+    if (this->state == eGameState::Pause) {
+        this->state = eGameState::Game;
+        this->ui.setGameState(this->state);
+    }
+    else if (this->state == eGameState::Game)
+        this->state = eGameState::Pause;
+}
 
 void GameManager::inputUp() {
     if (this->intended_direction != Map::eDirection::down)
