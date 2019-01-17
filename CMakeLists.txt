@@ -30,6 +30,7 @@ set(sourcesFiles
         Bloc.cpp
         LibLoader.cpp
         GameManager.cpp
+        ObstaclesFactory.cpp
         )
 
 PREPEND(sourcesProject ${prefixSources} ${sourcesFiles})

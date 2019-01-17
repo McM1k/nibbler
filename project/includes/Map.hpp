@@ -14,13 +14,14 @@
 # define MAP_HPP
 
 # include "Bloc.hpp"
+# include "ObstaclesFactory.hpp"
 # include <list>
 # include <iostream>
 # include <random>
 
 class Map {
 public:
-    Map() = default;
+    Map() = delete;
     Map(int _xSize, int _ySize);
     Map(Map const &src) = default;
     virtual ~Map() = default;
@@ -41,17 +42,34 @@ public:
 
     void spawnFruit();
     void spawnSnake();
-//    void spawnObstacle();
+    void spawnObstacles();
 
     typedef enum {left, right, up, down} eDirection;
     bool moveSnake(eDirection dir);
+
+    class MapTooSmallException : public std::exception {
+    public:
+        const char *what() const noexcept override;
+    };
+
+    class OutOfMapException : public std::exception {
+    public:
+        const char *what() const noexcept override;
+    };
 private:
+
+    void setObstacles(const std::list<Bloc *> &obstacles);
+
+    void setFruit(const Bloc &fruit);
+
+    void setSnake(const std::list<Bloc *> &snake);
 
     int const           xSize{};
     int const           ySize{};
     std::list<Bloc>     obstacles;
     std::list<Bloc>     snake;
     Bloc                fruit;
+    static int minObstacles;
 };
 
 std::ostream &operator<<(std::ostream &o, Map &i);

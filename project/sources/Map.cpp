@@ -15,7 +15,13 @@
 /*
  * Constructors
  */
-Map::Map(int xSize, int ySize) : xSize(xSize), ySize(ySize), fruit(-1, -1) {}
+Map::Map(int xSize, int ySize) : xSize(xSize), ySize(ySize), fruit(-1, -1) {
+    if (xSize < 8 || ySize < 8)
+        throw MapTooSmallException();
+    spawnSnake();
+    spawnObstacles();
+    spawnFruit();
+}
 
 /*
  * Destructors
@@ -24,6 +30,7 @@ Map::Map(int xSize, int ySize) : xSize(xSize), ySize(ySize), fruit(-1, -1) {}
 /*
  * Getters
  */
+
 std::list<Bloc> Map::getObstacles() const {
     return obstacles;
 }
@@ -47,16 +54,30 @@ int Map::getYSize() const {
 /*
  * Setters
  */
-void Map::setObstacles(std::list<Bloc> obstacles) {
-    this->obstacles = obstacles;
+
+void Map::setObstacles(const std::list<Bloc> &_obstacles) {
+    for (Bloc *obstacle : _obstacles) {
+        if (obstacle->getX() < 0 || obstacle->getY() > xSize ||
+            obstacle->getY() < 0 || obstacle->getY() > ySize)
+            throw OutOfMapException();
+    }
+    this->obstacles = _obstacles;
 }
 
-void Map::setFruit(Bloc fruit) {
-    this->fruit = fruit;
+void Map::setFruit(const Bloc &_fruit) {
+    if (_fruit.getX() < 0 || _fruit.getY() > xSize ||
+        _fruit.getY() < 0 || _fruit.getY() > ySize)
+        throw OutOfMapException();
+    this->fruit = _fruit;
 }
 
-void Map::setSnake(std::list<Bloc> snake) {
-    this->snake = snake;
+void Map::setSnake(const std::list<Bloc> &_snake) {
+    for (Bloc *snakePart : _snake) {
+        if (snakePart->getX() < 0 || snakePart->getY() > xSize ||
+            snakePart->getY() < 0 || snakePart->getY() > ySize)
+            throw OutOfMapException();
+    }
+    this->snake = _snake;
 }
 
 /*
@@ -76,21 +97,25 @@ void Map::setSnake(std::list<Bloc> snake) {
  */
 
 void Map::spawnSnake() {
-    std::list<Bloc> newSnake;
-    newSnake.emplace_back(3,6);
-    newSnake.emplace_back(3,5);
-    newSnake.emplace_back(3,4);
+    std::list<Bloc *> newSnake;
+    auto middleX = xSize / 2;
+    auto middleY = ySize / 2;
 
-    this->snake = newSnake;
+    newSnake.push_back(new Bloc(middleX, middleY - 1));
+    newSnake.push_back(new Bloc(middleX, middleY));
+    newSnake.push_back(new Bloc(middleX, middleY + 1));
+    newSnake.push_back(new Bloc(middleX, middleY + 2));
+
+    setSnake(newSnake);
 }
 
 void Map::spawnFruit() {
-    int x = -1, y = -1;
+    auto x = -1, y = -1;
     std::random_device generator;
 
     while (x == -1 || y == -1) {
-        x = (generator())%(this->xSize);
-        y = (generator())%(this->ySize);
+        x = generator() % (this->xSize + 1);
+        y = generator() % (this->ySize + 1);
 
         for (auto part : this->snake) {
             if (part == Bloc(x, y))
@@ -101,7 +126,20 @@ void Map::spawnFruit() {
                 x = y = -1;
         }
     }
-    this->fruit = Bloc(x, y);
+    setFruit(Bloc(x, y));
+}
+
+void Map::spawnObstacles() {
+    auto maxObstacles = (xSize * ySize) / 64 * minObstacles;
+    std::random_device generator;
+
+    auto numberOfObstacles = generator() % maxObstacles;
+
+    std::cout << "number of obstacles : " << numberOfObstacles << std::endl;
+
+    ObstaclesFactory obstaclesFactory;
+
+    obstaclesFactory.generateAllObstacles(obstacles, numberOfObstacles, xSize, ySize, snake, 0);
 }
 
 bool Map::moveSnake(Map::eDirection dir) {
@@ -141,3 +179,13 @@ bool Map::moveSnake(Map::eDirection dir) {
 /*
  * Exceptions
  */
+
+const char *Map::MapTooSmallException::what() const noexcept {
+    return "Map must be at least a 8x8 square.";
+}
+
+const char *Map::OutOfMapException::what() const noexcept {
+    return "Bloc is out of the map.";
+}
+
+int Map::minObstacles = 4;

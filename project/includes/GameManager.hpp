@@ -27,9 +27,11 @@
 class GameManager {
 public:
     GameManager() = delete;
-    GameManager(GameManager const &src) = default;
+
+    GameManager(GameManager const &src) = delete;
     virtual ~GameManager() = default;
-    GameManager &operator=(GameManager const &rhs) = default;
+
+    GameManager &operator=(GameManager const &rhs) = delete;
     GameManager(int x, int y);
 
     eGameState getState() const;
