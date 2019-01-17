@@ -21,7 +21,7 @@ int main(int ac, char **av) {
     try {
         auto x = std::stoi(av[1]);
         auto y = std::stoi(av[2]);
-        GameManager(x, y);
+        GameManager gameManager(x, y);
     }
     catch (std::invalid_argument &e) {std::cout << e.what() << std::endl;}
     catch (std::exception &e)        {std::cout << e.what() << std::endl;}
