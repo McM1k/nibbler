@@ -56,9 +56,9 @@ int Map::getYSize() const {
  */
 
 void Map::setObstacles(const std::list<Bloc> &_obstacles) {
-    for (Bloc *obstacle : _obstacles) {
-        if (obstacle->getX() < 0 || obstacle->getY() > xSize ||
-            obstacle->getY() < 0 || obstacle->getY() > ySize)
+    for (auto const &obstacle : _obstacles) {
+        if (obstacle.getX() < 0 || obstacle.getY() > xSize ||
+            obstacle.getY() < 0 || obstacle.getY() > ySize)
             throw OutOfMapException();
     }
     this->obstacles = _obstacles;
@@ -72,9 +72,9 @@ void Map::setFruit(const Bloc &_fruit) {
 }
 
 void Map::setSnake(const std::list<Bloc> &_snake) {
-    for (Bloc *snakePart : _snake) {
-        if (snakePart->getX() < 0 || snakePart->getY() > xSize ||
-            snakePart->getY() < 0 || snakePart->getY() > ySize)
+    for (auto const &snakePart : _snake) {
+        if (snakePart.getX() < 0 || snakePart.getY() > xSize ||
+            snakePart.getY() < 0 || snakePart.getY() > ySize)
             throw OutOfMapException();
     }
     this->snake = _snake;
@@ -97,14 +97,14 @@ void Map::setSnake(const std::list<Bloc> &_snake) {
  */
 
 void Map::spawnSnake() {
-    std::list<Bloc *> newSnake;
+    std::list<Bloc> newSnake;
     auto middleX = xSize / 2;
     auto middleY = ySize / 2;
 
-    newSnake.push_back(new Bloc(middleX, middleY - 1));
-    newSnake.push_back(new Bloc(middleX, middleY));
-    newSnake.push_back(new Bloc(middleX, middleY + 1));
-    newSnake.push_back(new Bloc(middleX, middleY + 2));
+    newSnake.emplace_back(Bloc(middleX, middleY - 1));
+    newSnake.emplace_back(Bloc(middleX, middleY));
+    newSnake.emplace_back(Bloc(middleX, middleY + 1));
+    newSnake.emplace_back(Bloc(middleX, middleY + 2));
 
     setSnake(newSnake);
 }
@@ -157,7 +157,7 @@ bool Map::moveSnake(Map::eDirection dir) {
     if (newHead.getX() < 0 || newHead.getX() >= this->xSize || newHead.getY() < 0 || newHead.getY() > this->ySize)
         return false;
 
-    for (auto obstacle_part : this->obstacles) {
+    for (auto const &obstacle_part : this->obstacles) {
         if (newHead == obstacle_part)
             return false;
     }

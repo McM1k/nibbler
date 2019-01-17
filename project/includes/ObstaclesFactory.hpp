@@ -12,10 +12,10 @@
 class ObstaclesFactory {
 public:
 
-    typedef void (ObstaclesFactory::*PointerToObstacleFunction)(std::list<Bloc *> &obstacles,
+    typedef void (ObstaclesFactory::*PointerToObstacleFunction)(std::list<Bloc> &obstacles,
                                                                 int sizeX,
                                                                 int sizeY,
-                                                                std::list<Bloc *> &snake);
+                                                                std::list<Bloc> &snake);
 
     ObstaclesFactory();
 
@@ -26,11 +26,11 @@ public:
     ObstaclesFactory &operator=(ObstaclesFactory const &) = delete;
 
     void generateAllObstacles(
-            std::list<Bloc *> &obstacles,
+            std::list<Bloc> &obstacles,
             unsigned int obstaclesToAdd,
             int sizeX,
             int sizeY,
-            std::list<Bloc *> &snake,
+            std::list<Bloc> &snake,
             int numberOfTimeItTried);
 
     class CannotPlaceObstacleHereException : public std::exception {
@@ -40,60 +40,60 @@ public:
 
 private:
     void generateOneObstacle(
-            std::list<Bloc *> &obstacles,
+            std::list<Bloc> &obstacles,
             int sizeX,
             int sizeY,
-            std::list<Bloc *> &snake);
+            std::list<Bloc> &snake);
 
     void generateSimpleObstacle(
-            std::list<Bloc *> &obstacles,
+            std::list<Bloc> &obstacles,
             int sizeX,
             int sizeY,
-            std::list<Bloc *> &snake);
+            std::list<Bloc> &snake);
 
     void generateLeftUpCornerObstacle(
-            std::list<Bloc *> &obstacles,
+            std::list<Bloc> &obstacles,
             int sizeX,
             int sizeY,
-            std::list<Bloc *> &snake);
+            std::list<Bloc> &snake);
 
     void generateLeftDownCornerObstacle(
-            std::list<Bloc *> &obstacles,
+            std::list<Bloc> &obstacles,
             int sizeX,
             int sizeY,
-            std::list<Bloc *> &snake);
+            std::list<Bloc> &snake);
 
     void generateRightUpCornerObstacle(
-            std::list<Bloc *> &obstacles,
+            std::list<Bloc> &obstacles,
             int sizeX,
             int sizeY,
-            std::list<Bloc *> &snake);
+            std::list<Bloc> &snake);
 
     void generateRightDownCornerObstacle(
-            std::list<Bloc *> &obstacles,
+            std::list<Bloc> &obstacles,
             int sizeX,
             int sizeY,
-            std::list<Bloc *> &snake);
+            std::list<Bloc> &snake);
 
     void generateHorizontalBarObstacle(
-            std::list<Bloc *> &obstacles,
+            std::list<Bloc> &obstacles,
             int sizeX,
             int sizeY,
-            std::list<Bloc *> &snake);
+            std::list<Bloc> &snake);
 
     void generateVerticalBarObstacle(
-            std::list<Bloc *> &obstacles,
+            std::list<Bloc> &obstacles,
             int sizeX,
             int sizeY,
-            std::list<Bloc *> &snake);
+            std::list<Bloc> &snake);
 
     bool checkPlaceIsEmpty(int x, int y, int sizeX, int sizeY,
-                           std::list<Bloc *> &snake,
-                           std::list<Bloc *> &obstacles);
+                           std::list<Bloc> &snake,
+                           std::list<Bloc> &obstacles);
 
     bool checkOneSquare(int x, int y, int sizeX, int sizeY,
-                        std::list<Bloc *> &snake,
-                        std::list<Bloc *> &obstacles);
+                        std::list<Bloc> &snake,
+                        std::list<Bloc> &obstacles);
 
     unsigned int const numberOfDifferentObstacles;
     std::random_device generator;

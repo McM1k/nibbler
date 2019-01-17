@@ -36,9 +36,11 @@ public:
     int getXSize() const;
     int getYSize() const;
 
-    void setObstacles(std::list<Bloc> obstacles);
-    void setFruit(Bloc fruit);
-    void setSnake(std::list<Bloc> snake);
+    void setObstacles(const std::list<Bloc> &_obstacles);
+
+    void setFruit(const Bloc &_fruit);
+
+    void setSnake(const std::list<Bloc> &_snake);
 
     void spawnFruit();
     void spawnSnake();
@@ -57,13 +59,6 @@ public:
         const char *what() const noexcept override;
     };
 private:
-
-    void setObstacles(const std::list<Bloc *> &obstacles);
-
-    void setFruit(const Bloc &fruit);
-
-    void setSnake(const std::list<Bloc *> &snake);
-
     int const           xSize{};
     int const           ySize{};
     std::list<Bloc>     obstacles;
