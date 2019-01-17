@@ -151,7 +151,8 @@ void GameManager::loopGame() {
     {
         std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
 
-        (this->*map_inputs[input->getInput()])();
+        auto _input = this->input->getInput();
+        (this->*map_inputs[_input])();
         (this->*map_states[this->state])();
         render();
 
