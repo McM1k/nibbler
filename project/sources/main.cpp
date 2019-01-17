@@ -13,10 +13,12 @@
 #include <iostream>
 #include "../includes/LibLoader.hpp"
 #include "../includes/IInputs.hpp"
+#include "../includes/Map.hpp"
 
 int main() {
     try {
         LibLoader libLoader(eSharedLibs::ncursesLib);
+        auto *map = new Map(16, 16);
 
     } catch (LibLoader::DLExceptions const &e) {
         std::cout << e.what() << std::endl;

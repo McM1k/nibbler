@@ -112,7 +112,7 @@ void Map::spawnFruit() {
     auto x = -1, y = -1;
     std::random_device generator;
     auto snake = getSnake();
-//    auto obstacles = getObstacles();
+    auto obstacles = getObstacles();
 
     while (x == -1 || y == -1){
         x = generator() % (this->xSize + 1);
@@ -122,40 +122,25 @@ void Map::spawnFruit() {
             if (part->getX() == x && part->getY() == y)
                 x = y = -1;
         }
-//        for (auto part : obstacles) {
-//            if (part->getX() == x && part->getY() == y)
-//                x = y = -1;
-//        }
+        for (auto part : obstacles) {
+            if (part->getX() == x && part->getY() == y)
+                x = y = -1;
+        }
     }
-    setFruit(Bloc(x, y));
+    //setFruit(Bloc(x, y));
 }
 
 void Map::spawnObstacles() {
     auto maxObstacles = (xSize * ySize) / 64 * minObstacles;
-    auto x = -1, y = -1;
     std::random_device generator;
 
     auto numberOfObstacles = generator() % maxObstacles;
 
-    auto currentObstaclesCount = 0;
-    while (currentObstaclesCount <)
-        while (x == -1 || y == -1) {
-            x = generator() % this->xSize;
-            y = generator() % this->ySize;
+    std::cout << "number of obstacles : " << numberOfObstacles << std::endl;
 
-            auto obstacleSize = generator() % 3 + 1;
+    ObstaclesFactory obstaclesFactory;
 
-            if (x == 0 || y == 0)
-                x = y = -1;
-            else {
-
-                for (auto part : snake) {
-                    if (part->getX() == x && part->getY() == y)
-                        x = y = -1;
-                }
-            }
-        }
-    setFruit(Bloc(x, y));
+    obstaclesFactory.generateAllObstacles(obstacles, numberOfObstacles, xSize, ySize, snake, 0);
 }
 
 bool Map::moveSnake(Map::eDirection dir) {
@@ -171,6 +156,7 @@ bool Map::moveSnake(Map::eDirection dir) {
         newHead = new Bloc(currHead->getX() + 1, currHead->getY());
 
 
+    return true;
 }
 
 /*

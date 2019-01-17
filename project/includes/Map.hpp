@@ -14,6 +14,7 @@
 # define MAP_HPP
 
 # include "Bloc.hpp"
+# include "ObstaclesFactory.hpp"
 # include <list>
 # include <iostream>
 # include <random>

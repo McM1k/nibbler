@@ -58,7 +58,8 @@ PROJ_SRC_LIST = main.cpp \
                 UI.cpp \
                 Bloc.cpp \
                 LibLoader.cpp \
-                GameManager.cpp
+                GameManager.cpp \
+                ObstaclesFactory.cpp
 
 LIB1_SRC_LIST = Display.cpp \
                 Inputs.cpp
