@@ -127,7 +127,7 @@ void Map::spawnFruit() {
                 x = y = -1;
         }
     }
-    //setFruit(Bloc(x, y));
+    setFruit(Bloc(x, y));
 }
 
 void Map::spawnObstacles() {
