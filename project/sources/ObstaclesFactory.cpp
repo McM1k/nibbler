@@ -64,10 +64,10 @@ void ObstaclesFactory::generateSimpleObstacle(
         int sizeX,
         int sizeY,
         std::list<Bloc> &snake) {
-    int x = generator() % (sizeX + 1);
-    int y = generator() % (sizeY + 1);
+    int x = generator() % sizeX;
+    int y = generator() % sizeY;
 
-    if (checkPlaceIsEmpty(x, y, sizeX, sizeY, snake, obstacles)) {
+    if (checkPlaceIsFine(x, y, sizeX, sizeY, snake, obstacles)) {
         obstacles.emplace_back(Bloc(x, y));
     } else
         throw CannotPlaceObstacleHereException();
@@ -78,14 +78,14 @@ void ObstaclesFactory::generateLeftUpCornerObstacle(
         int sizeX,
         int sizeY,
         std::list<Bloc> &snake) {
-    int x = generator() % (sizeX + 1);
-    int y = generator() % (sizeY + 1);
+    int x = generator() % sizeX;
+    int y = generator() % sizeY;
     int x1 = x + 1;
     int y1 = y - 1;
 
-    if (checkPlaceIsEmpty(x, y, sizeX, sizeY, snake, obstacles) ||
-        checkPlaceIsEmpty(x1, y, sizeX, sizeY, snake, obstacles) ||
-        checkPlaceIsEmpty(x, y1, sizeX, sizeY, snake, obstacles)) {
+    if (checkPlaceIsFine(x, y, sizeX, sizeY, snake, obstacles) &&
+        checkPlaceIsFine(x1, y, sizeX, sizeY, snake, obstacles) &&
+        checkPlaceIsFine(x, y1, sizeX, sizeY, snake, obstacles)) {
         obstacles.emplace_back(Bloc(x, y));
         obstacles.emplace_back(Bloc(x1, y));
         obstacles.emplace_back(Bloc(x, y1));
@@ -98,14 +98,14 @@ void ObstaclesFactory::generateLeftDownCornerObstacle(
         int sizeX,
         int sizeY,
         std::list<Bloc> &snake) {
-    int x = generator() % (sizeX + 1);
-    int y = generator() % (sizeY + 1);
+    int x = generator() % sizeX;
+    int y = generator() % sizeY;
     int x1 = x + 1;
     int y1 = y + 1;
 
-    if (checkPlaceIsEmpty(x, y, sizeX, sizeY, snake, obstacles) ||
-        checkPlaceIsEmpty(x1, y, sizeX, sizeY, snake, obstacles) ||
-        checkPlaceIsEmpty(x, y1, sizeX, sizeY, snake, obstacles)) {
+    if (checkPlaceIsFine(x, y, sizeX, sizeY, snake, obstacles) &&
+        checkPlaceIsFine(x1, y, sizeX, sizeY, snake, obstacles) &&
+        checkPlaceIsFine(x, y1, sizeX, sizeY, snake, obstacles)) {
         obstacles.emplace_back(Bloc(x, y));
         obstacles.emplace_back(Bloc(x1, y));
         obstacles.emplace_back(Bloc(x, y1));
@@ -118,14 +118,14 @@ void ObstaclesFactory::generateRightUpCornerObstacle(
         int sizeX,
         int sizeY,
         std::list<Bloc> &snake) {
-    int x = generator() % (sizeX + 1);
-    int y = generator() % (sizeY + 1);
+    int x = generator() % sizeX;
+    int y = generator() % sizeY;
     int x1 = x - 1;
     int y1 = y - 1;
 
-    if (checkPlaceIsEmpty(x, y, sizeX, sizeY, snake, obstacles) ||
-        checkPlaceIsEmpty(x1, y, sizeX, sizeY, snake, obstacles) ||
-        checkPlaceIsEmpty(x, y1, sizeX, sizeY, snake, obstacles)) {
+    if (checkPlaceIsFine(x, y, sizeX, sizeY, snake, obstacles) &&
+        checkPlaceIsFine(x1, y, sizeX, sizeY, snake, obstacles) &&
+        checkPlaceIsFine(x, y1, sizeX, sizeY, snake, obstacles)) {
         obstacles.emplace_back(Bloc(x, y));
         obstacles.emplace_back(Bloc(x1, y));
         obstacles.emplace_back(Bloc(x, y1));
@@ -138,14 +138,14 @@ void ObstaclesFactory::generateRightDownCornerObstacle(
         int sizeX,
         int sizeY,
         std::list<Bloc> &snake) {
-    int x = generator() % (sizeX + 1);
-    int y = generator() % (sizeY + 1);
+    int x = generator() % sizeX;
+    int y = generator() % sizeY;
     int x1 = x - 1;
     int y1 = y + 1;
 
-    if (checkPlaceIsEmpty(x, y, sizeX, sizeY, snake, obstacles) ||
-        checkPlaceIsEmpty(x1, y, sizeX, sizeY, snake, obstacles) ||
-        checkPlaceIsEmpty(x, y1, sizeX, sizeY, snake, obstacles)) {
+    if (checkPlaceIsFine(x, y, sizeX, sizeY, snake, obstacles) &&
+        checkPlaceIsFine(x1, y, sizeX, sizeY, snake, obstacles) &&
+        checkPlaceIsFine(x, y1, sizeX, sizeY, snake, obstacles)) {
         obstacles.emplace_back(Bloc(x, y));
         obstacles.emplace_back(Bloc(x1, y));
         obstacles.emplace_back(Bloc(x, y1));
@@ -158,12 +158,12 @@ void ObstaclesFactory::generateHorizontalBarObstacle(
         int sizeX,
         int sizeY,
         std::list<Bloc> &snake) {
-    int x = generator() % (sizeX + 1);
-    int y = generator() % (sizeY + 1);
+    int x = generator() % sizeX;
+    int y = generator() % sizeY;
     int x1 = x + 1;
 
-    if (checkPlaceIsEmpty(x, y, sizeX, sizeY, snake, obstacles) ||
-        checkPlaceIsEmpty(x1, y, sizeX, sizeY, snake, obstacles)) {
+    if (checkPlaceIsFine(x, y, sizeX, sizeY, snake, obstacles) &&
+        checkPlaceIsFine(x1, y, sizeX, sizeY, snake, obstacles)) {
         obstacles.emplace_back(Bloc(x, y));
         obstacles.emplace_back(Bloc(x1, y));
     } else
@@ -175,35 +175,35 @@ void ObstaclesFactory::generateVerticalBarObstacle(
         int sizeX,
         int sizeY,
         std::list<Bloc> &snake) {
-    int x = generator() % (sizeX + 1);
-    int y = generator() % (sizeY + 1);
+    int x = generator() % sizeX;
+    int y = generator() % sizeY;
     int y1 = y + 1;
 
-    if (checkPlaceIsEmpty(x, y, sizeX, sizeY, snake, obstacles) ||
-        checkPlaceIsEmpty(y1, y, sizeX, sizeY, snake, obstacles)) {
+    if (checkPlaceIsFine(x, y, sizeX, sizeY, snake, obstacles) &&
+        checkPlaceIsFine(y1, y, sizeX, sizeY, snake, obstacles)) {
         obstacles.emplace_back(Bloc(x, y));
         obstacles.emplace_back(Bloc(y1, y));
     } else
         throw CannotPlaceObstacleHereException();
 }
 
-bool ObstaclesFactory::checkPlaceIsEmpty(int x, int y, int sizeX, int sizeY,
-                                         std::list<Bloc> &snake,
-                                         std::list<Bloc> &obstacles) {
-    return !(!checkOneSquare(x, y, sizeX, sizeY, snake, obstacles) ||
-             !checkOneSquare(x + 1, y, sizeX, sizeY, snake, obstacles) ||
-             !checkOneSquare(x - 1, y, sizeX, sizeY, snake, obstacles) ||
-             !checkOneSquare(x, y + 1, sizeX, sizeY, snake, obstacles) ||
-             !checkOneSquare(x, y - 1, sizeX, sizeY, snake, obstacles));
+bool ObstaclesFactory::checkPlaceIsFine(int x, int y, int sizeX, int sizeY,
+                                        std::list<Bloc> &snake,
+                                        std::list<Bloc> &obstacles) {
+    return !(!checkOneSquareIsNotOnBorder(x, y, sizeX, sizeY) ||
+             !checkOneSquareIsEmpty(x, y, snake, obstacles) ||
+             !checkOneSquareIsEmpty(x + 1, y, snake, obstacles) ||
+             !checkOneSquareIsEmpty(x - 1, y, snake, obstacles) ||
+             !checkOneSquareIsEmpty(x, y + 1, snake, obstacles) ||
+             !checkOneSquareIsEmpty(x, y - 1, snake, obstacles) ||
+             !checkOneSquareIsEmpty(x - 1, y - 1, snake, obstacles) ||
+             !checkOneSquareIsEmpty(x + 1, y - 1, snake, obstacles) ||
+             !checkOneSquareIsEmpty(x - 1, y + 1, snake, obstacles) ||
+             !checkOneSquareIsEmpty(x + 1, y + 1, snake, obstacles));
 
 }
 
-bool ObstaclesFactory::checkOneSquare(int x, int y, int sizeX, int sizeY,
-                                      std::list<Bloc> &snake,
-                                      std::list<Bloc> &obstacles) {
-    if (x < 0 || x >= sizeX || y < 0 || y >= sizeY)
-        return false;
-
+bool ObstaclesFactory::checkOneSquareIsEmpty(int x, int y, std::list<Bloc> &snake, std::list<Bloc> &obstacles) {
     for (auto part : snake) {
         if (part == Bloc(x, y))
             return false;
@@ -215,6 +215,10 @@ bool ObstaclesFactory::checkOneSquare(int x, int y, int sizeX, int sizeY,
     }
 
     return true;
+}
+
+bool ObstaclesFactory::checkOneSquareIsNotOnBorder(int x, int y, int sizeX, int sizeY) {
+    return !(x <= 0 || x >= sizeX - 1 || y <= 0 || y >= sizeY - 1);
 }
 
 /* ******************************* */
