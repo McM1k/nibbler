@@ -67,6 +67,7 @@ public:
 private:
     int                                     frame_required_for_a_move;
     int                                     current_frame;
+    Map::eDirection                         current_direction;
     Map::eDirection                         intended_direction;
     std::map<eInputs, ft_input>             map_inputs;
     std::map<eGameState, ft_state>          map_states;

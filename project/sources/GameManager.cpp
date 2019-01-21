@@ -15,7 +15,7 @@
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-GameManager::GameManager(int x, int y) : state(eGameState::Pause), map(x, y) {
+GameManager::GameManager(int x, int y) : state(eGameState::Game), map(x, y) {
     instantiateFromLib(eSharedLibs::ncursesLib);
 
     map_states.insert(std::pair<eGameState, ft_state >(eGameState::Pause, &GameManager::gamePause));
@@ -75,7 +75,7 @@ void GameManager::changeLib(eSharedLibs lib) {
 
 void GameManager::newGame() {
     this->ms_per_frame = std::chrono::duration<int, std::milli>(16);
-    this->intended_direction = Map::eDirection::up;
+    this->current_direction = this->intended_direction = Map::eDirection::up;
     this->frame_required_for_a_move = 62;
     this->current_frame = 0;
     map.spawnSnake();
@@ -89,6 +89,7 @@ void GameManager::update() {
     this->map.moveSnake(this->intended_direction);
     if (this->map.getSnake().size() != snakeSize)
         this->ui.addScore(100);
+    this->current_direction = this->intended_direction;
 }
 
 void GameManager::render() {display->display(map, ui);}
@@ -116,49 +117,48 @@ void GameManager::inputLib2() {changeLib(eSharedLibs::ncursesLib);}//TODO change
 void GameManager::inputLib3() {changeLib(eSharedLibs::ncursesLib);}// TODO change lib used
 
 void GameManager::inputPause() {
-    if (this->state == eGameState::Pause) {
+    if (this->state == eGameState::Pause)
         this->state = eGameState::Game;
-        this->ui.setGameState(this->state);
-    }
     else if (this->state == eGameState::Game)
         this->state = eGameState::Pause;
+    this->ui.setGameState(this->state);
 }
 
 void GameManager::inputUp() {
-    if (this->intended_direction != Map::eDirection::down)
+    if (this->current_direction != Map::eDirection::down)
         this->intended_direction = Map::eDirection::up;
 }
 
 void GameManager::inputDown() {
-    if (this->intended_direction != Map::eDirection::up)
+    if (this->current_direction != Map::eDirection::up)
         this->intended_direction = Map::eDirection::down;
 }
 
 void GameManager::inputLeft() {
-    if (this->intended_direction != Map::eDirection::right)
+    if (this->current_direction != Map::eDirection::right)
         this->intended_direction = Map::eDirection::left;
 }
 
 void GameManager::inputRight() {
-    if (this->intended_direction != Map::eDirection::left)
+    if (this->current_direction != Map::eDirection::left)
         this->intended_direction = Map::eDirection::right;
 }
 
 void GameManager::inputNo() {}
 
 void GameManager::loopGame() {
-    while (this->getState() != eGameState::Quit)
-    {
+    while (this->getState() != eGameState::Quit) {
         std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
 
-        auto _input = this->input->getInput();
-        (this->*map_inputs[_input])();
+        (this->*map_inputs[this->input->getInput()])();
+        std::cout << this->input->getInput();
+        std::cout << this->state << std::endl;
         (this->*map_states[this->state])();
         render();
 
-        std::this_thread::sleep_for(start + ms_per_frame - std::chrono::high_resolution_clock::now());
+        std::this_thread::sleep_for(start + this->ms_per_frame - std::chrono::high_resolution_clock::now());
     }
-    (this->*map_states[this->state])();
+    (this->*map_states[eGameState::Quit])();
 }
 /* ******************************* */
 /*            Exceptions           */

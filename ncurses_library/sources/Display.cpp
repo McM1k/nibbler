@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Display.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboudrie <gboudrie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 15:48:50 by gboudrie          #+#    #+#             */
+/*   Updated: 2019/01/18 15:48:50 by gboudrie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/Display.hpp"
 
@@ -9,6 +20,8 @@ Display::Display(int x, int y) : xSize(x), ySize(y){
     initscr();
     this->window = newwin(y + 7, x + 2, 0, 0);
     start_color();
+    cbreak();
+    noecho();
     this->red_colour = init_pair(1, COLOR_RED, COLOR_BLACK); // TODO use colours
     this->yellow_colour = init_pair(2, COLOR_YELLOW, COLOR_BLACK);
     this->green_colour = init_pair(3, COLOR_GREEN, COLOR_BLACK);

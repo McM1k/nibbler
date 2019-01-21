@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include <iostream>
-#include "../includes/LibLoader.hpp"
-#include "../includes/IInputs.hpp"
 #include "../includes/GameManager.hpp"
 
 int main(int ac, char **av) {

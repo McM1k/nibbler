@@ -25,17 +25,9 @@ UI::UI() : score(0), gameState(eGameState::Game) {
 /* ******************************* */
 
 std::ostream &operator<<(std::ostream &o, UI const &instance) {
-    std::string gameStates[4];
-
-    gameStates[0] = "Menu";
-    gameStates[1] = "Game";
-    gameStates[2] = "Pause";
-    gameStates[3] = "GameOver";
-
     o << "UI :" << std::endl;
     o << "Score :" << instance.getScore() << std::endl;
-    o << "State of the game :" << static_cast<int>(instance.getGameState()) << " ";
-    o << gameStates[static_cast<int>(instance.getGameState())] << std::endl;
+    o << "State of the game :" << instance.getGameState();
 
     return o;
 }
