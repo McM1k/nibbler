@@ -140,6 +140,9 @@ void Map::spawnObstacles() {
     ObstaclesFactory obstaclesFactory;
 
     obstaclesFactory.generateAllObstacles(obstacles, numberOfObstacles, xSize, ySize, snake, 0);
+
+    for (Bloc test : obstacles)
+        std::cout << test << std::endl;
 }
 
 bool Map::moveSnake(Map::eDirection dir) {

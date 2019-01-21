@@ -36,16 +36,15 @@ void ObstaclesFactory::generateAllObstacles(
     }
     if (obstaclesToAdd > 0) {
         try {
-            numberOfTimeItTried++;
             generateOneObstacle(obstacles, sizeX, sizeY, snake);
-            generateAllObstacles(obstacles, --obstaclesToAdd, sizeX, sizeY, snake, numberOfTimeItTried);
+            generateAllObstacles(obstacles, --obstaclesToAdd, sizeX, sizeY, snake, ++numberOfTimeItTried);
         } catch (CannotPlaceObstacleHereException const &e) {
             std::cerr << e.what() << std::endl;
-            generateAllObstacles(obstacles, obstaclesToAdd, sizeX, sizeY, snake, numberOfTimeItTried);
+            generateAllObstacles(obstacles, obstaclesToAdd, sizeX, sizeY, snake, ++numberOfTimeItTried);
         }
         catch (std::exception const &e) {
             std::cerr << "Something has gone unexpectedly wrong : " << e.what() << std::endl;
-            generateAllObstacles(obstacles, obstaclesToAdd, sizeX, sizeY, snake, numberOfTimeItTried);
+            generateAllObstacles(obstacles, obstaclesToAdd, sizeX, sizeY, snake, ++numberOfTimeItTried);
         }
     }
 }
