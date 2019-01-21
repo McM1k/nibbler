@@ -87,13 +87,13 @@ private:
             int sizeY,
             std::list<Bloc> &snake);
 
-    bool checkPlaceIsEmpty(int x, int y, int sizeX, int sizeY,
-                           std::list<Bloc> &snake,
-                           std::list<Bloc> &obstacles);
+    bool checkPlaceIsFine(int x, int y, int sizeX, int sizeY,
+                          std::list<Bloc> &snake,
+                          std::list<Bloc> &obstacles);
 
-    bool checkOneSquare(int x, int y, int sizeX, int sizeY,
-                        std::list<Bloc> &snake,
-                        std::list<Bloc> &obstacles);
+    bool checkOneSquareIsEmpty(int x, int y, std::list<Bloc> &snake, std::list<Bloc> &obstacles);
+
+    bool checkOneSquareIsNotOnBorder(int x, int y, int sizeX, int sizeY);
 
     unsigned int const numberOfDifferentObstacles;
     std::random_device generator;

@@ -114,8 +114,8 @@ void Map::spawnFruit() {
     std::random_device generator;
 
     while (x == -1 || y == -1) {
-        x = generator() % (this->xSize + 1);
-        y = generator() % (this->ySize + 1);
+        x = generator() % (this->xSize);
+        y = generator() % (this->ySize);
 
         for (auto part : this->snake) {
             if (part == Bloc(x, y))
