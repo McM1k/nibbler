@@ -21,6 +21,7 @@
 /* ******************************* */
 
 eInputs Inputs::getInput() const {
+    int
     switch(getch()) {
         case KEY_EXIT:
             return eInputs::quit;
@@ -56,7 +57,6 @@ eInputs Inputs::getInput() const {
 Inputs *newInputs() {
     return new Inputs();
 }
-
 
 void deleteInputs(Inputs *inputs) {
     delete inputs;

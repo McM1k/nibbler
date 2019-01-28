@@ -150,10 +150,12 @@ void GameManager::loopGame() {
     while (this->getState() != eGameState::Quit) {
         std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
 
-        (this->*map_inputs[this->input->getInput()])();
-        std::cout << this->input->getInput();
-        std::cout << this->state << std::endl;
-        (this->*map_states[this->state])();
+        auto currentInput = this->input->getInput();
+        (this->*map_inputs[currentInput])();
+        std::cout << currentInput;
+        auto currentState = this->state;
+        std::cout << currentState << std::endl;
+        (this->*map_states[currentState])();
         render();
 
         std::this_thread::sleep_for(start + this->ms_per_frame - std::chrono::high_resolution_clock::now());
