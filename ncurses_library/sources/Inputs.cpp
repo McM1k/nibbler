@@ -21,7 +21,6 @@
 /* ******************************* */
 
 eInputs Inputs::getInput() const {
-    int
     switch(getch()) {
         case KEY_EXIT:
             return eInputs::quit;

@@ -152,9 +152,7 @@ void GameManager::loopGame() {
 
         auto currentInput = this->input->getInput();
         (this->*map_inputs[currentInput])();
-        std::cout << currentInput;
         auto currentState = this->state;
-        std::cout << currentState << std::endl;
         (this->*map_states[currentState])();
         render();
 

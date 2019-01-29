@@ -42,7 +42,8 @@ Display::~Display() {
 /* ******************************* */
 /*            Functions            */
 /* ******************************* */
-void Display::printSnake(std::list<Bloc> snake) {/*
+void Display::printSnake(std::list<Bloc> snake) {
+    /*
     std::list<Bloc *>::const_iterator prev = snake.begin();
     std::list<Bloc *>::const_iterator next = snake.begin();
     next++;
@@ -92,7 +93,7 @@ void Display::printSnake(std::list<Bloc> snake) {/*
         throw BrokenSnakeException();
 */
 
-    for (auto snake_part : snake){
+    for (const auto &snake_part : snake) {
         mvaddch(snake_part.getY() + 1, snake_part.getX() + 1, GENERIC_SNAKE_PART);
     }
 }
@@ -104,41 +105,50 @@ void Display::printFruit(Bloc fruit) {
 }
 
 void Display::printObstacles(std::list<Bloc> obstacles) {
-    for (auto obstacle_part : obstacles){
+    for (const auto &obstacle_part : obstacles) {
         mvaddch(obstacle_part.getY() + 1, obstacle_part.getX() + 1, OBSTACLE);
     }
 }
 
-void Display::printBorders(int x, int y) {
-    for (int i = 0; i < x + 2; i++) {
+void Display::printBorders() {
+    for (int i = 0; i < xSize + 2; i++) {
         mvaddch(0, i, GENERIC_BORDER);
-        mvaddch(y + 1, i, GENERIC_BORDER);
+        mvaddch(ySize + 1, i, GENERIC_BORDER);
     }
-    for (int j = 0; j < y + 2; j++) {
+    for (int j = 0; j < ySize + 2; j++) {
         mvaddch(j, 0, GENERIC_BORDER);
-        mvaddch(j, x + 1, GENERIC_BORDER);
+        mvaddch(j, xSize + 1, GENERIC_BORDER);
     }
 }
 
-void Display::display(const Map &map, const UI &) {
+void Display::printUI(UI const &gameInfo) {
+    std::stringstream stringstream;
+
+    stringstream << static_cast<eGameState>(gameInfo.getGameState());
+
+    mvprintw(ySize + 2, 0, "Game State : %s | Score : %d", stringstream.str().c_str(), gameInfo.getScore());
+}
+
+void Display::display(const Map &map, const UI &gameInfo) {
     wclear(this->window);
 //    wborder(this->window, LEFT_BORDER, RIGHT_BORDER, UP_BORDER, DOWN_BORDER,
   //          NW_CORNER_BORDER, NE_CORNER_BORDER, SW_CORNER_BORDER, SE_CORNER_BORDER);
-    printBorders(this->xSize, this->ySize);
+    printBorders();
     printSnake(map.getSnake());
     printObstacles(map.getObstacles());
     printFruit(map.getFruit());
+    printUI(gameInfo);
     refresh();
 }
 
 /* ******************************* */
 /*            Exceptions           */
 /* ******************************* */
-const char* Display::UnableToDeleteWindowException::what() const throw(){
+const char *Display::UnableToDeleteWindowException::what() const noexcept {
     return "Unable to delete nCurses window";
 }
 
-const char* Display::BrokenSnakeException::what() const throw(){
+const char *Display::BrokenSnakeException::what() const noexcept {
     return "Snake is broken";
 }
 

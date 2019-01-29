@@ -58,6 +58,8 @@
 # include <ncurses.h>
 # include <clocale>
 
+#include <sstream>
+
 class Display : public IEntity{
 public:
     Display() = delete;
@@ -84,7 +86,10 @@ private:
     void printSnake(std::list<Bloc> snake);
     void printFruit(Bloc fruit);
     void printObstacles(std::list<Bloc> obstacles);
-    void printBorders(int x, int y);
+
+    void printBorders();
+
+    void printUI(UI const &gameInfo);
 
     WINDOW      *window;
     int         red_colour;
