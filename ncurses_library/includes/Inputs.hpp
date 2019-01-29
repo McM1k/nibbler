@@ -13,28 +13,23 @@
 #ifndef INPUTS_HPP
 # define INPUTS_HPP
 
-# include "../../project/includes/IInputs.hpp"
 # include <iostream>
 # include <ncurses.h>
+#include "../../project/includes/eInputs.hpp"
 
-class Inputs : public IInputs {
+class Inputs{
 public:
     Inputs() = default;
-
+    Inputs(WINDOW *_window);
     virtual ~Inputs() = default;
-
-    eInputs getInput() const override;
-
-private:
     Inputs(Inputs const &src) = default;
-
     Inputs &operator=(Inputs const &rhs) = default;
 
+    eInputs getInput() const ;
+
+private:
+    WINDOW *window;
 };
 
-extern "C" {
-Inputs *newInputs();
-void deleteInputs(Inputs *inputs);
-}
 
 #endif

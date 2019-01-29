@@ -50,25 +50,21 @@
 # define WE_SNAKE_HEAD u8"\u2B62"
 # define WS_SNAKE_HEAD '\u2BA7'
 
-# include "../../project/includes/IEntity.hpp"
 # include "../../project/includes/Map.hpp"
 # include "../../project/includes/UI.hpp"
 # include <iostream>
-
 # include <ncurses.h>
-# include <clocale>
 
-class Display : public IEntity{
+class Display{
 public:
-    Display() = delete;
+    Display() = default;
     Display(Display const &src) = default;
-
-    virtual ~Display();
+    virtual ~Display() = default;
     Display &operator=(Display const &rhs) = default;
 
-    Display(int x, int y);
+    Display(int x, int y, WINDOW *_window);
 
-    void display(Map const &map, UI const &gameInfo) override;
+    void display(Map const &map, UI const &gameInfo);
 
     class UnableToDeleteWindowException : public std::exception {
     public:
@@ -86,16 +82,10 @@ private:
     void printObstacles(std::list<Bloc> obstacles);
     void printBorders(int x, int y);
 
-    WINDOW      *window;
-    int         red_colour;
-    int         green_colour;
-    int         yellow_colour;
     int         xSize;
     int         ySize;
+    WINDOW      *window;
 
 };
-
-extern "C" Display *newDisplay(int x, int y);
-extern "C" void deleteDisplay(Display *display);
 
 #endif

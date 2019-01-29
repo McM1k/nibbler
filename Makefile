@@ -62,7 +62,8 @@ PROJ_SRC_LIST = main.cpp \
                 ObstaclesFactory.cpp
 
 LIB1_SRC_LIST = Display.cpp \
-                Inputs.cpp
+                Inputs.cpp \
+                Graphics.cpp
 
 LIB2_SRC_LIST =
 LIB3_SRC_LIST =

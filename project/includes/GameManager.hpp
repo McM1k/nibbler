@@ -17,11 +17,11 @@
 # include <chrono>
 # include <thread>
 # include <map>
-# include "IEntity.hpp"
-# include "IInputs.hpp"
 # include "LibLoader.hpp"
 # include "eSharedLibs.hpp"
 # include "eInputs.hpp"
+#include "IGraphics.hpp"
+#include "eGameState.hpp"
 
 
 class GameManager {
@@ -73,8 +73,7 @@ private:
     std::map<eGameState, ft_state>          map_states;
     LibLoader                               *libLoader;
     eGameState                              state;
-    IEntity                                 *display;
-    IInputs                                 *input;
+    IGraphics                               *graphics;
     Map                                     map;
     UI                                      ui;
     std::chrono::duration<int,std::milli>   ms_per_frame;

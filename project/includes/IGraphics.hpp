@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   IEntity.hpp                                        :+:      :+:    :+:   */
+/*   IGraphics.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboudrie <gboudrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/18 14:09:22 by gboudrie          #+#    #+#             */
-/*   Updated: 2018/12/18 14:09:22 by gboudrie         ###   ########.fr       */
+/*   Created: 2019/01/28 16:18:12 by gboudrie          #+#    #+#             */
+/*   Updated: 2019/01/28 16:18:12 by gboudrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IENTITY_HPP
-# define IENTITY_HPP
+#ifndef NIBBLER_IGRAPHICS_HPP
+#define NIBBLER_IGRAPHICS_HPP
 
-#  include <iostream>
-#  include "Map.hpp"
-#  include "UI.hpp"
+#include "Map.hpp"
+#include "UI.hpp"
+#include "eInputs.hpp"
 
-class IEntity {
-public:
+class IGraphics {
+public :
     virtual void display(Map const &map, UI const &gameInfo) = 0;
+    virtual eInputs getInput() const = 0;
 };
 
 #endif

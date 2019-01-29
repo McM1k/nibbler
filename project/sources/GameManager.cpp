@@ -52,17 +52,14 @@ eGameState GameManager::getState() const {
 /*            Functions            */
 /* ******************************* */
 void GameManager::freeLib() {
-    if (this->display)
-        this->libLoader->loadFunction<void (*)(IEntity *)>("deleteDisplay")(this->display);
-    if (this->input)
-        this->libLoader->loadFunction<void (*)(IInputs *)>("deleteInputs")(this->input);
+    if (this->graphics)
+        this->libLoader->loadFunction<void (*)(IGraphics *)>("deleteGraphics")(this->graphics);
     delete this->libLoader;
 }
 
 void GameManager::instantiateFromLib(eSharedLibs lib) {
     this->libLoader = new LibLoader(lib);
-    this->display = this->libLoader->loadFunction<IEntity *(*)(int, int)>("newDisplay")(map.getXSize(), map.getYSize());
-    this->input = this->libLoader->loadFunction<IInputs *(*)()>("newInputs")();
+    this->graphics = this->libLoader->loadFunction<IGraphics *(*)(int, int)>("newGraphics")(map.getXSize(), map.getYSize());
 }
 
 void GameManager::changeLib(eSharedLibs lib) {
@@ -92,7 +89,7 @@ void GameManager::update() {
     this->current_direction = this->intended_direction;
 }
 
-void GameManager::render() {display->display(map, ui);}
+void GameManager::render() {graphics->display(map, ui);}
 
 void GameManager::gamePause() {this->ui.setGameState(this->state);}
 
@@ -150,7 +147,7 @@ void GameManager::loopGame() {
     while (this->getState() != eGameState::Quit) {
         std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
 
-        auto currentInput = this->input->getInput();
+        auto currentInput = this->graphics->getInput();
         (this->*map_inputs[currentInput])();
         std::cout << currentInput;
         auto currentState = this->state;
