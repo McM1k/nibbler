@@ -19,11 +19,12 @@ Graphics::Graphics(int x, int y) {
 //    setlocale(LC_ALL, "");
     initscr();
     this->window = newwin(y + 7, x + 2, 0, 0);
-    start_color();
     cbreak();
     noecho();
+    keypad(this->window, true);
+    nodelay(this->window, true);
 
-    this->display1 = Display(x, y, this->window);
+    this->display1 = Display(x, y);
     this->inputs = Inputs(this->window);
 }
 

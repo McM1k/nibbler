@@ -73,7 +73,7 @@ void GameManager::changeLib(eSharedLibs lib) {
 void GameManager::newGame() {
     this->ms_per_frame = std::chrono::duration<int, std::milli>(16);
     this->current_direction = this->intended_direction = Map::eDirection::up;
-    this->frame_required_for_a_move = 62;
+    this->frame_required_for_a_move = 42;
     this->current_frame = 0;
     map.spawnSnake();
     map.spawnFruit();
@@ -84,8 +84,10 @@ void GameManager::newGame() {
 void GameManager::update() {
     auto snakeSize = this->map.getSnake().size();
     this->map.moveSnake(this->intended_direction);
-    if (this->map.getSnake().size() != snakeSize)
+    if (this->map.getSnake().size() != snakeSize) {
         this->ui.addScore(100);
+        if (this->frame_required_for_a_move > 8) {this->frame_required_for_a_move--;}
+    }
     this->current_direction = this->intended_direction;
 }
 
@@ -149,9 +151,9 @@ void GameManager::loopGame() {
 
         auto currentInput = this->graphics->getInput();
         (this->*map_inputs[currentInput])();
-        std::cout << currentInput;
+        //std::cout << currentInput;
         auto currentState = this->state;
-        std::cout << currentState << std::endl;
+        //std::cout << currentState << std::endl;
         (this->*map_states[currentState])();
         render();
 

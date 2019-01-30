@@ -15,7 +15,13 @@
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-Display::Display(int x, int y, WINDOW *_window) : xSize(x), ySize(y), window(_window) {}
+Display::Display(int x, int y) : xSize(x), ySize(y){
+    curs_set(0);
+    start_color();
+    init_pair(1, COLOR_BLACK, COLOR_RED);
+    init_pair(2, COLOR_BLACK, COLOR_YELLOW);
+    init_pair(3, COLOR_BLUE, COLOR_GREEN);
+}
 
 /* ******************************* */
 /*            Accessors            */
@@ -108,13 +114,21 @@ void Display::printBorders(int x, int y) {
 }
 
 void Display::display(const Map &map, const UI &) {
-    wclear(this->window);
+    clear();
+    //wclear(this->window);
 //    wborder(this->window, LEFT_BORDER, RIGHT_BORDER, UP_BORDER, DOWN_BORDER,
   //          NW_CORNER_BORDER, NE_CORNER_BORDER, SW_CORNER_BORDER, SE_CORNER_BORDER);
+    attron(1);
     printBorders(this->xSize, this->ySize);
-    printSnake(map.getSnake());
     printObstacles(map.getObstacles());
+    attroff(1);
+    attron(3);
+    printSnake(map.getSnake());
+    attroff(3);
+    attron(2);
     printFruit(map.getFruit());
+    attroff(2);
+    //wrefresh(this->window);
     refresh();
 }
 

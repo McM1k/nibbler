@@ -62,7 +62,7 @@ public:
     virtual ~Display() = default;
     Display &operator=(Display const &rhs) = default;
 
-    Display(int x, int y, WINDOW *_window);
+    Display(int x, int y);
 
     void display(Map const &map, UI const &gameInfo);
 
@@ -84,7 +84,6 @@ private:
 
     int         xSize;
     int         ySize;
-    WINDOW      *window;
 
 };
 
