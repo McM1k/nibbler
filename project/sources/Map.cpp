@@ -154,7 +154,7 @@ bool Map::moveSnake(Map::eDirection dir) {
     else if (dir == Map::eDirection::right)
         newHead = Bloc(currHead.getX() + 1, currHead.getY());
 
-    if (newHead.getX() < 0 || newHead.getX() >= this->xSize || newHead.getY() < 0 || newHead.getY() > this->ySize)
+    if (newHead.getX() < 0 || newHead.getX() >= this->xSize || newHead.getY() < 0 || newHead.getY() >= this->ySize)
         return false;
 
     for (auto const &obstacle_part : this->obstacles) {
