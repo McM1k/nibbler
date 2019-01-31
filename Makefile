@@ -33,11 +33,14 @@ CR_DL =	\xe2\x95\x9a
 CC =		clang++
 CFLAGS =	-Wall -Wextra -Werror -std=c++11
 SFLAGS =    -shared -fPIC -undefined dynamic_lookup
+L1FLAGS =   -lncurses
+L2FLAGS =   -lmlx -framework OpenGL -framework AppKit
+L3FLAGS =
 
 # binaries
 EXE =       nibbler
-LIB1 =      libncurses.so
-LIB2 =
+LIB1 =      ncurses.so
+LIB2 =      mlx.so
 LIB3 =
 
 # dir
@@ -46,7 +49,7 @@ INC_DIR =       includes
 OBJ_DIR =       obj
 PROJ_DIR =      project
 LIB1_DIR =      ncurses_library
-LIB2_DIR =
+LIB2_DIR =      mlx_library
 LIB3_DIR =
 LIBS_DIR =      libs
 
@@ -65,7 +68,10 @@ LIB1_SRC_LIST = Display.cpp \
                 Inputs.cpp \
                 Graphics.cpp
 
-LIB2_SRC_LIST =
+LIB2_SRC_LIST = Graphics.cpp \
+                MlxData.cpp \
+                Inputs.cpp
+
 LIB3_SRC_LIST =
 
 # objects
@@ -100,7 +106,7 @@ $(PROJ_DIR)/$(OBJ_DIR)/%.o: $(PROJ_DIR)/$(SRC_DIR)/%.cpp
 
 $(LIB1) :                   $(LIB1_SRC) $(LIB1_OBJ)
 	                        @mkdir -p $(LIBS_DIR) 2> /dev/null || true
-	                        @$(CC) $(SFLAGS) $(LIB1_OBJ) -o $(LIBS_DIR)/$@ -lncurses
+	                        @$(CC) $(SFLAGS) $(LIB1_OBJ) -o $(LIBS_DIR)/$@ $(L1FLAGS)
 	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(LIB1) "$(CLEAR)$(LIG)"
 
 $(LIB1_DIR)/$(OBJ_DIR)/%.o: $(LIB1_DIR)/$(SRC_DIR)/%.cpp
@@ -111,7 +117,7 @@ $(LIB1_DIR)/$(OBJ_DIR)/%.o: $(LIB1_DIR)/$(SRC_DIR)/%.cpp
 
 $(LIB2) :                   $(LIB2_SRC) $(LIB2_OBJ)
 	                        @mkdir -p $(LIBS_DIR) 2> /dev/null || true
-	                        @$(CC) $(SFLAGS) $(LIB2_OBJ) -o $(LIBS_DIR)/$@
+	                        @$(CC) $(SFLAGS) $(LIB2_OBJ) -o $(LIBS_DIR)/$@ $(L2FLAGS)
 	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(LIB2) "$(CLEAR)$(LIG)"
 
 $(LIB2_DIR)/$(OBJ_DIR)/%.o: $(LIB2_DIR)/$(SRC_DIR)/%.cpp
@@ -122,7 +128,7 @@ $(LIB2_DIR)/$(OBJ_DIR)/%.o: $(LIB2_DIR)/$(SRC_DIR)/%.cpp
 
 $(LIB3) :                   $(LIB3_SRC) $(LIB3_OBJ)
 	                        @mkdir -p $(LIBS_DIR) 2> /dev/null || true
-	                        @$(CC) $(SFLAGS) $(LIB3_OBJ) -o $(LIBS_DIR)/$@
+	                        @$(CC) $(SFLAGS) $(LIB3_OBJ) -o $(LIBS_DIR)/$@ $(L3FLAGS)
 	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(LIB3) "$(CLEAR)$(LIG)"
 
 $(LIB3_DIR)/$(OBJ_DIR)/%.o: $(LIB3_DIR)/$(SRC_DIR)/%.cpp
