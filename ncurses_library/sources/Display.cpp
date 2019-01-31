@@ -118,16 +118,15 @@ void Display::display(const Map &map, const UI &) {
     //wclear(this->window);
 //    wborder(this->window, LEFT_BORDER, RIGHT_BORDER, UP_BORDER, DOWN_BORDER,
   //          NW_CORNER_BORDER, NE_CORNER_BORDER, SW_CORNER_BORDER, SE_CORNER_BORDER);
-    attron(1);
+    attrset(COLOR_PAIR(1));
     printBorders(this->xSize, this->ySize);
     printObstacles(map.getObstacles());
-    attroff(1);
-    attron(3);
+    attrset(COLOR_PAIR(3));
     printSnake(map.getSnake());
-    attroff(3);
-    attron(2);
+
+    attrset(COLOR_PAIR(2));
     printFruit(map.getFruit());
-    attroff(2);
+    attrset(COLOR_PAIR(0));
     //wrefresh(this->window);
     refresh();
 }

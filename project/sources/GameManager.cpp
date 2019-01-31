@@ -86,7 +86,10 @@ void GameManager::update() {
     this->map.moveSnake(this->intended_direction);
     if (this->map.getSnake().size() != snakeSize) {
         this->ui.addScore(100);
-        if (this->frame_required_for_a_move > 8) {this->frame_required_for_a_move--;}
+        if (this->frame_required_for_a_move > 8) {
+            if (this->frame_required_for_a_move > 20) {this->frame_required_for_a_move-=2;}
+            else                                      {this->frame_required_for_a_move--;}
+        }
     }
     this->current_direction = this->intended_direction;
 }
