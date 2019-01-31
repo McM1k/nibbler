@@ -6,7 +6,7 @@
 #    By: gboudrie <gboudrie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/16 20:06:05 by gboudrie          #+#    #+#              #
-#    Updated: 2018/12/19 16:07:49 by gboudrie         ###   ########.fr        #
+#    Updated: 2019/01/30 15:54:01 by gboudrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,10 +58,12 @@ PROJ_SRC_LIST = main.cpp \
                 UI.cpp \
                 Bloc.cpp \
                 LibLoader.cpp \
-                GameManager.cpp
+                GameManager.cpp \
+                ObstaclesFactory.cpp
 
 LIB1_SRC_LIST = Display.cpp \
-                Inputs.cpp
+                Inputs.cpp \
+                Graphics.cpp
 
 LIB2_SRC_LIST =
 LIB3_SRC_LIST =

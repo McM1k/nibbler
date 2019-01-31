@@ -30,6 +30,7 @@ set(sourcesFiles
         Bloc.cpp
         LibLoader.cpp
         GameManager.cpp
+        ObstaclesFactory.cpp
         )
 
 PREPEND(sourcesProject ${prefixSources} ${sourcesFiles})
@@ -45,6 +46,7 @@ PREPEND(tests ${prefixTests} ${sourcesTests})
 set(ncursesFiles
         Display.cpp
         Inputs.cpp
+        Graphics.cpp
         )
 
 PREPEND(sourcesNcurses ${prefixNcurses} ${ncursesFiles})
@@ -57,17 +59,17 @@ PREPEND(sourcesNcurses ${prefixNcurses} ${ncursesFiles})
 
 # libraries
 
-add_library(ncurses SHARED ${sourcesNcurses})
+add_library(ncurses SHARED ${sourcesNcurses} project/includes/IGraphics.hpp)
 
 #add_library(lib2 SHARED ${sourcesLib2})
 
 # exe
 
-add_executable(nibbler project/sources/main.cpp ${sourcesProject})
+add_executable(nibbler project/sources/main.cpp ${sourcesProject} project/includes/IGraphics.hpp)
 
 # tests
 
-add_executable(testAll ${sourcesProject} ${tests})
+add_executable(testAll ${sourcesProject} ${tests} project/includes/IGraphics.hpp)
 
 # add includes
 

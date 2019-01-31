@@ -1,29 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Inputs.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboudrie <gboudrie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 15:49:37 by gboudrie          #+#    #+#             */
+/*   Updated: 2019/01/18 15:49:37 by gboudrie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef INPUTS_HPP
 # define INPUTS_HPP
 
-# include "../../project/includes/IInputs.hpp"
 # include <iostream>
 # include <ncurses.h>
+#include "../../project/includes/eInputs.hpp"
 
-class Inputs : public IInputs {
+class Inputs{
 public:
     Inputs() = default;
-
+    Inputs(WINDOW *_window);
     virtual ~Inputs() = default;
-
-    int getInput() const override;
-
-private:
     Inputs(Inputs const &src) = default;
-
     Inputs &operator=(Inputs const &rhs) = default;
 
+    eInputs getInput() const ;
+
+private:
+    WINDOW *window;
 };
 
-extern "C" {
-Inputs *newInputs();
-void deleteInputs(Inputs *inputs);
-}
 
 #endif

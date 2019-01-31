@@ -14,11 +14,14 @@
 # define GAMEMANAGER_HPP
 
 # include <iostream>
-# include <random>
-# include "IEntity.hpp"
-# include "IInputs.hpp"
+# include <chrono>
+# include <thread>
+# include <map>
 # include "LibLoader.hpp"
 # include "eSharedLibs.hpp"
+# include "eInputs.hpp"
+#include "IGraphics.hpp"
+#include "eGameState.hpp"
 
 
 class GameManager {
@@ -26,30 +29,54 @@ public:
     GameManager() = delete;
 
     GameManager(GameManager const &src) = delete;
-
-    virtual ~GameManager();
+    virtual ~GameManager() = default;
 
     GameManager &operator=(GameManager const &rhs) = delete;
     GameManager(int x, int y);
 
     eGameState getState() const;
 
-    void spawnFruit();
-    void spawnSnake();
-//    void spawnObstacle();
+
     void update();
     void render();
     void changeLib(eSharedLibs lib);
     void instantiateFromLib(eSharedLibs lib);
     void freeLib();
+    void loopGame();
+    void newGame();
+
+    void gamePause();
+    void gameRun();
+    void gameQuit();
+    void gameOver();
+
+    void inputQuit();
+    void inputLib1();
+    void inputLib2();
+    void inputLib3();
+    void inputPause();
+    void inputUp();
+    void inputDown();
+    void inputLeft();
+    void inputRight();
+    void inputNo();
+
+    typedef void (GameManager::*ft_input)();
+    typedef void (GameManager::*ft_state)();
 
 private:
-    LibLoader           *libLoader;
-    eGameState          state;
-    IEntity             *display;
-    IInputs *inputs;
-    Map                 map;
-   // UI                  ui; //TODO init
+    int                                     frame_required_for_a_move;
+    int                                     current_frame;
+    Map::eDirection                         current_direction;
+    Map::eDirection                         intended_direction;
+    std::map<eInputs, ft_input>             map_inputs;
+    std::map<eGameState, ft_state>          map_states;
+    LibLoader                               *libLoader;
+    eGameState                              state;
+    IGraphics                               *graphics;
+    Map                                     map;
+    UI                                      ui;
+    std::chrono::duration<int,std::milli>   ms_per_frame;
 
 };
 

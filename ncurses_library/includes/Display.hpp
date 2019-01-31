@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Display.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboudrie <gboudrie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 15:49:09 by gboudrie          #+#    #+#             */
+/*   Updated: 2019/01/18 15:49:09 by gboudrie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef DISPLAY_HPP
 # define DISPLAY_HPP
@@ -39,19 +50,16 @@
 # define WE_SNAKE_HEAD u8"\u2B62"
 # define WS_SNAKE_HEAD '\u2BA7'
 
-# include "../../project/includes/IEntity.hpp"
 # include "../../project/includes/Map.hpp"
 # include "../../project/includes/UI.hpp"
 # include <iostream>
-
 # include <ncurses.h>
-# include <locale.h>
 
-class Display : public IEntity{
+class Display{
 public:
-    Display(void) = default;
+    Display() = default;
     Display(Display const &src) = default;
-    virtual ~Display(void);
+    virtual ~Display() = default;
     Display &operator=(Display const &rhs) = default;
 
     Display(int x, int y);
@@ -60,28 +68,23 @@ public:
 
     class UnableToDeleteWindowException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        const char *what() const noexcept override;
     };
+
     class BrokenSnakeException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        const char *what() const noexcept override;
     };
+
 private:
-    void printSnake(std::list<Bloc *> snake);
+    void printSnake(std::list<Bloc> snake);
     void printFruit(Bloc fruit);
-    void printObstacles(std::list<Bloc *> obstacles);
+    void printObstacles(std::list<Bloc> obstacles);
     void printBorders(int x, int y);
 
-    WINDOW      *window;
-    int         red_colour;
-    int         green_colour;
-    int         yellow_colour;
     int         xSize;
     int         ySize;
 
 };
-
-extern "C" Display *newDisplay(int x, int y);
-extern "C" void deleteDisplay(Display *display);
 
 #endif

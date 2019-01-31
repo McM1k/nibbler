@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   IInputs.hpp                                        :+:      :+:    :+:   */
+/*   IGraphics.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboudrie <gboudrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/18 14:09:26 by gboudrie          #+#    #+#             */
-/*   Updated: 2018/12/18 14:09:26 by gboudrie         ###   ########.fr       */
+/*   Created: 2019/01/28 16:18:12 by gboudrie          #+#    #+#             */
+/*   Updated: 2019/01/28 16:18:12 by gboudrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IINPUT_HPP
-# define IINPUT_HPP
+#ifndef NIBBLER_IGRAPHICS_HPP
+#define NIBBLER_IGRAPHICS_HPP
 
-# include <iostream>
+#include "Map.hpp"
+#include "UI.hpp"
+#include "eInputs.hpp"
 
-class IInputs {
-public:
-    virtual int getInput() const = 0;
+class IGraphics {
+public :
+    virtual void display(Map const &map, UI const &gameInfo) = 0;
+    virtual eInputs getInput() const = 0;
 };
 
 #endif

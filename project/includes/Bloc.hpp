@@ -22,7 +22,7 @@ public:
 
     virtual ~Bloc() = default;
     Bloc &operator=(Bloc const &rhs);
-    std::ostream &operator<<(std::ostream &o);
+
 
     bool operator==(Bloc const &rhs);
 
@@ -36,5 +36,7 @@ private:
     int y{};
 
 };
+
+std::ostream &operator<<(std::ostream &o, Bloc &i);
 
 #endif

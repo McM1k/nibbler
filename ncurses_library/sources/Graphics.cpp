@@ -1,49 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Inputs.cpp                                         :+:      :+:    :+:   */
+/*   Graphics.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboudrie <gboudrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/18 15:49:03 by gboudrie          #+#    #+#             */
-/*   Updated: 2019/01/18 15:49:03 by gboudrie         ###   ########.fr       */
+/*   Created: 2019/01/29 19:42:56 by gboudrie          #+#    #+#             */
+/*   Updated: 2019/01/29 19:42:56 by gboudrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Inputs.hpp"
+#include "../includes/Graphics.hpp"
 
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-Inputs::Inputs(WINDOW *_window) : window(_window){}
+Graphics::Graphics(int x, int y) {
+//    setlocale(LC_ALL, "");
+    initscr();
+    this->window = newwin(y + 7, x + 2, 0, 0);
+    cbreak();
+    noecho();
+    keypad(this->window, true);
+    nodelay(this->window, true);
+
+    this->display1 = Display(x, y);
+    this->inputs = Inputs(this->window);
+}
+
+Graphics::~Graphics() {
+    delwin(this->window);
+    endwin();
+}
 /* ******************************* */
 /*            Accessors            */
 /* ******************************* */
-
-eInputs Inputs::getInput() const {
-    switch(wgetch(this->window)) {
-        case KEY_EXIT:
-            return eInputs::quit;
-        case '1':
-            return eInputs::lib1;
-        case '2':
-            return eInputs::lib2;
-        case '3':
-            return eInputs::lib3;
-        case ' ':
-            return eInputs::pause;
-        case KEY_LEFT:
-            return eInputs::left;
-        case KEY_RIGHT:
-            return eInputs::right;
-        case KEY_UP:
-            return eInputs::up;
-        case KEY_DOWN:
-            return eInputs::down;
-        default:
-            return eInputs::noInput;
-    }
-}
 
 /* ******************************* */
 /*       operators  overload       */
@@ -52,7 +43,21 @@ eInputs Inputs::getInput() const {
 /* ******************************* */
 /*            Functions            */
 /* ******************************* */
+void Graphics::display(Map const &map, UI const &gameInfo) {
+    this->display1.display(map, gameInfo);
+}
 
+eInputs Graphics::getInput() const {
+    return this->inputs.getInput();
+}
 /* ******************************* */
 /*            Exceptions           */
 /* ******************************* */
+
+Graphics *newGraphics(int x, int y){
+    return new Graphics(x ,y);
+}
+
+void deleteGraphics(Graphics *graphics){
+    delete graphics;
+}
