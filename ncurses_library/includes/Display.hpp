@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DISPLAY_HPP
-# define DISPLAY_HPP
+#ifndef NCURSES_DISPLAY_HPP
+# define NCURSES_DISPLAY_HPP
 
 # define GENERIC_BORDER '#'
 # define VERTICAL_BORDER '|'

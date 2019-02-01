@@ -1,10 +1,11 @@
 
-#ifndef GRAPHICS_HPP
-# define GRAPHICS_HPP
+#ifndef MLX_GRAPHICS_HPP
+# define MLX_GRAPHICS_HPP
 
 # include "../../project/includes/IGraphics.hpp"
 #include "MlxData.hpp"
 #include "Inputs.hpp"
+#include "Display.hpp"
 # include <iostream>
 # include <mlx.h>
 
@@ -44,6 +45,7 @@ private:
     int         ySize;
     MlxData     mlxData;
     Inputs      inputs;
+    Display     display1;
 };
 
 extern "C" {

@@ -14,11 +14,22 @@ Graphics::Graphics(int x, int y) : xSize((x + 2) * 10), ySize((y + 7) * 10) {
     this->mlxData.setImg_content(mlx_get_data_addr(this->mlxData.getImg_addr(), this->mlxData.getBits_per_pixel(),
                                                    this->mlxData.getSize_line(), this->mlxData.getEndian()));
     if (!this->mlxData.getImg_content()) {throw UnableToInitImageContent();}
+    this->mlxData.setXSize(this->xSize);
+    this->mlxData.setYSize(this->ySize);
+
     this->inputs = Inputs(this->mlxData);
+    this->display1 = Display(this->mlxData);
 }
 /* ******************************* */
 /*            Accessors            */
 /* ******************************* */
+eInputs Graphics::getInput() const {
+    return this->inputs.getCurrent_input();
+}
+
+void Graphics::display(Map const &map, UI const &gameInfo) {
+
+}
 
 /* ******************************* */
 /*       operators  overload       */

@@ -57,6 +57,7 @@ set(mlxFiles
         Graphics.cpp
         MlxData.cpp
         Inputs.cpp
+        Display.cpp
         )
 
 PREPEND(sourcesMlx ${prefixMlx} ${mlxFiles})

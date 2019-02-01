@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GRAPHICS_HPP
-# define GRAPHICS_HPP
+#ifndef NCURSES_GRAPHICS_HPP
+# define NCURSES_GRAPHICS_HPP
 
 # include <iostream>
 # include <ncurses.h>

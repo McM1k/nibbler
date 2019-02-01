@@ -1,11 +1,25 @@
 
-#ifndef INPUTS_HPP
-# define INPUTS_HPP
+#ifndef MLX_INPUTS_HPP
+# define MLX_INPUTS_HPP
 
 # include <iostream>
 # include <mlx.h>
 #include "MlxData.hpp"
 #include "../../project/includes/eInputs.hpp"
+
+
+#define ESC_KEY 53
+#define ONE_KEY 18
+#define TWO_KEY 19
+#define THREE_KEY 20
+#define SPACE_KEY 49
+#define LEFT_KEY 123
+#define RIGHT_KEY 124
+#define UP_KEY 126
+#define DOWN_KEY 125
+
+int     ft_events(int keycode, void *param);
+int     ft_destroy(void *param);
 
 class Inputs {
 public:
@@ -16,18 +30,18 @@ public:
     Inputs &operator=(Inputs const &rhs) = default;
 
     eInputs getCurrent_input() const;
+    MlxData *getMlxData();
 
-    typedef int (Inputs::*mlx_key_hook_fct)(int keycode, void *param);
-    typedef int (Inputs::*mlx_hook_fct)(void *param);
-    typedef int (*mlx_fct)();
+    void    stockInput(int input);
+
 private:
-    int     ft_events(int keycode, void *param);
 
 
-    MlxData             mlxData;
-    mlx_hook_fct        destroy_ptr;
-    mlx_fct    events_ptr;
-    eInputs             current_input;
+
+    MlxData     mlxData;
+    int        (*destroy_ptr)(void *param);
+    int        (*events_ptr)(int keycode, void *param);
+    eInputs     current_input;
 };
 
 

@@ -70,7 +70,8 @@ LIB1_SRC_LIST = Display.cpp \
 
 LIB2_SRC_LIST = Graphics.cpp \
                 MlxData.cpp \
-                Inputs.cpp
+                Inputs.cpp \
+                Display.cpp
 
 LIB3_SRC_LIST =
 

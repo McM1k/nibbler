@@ -63,6 +63,22 @@ int *MlxData::getEndian() const {
 void MlxData::setEndian(int *endian) {
     MlxData::endian = endian;
 }
+
+int MlxData::getXSize() const {
+    return xSize;
+}
+
+void MlxData::setXSize(int xSize) {
+    MlxData::xSize = xSize;
+}
+
+int MlxData::getYSize() const {
+    return ySize;
+}
+
+void MlxData::setYSize(int ySize) {
+    MlxData::ySize = ySize;
+}
 /* ******************************* */
 /*       operators  overload       */
 /* ******************************* */

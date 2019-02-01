@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INPUTS_HPP
-# define INPUTS_HPP
+#ifndef NCURSES_INPUTS_HPP
+# define NCURSES_INPUTS_HPP
 
 # include <iostream>
 # include <ncurses.h>

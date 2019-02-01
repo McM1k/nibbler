@@ -34,6 +34,14 @@ public:
 
     void setEndian(int *endian);
 
+    int getXSize() const;
+
+    void setXSize(int xSize);
+
+    int getYSize() const;
+
+    void setYSize(int ySize);
+
 private:
     void    *mlx;
     void    *window;
@@ -42,6 +50,8 @@ private:
     int     *size_line;
     int     *bits_per_pixel;
     int     *endian;
+    int     xSize;
+    int     ySize;
 };
 
 
