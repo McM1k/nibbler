@@ -4,7 +4,7 @@
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-Graphics::Graphics(int x, int y) : xSize((x + 2) * 10), ySize((y + 7) * 10) {
+Graphics::Graphics(int x, int y) : xSize(x * 10), ySize((y + 5) * 10) {
     this->mlxData.setMlx(mlx_init());
     if (!this->mlxData.getMlx()) {throw UnableToInitMlx();}
     this->mlxData.setWindow(mlx_new_window(this->mlxData.getMlx(), this->xSize, this->ySize, "Nibbler - MLX"));
@@ -28,7 +28,7 @@ eInputs Graphics::getInput() const {
 }
 
 void Graphics::display(Map const &map, UI const &gameInfo) {
-
+    this->display1.display(map, gameInfo);
 }
 
 /* ******************************* */

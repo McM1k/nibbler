@@ -55,7 +55,11 @@ void Display::display(Map &map, UI &ui) {
 
 
 void Display::print_background(Map &map) {
-    for ()
+    for (int x = 0; x < map.getXSize() * 10; x++){
+        for (int y = 0; y < map.getYSize() * 10; y++){
+            put_pixel(x, y, 0, 0xDD, 0xDD, 0x55);
+        }
+    }
 }
 
 void Display::print_borders(Map &map) {

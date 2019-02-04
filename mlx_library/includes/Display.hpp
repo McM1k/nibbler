@@ -16,10 +16,11 @@ public:
     virtual ~Display(void) = default;
     Display &operator=(Display const &rhs) = default;
 
+    void    display(Map &map, UI &ui);
+
 private:
     void    put_pixel(int x, int y, char transparency, char red, char green, char blue);
     void    clean_image();
-    void    display(Map &map, UI &ui);
 
     void    print_background(Map &map);
     void    print_borders(Map &map);
