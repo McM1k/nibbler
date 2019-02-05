@@ -19,7 +19,8 @@
 LibLoader::LibLoader(eSharedLibs _libName) : libName(_libName), LIBSNUMBER(4) {
     char *libs[LIBSNUMBER];
 
-    libs[eSharedLibs::ncursesLib] = const_cast<char *>("libs/libncurses.so");
+    libs[eSharedLibs::ncursesLib] = const_cast<char *>("libs/ncurses.so");
+    libs[eSharedLibs::mlxLib] = const_cast<char *>("libs/mlx.so");
 
     dl_handle = dlopen(libs[libName], RTLD_NOW | RTLD_LOCAL);
 

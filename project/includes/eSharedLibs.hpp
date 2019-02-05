@@ -13,7 +13,8 @@
 # define ESHAREDLIBS_HPP
 
 typedef enum {
-    ncursesLib
+    ncursesLib,
+    mlxLib
 } eSharedLibs;
 
 #endif

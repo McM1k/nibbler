@@ -7,7 +7,7 @@
 Graphics::Graphics(int x, int y) : xSize(x * 10), ySize((y + 5) * 10) {
     this->mlxData.setMlx(mlx_init());
     if (!this->mlxData.getMlx()) {throw UnableToInitMlx();}
-    this->mlxData.setWindow(mlx_new_window(this->mlxData.getMlx(), this->xSize, this->ySize, "Nibbler - MLX"));
+    this->mlxData.setWindow(mlx_new_window(this->mlxData.getMlx(), this->xSize, this->ySize, (char *)"Nibbler - MLX"));
     if (!this->mlxData.getWindow()) {throw UnableToInitWindow();}
     this->mlxData.setImg_addr(mlx_new_image(this->mlxData.getMlx(), this->xSize, this->ySize));
     if (!this->mlxData.getImg_addr()) {throw UnableToInitImageAddress();}

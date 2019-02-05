@@ -61,6 +61,8 @@ int     ft_events(int keycode, void *param)
 
     if (instance->getCurrent_input() == eInputs::quit)
         ft_destroy(reinterpret_cast<void *>(instance->getMlxData())); // TODO could lead to leaks
+
+    return keycode;
 }
 
 int     ft_destroy(void *param)

@@ -114,7 +114,7 @@ void GameManager::inputQuit() {this->state = eGameState::Quit;}
 
 void GameManager::inputLib1() {changeLib(eSharedLibs::ncursesLib);}
 
-void GameManager::inputLib2() {changeLib(eSharedLibs::ncursesLib);}//TODO change lib used
+void GameManager::inputLib2() {changeLib(eSharedLibs::mlxLib);}//TODO change lib used
 
 void GameManager::inputLib3() {changeLib(eSharedLibs::ncursesLib);}// TODO change lib used
 

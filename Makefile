@@ -95,7 +95,7 @@ LIB3_OBJ =	$(addprefix $(LIB3_DIR)/$(OBJ_DIR)/, $(LIB3_OBJ_LIST))
 
 all :		    $(EXE)
 
-$(EXE) :                    $(LIB1) $(PROJ_SRC) $(PROJ_OBJ)
+$(EXE) :                    $(LIB1) $(LIB2) $(PROJ_SRC) $(PROJ_OBJ)
 	                        @$(CC) $(PROJ_OBJ) -o $@
 	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(EXE) "$(CLEAR)$(LIG)"
 
