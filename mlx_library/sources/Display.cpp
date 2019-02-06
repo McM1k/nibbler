@@ -83,6 +83,25 @@ void Display::put_square(int xSquare, int ySquare, char img[10][10], Map::eDirec
     }
 }
 
+Map::eDirection Display::select_direction(std::list<Bloc>::const_iterator primary_bloc_it,
+                                          std::list<Bloc>::const_iterator linked_bloc_it) {
+
+    if (linked_bloc_it->getX() != primary_bloc_it->getX()) {//right or left
+        if (linked_bloc_it->getX() == primary_bloc_it->getX() + 1) {//right
+            return Map::eDirection::right;
+        } else {//left
+            return Map::eDirection::left;
+        }
+    }
+    else {//up or down
+        if (linked_bloc_it->getY() == primary_bloc_it->getY() + 1) {//down
+            return Map::eDirection::down;
+        } else {//up
+            return Map::eDirection::up;
+        }
+    }
+}
+
 void    Display::clean_image() {
     auto imageContent = this->mlxData.getImg_content();
     auto imageByteSize = this->mlxData.getXSize() * this->mlxData.getYSize() * *this->mlxData.getBits_per_pixel();
@@ -138,60 +157,22 @@ void Display::print_snake(std::list<Bloc> snake) {
         auto xSquare = it->getX() * 10;
         auto ySquare = it->getY() * 10;
 
-        if (next->getX() != it->getX()) {//right or left
-            if (next->getX() == it->getX() + 1) {//right
-                dir = Map::eDirection::right;
-            } else {//left
-                dir = Map::eDirection::left;
-            }
-        }
-        else {//up or down
-            if (next->getY() == it->getY() + 1) {//down
-                dir = Map::eDirection::down;
-            } else {//up
-                dir = Map::eDirection::up;
-            }
-        }
+        dir = select_direction(it, next);
         if (it == snake.begin()) //TAIL
             put_square(xSquare, ySquare, tail_img, dir);
         else{ //BODY
             put_square(xSquare, ySquare, body_junction_img, dir);
             put_square(xSquare, ySquare, body_center_img, Map::eDirection::right);
-            if (prev->getX() != it->getX()) {
-                if (prev->getX() == it->getX() + 1) {
-                    dir = Map::eDirection::right;
-                } else {
-                    dir = Map::eDirection::left;
-                }
-            }
-            else {
-                if (prev->getY() == it->getY() + 1) {
-                    dir = Map::eDirection::down;
-                } else {//up
-                    dir = Map::eDirection::up;
-                }
-            }
+            dir = select_direction(it, prev);
             put_square(xSquare, ySquare, body_junction_img, dir);
+
             prev++;
         }
         if (next != snake.end())
             next++;
     }
     //HEAD
-    if (prev->getX() != snake.end()->getX()) {
-        if (prev->getX() == snake.end()->getX() + 1) {
-            dir = Map::eDirection::right;
-        } else {
-            dir = Map::eDirection::left;
-        }
-    }
-    else {
-        if (prev->getY() == snake.end()->getY() + 1) {
-            dir = Map::eDirection::down;
-        } else {//up
-            dir = Map::eDirection::up;
-        }
-    }
+    dir = select_direction(snake.end(), prev);
     put_square(snake.end()->getX() * 10, snake.end()->getY() * 10, head_img, dir);
 }
 

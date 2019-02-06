@@ -39,8 +39,8 @@ L3FLAGS =
 
 # binaries
 EXE =       nibbler
-LIB1 =      ncurses.so
-LIB2 =      mlx.so
+LIB1 =      libncurses.so
+LIB2 =      libmlx.so
 LIB3 =
 
 # dir

@@ -34,6 +34,8 @@ public:
 private:
     void    put_pixel(int x, int y, char transparency, char red, char green, char blue);
     void    put_square(int xSquare, int ySquare, char img[10][10], Map::eDirection direction);
+    Map::eDirection    select_direction(std::list<Bloc>::const_iterator primary_bloc_it,
+                                        std::list<Bloc>::const_iterator linked_bloc_it);
     void    select_color(int x, int y, char color);
     void    clean_image();
 

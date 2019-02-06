@@ -2,14 +2,14 @@ cmake_minimum_required(VERSION 3.9)
 project(nibbler)
 
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lncurses -undefined dynamic_lookup -lmlx -framework OpenGL -framework AppKit")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lncurses -lmlx -framework OpenGL -framework AppKit -undefined dynamic_lookup")
 
 # Files paths
 
 set(prefixSources   ${CMAKE_CURRENT_SOURCE_DIR}/project/sources/)
 set(prefixTests     ${CMAKE_CURRENT_SOURCE_DIR}/tests/)
 set(prefixNcurses   ${CMAKE_CURRENT_SOURCE_DIR}/ncurses_library/sources/)
-set(prefixMlx   ${CMAKE_CURRENT_SOURCE_DIR}/mlx_library/sources/)
+set(prefixMlx       ${CMAKE_CURRENT_SOURCE_DIR}/mlx_library/sources/)
 #set(prefixLib2 testLib2/sources/)
 set(libDirectory    ${CMAKE_CURRENT_SOURCE_DIR}/libs)
 
@@ -50,9 +50,9 @@ set(ncursesFiles
         Graphics.cpp
         )
 
-PREPEND(sourcesNcurses ${prefixNcurses} ${ncursesFiles})
+PREPEND(sourcesNcurses  ${prefixNcurses}    ${ncursesFiles})
 
-# lib 2
+# mlx
 set(mlxFiles
         Graphics.cpp
         MlxData.cpp
@@ -60,15 +60,15 @@ set(mlxFiles
         Display.cpp
         )
 
-PREPEND(sourcesMlx ${prefixMlx} ${mlxFiles})
+PREPEND(sourcesMlx      ${prefixMlx}        ${mlxFiles})
 
 #set(lib2Files PartA.cpp PartB.cpp)
 
 #PREPEND(sourcesLib2 ${prefixLib2} ${lib2Files})
 
 # libraries
-add_library(mlx SHARED ${sourcesMlx} project/includes/IGraphics.hpp)
-add_library(ncurses SHARED ${sourcesNcurses} project/includes/IGraphics.hpp)
+add_library(mlx SHARED      ${sourcesMlx}       project/includes/IGraphics.hpp)
+add_library(ncurses SHARED  ${sourcesNcurses}   project/includes/IGraphics.hpp)
 
 #add_library(lib2 SHARED ${sourcesLib2})
 
@@ -88,12 +88,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/includes)
 
 set_target_properties(ncurses PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${libDirectory}
-        PREFIX ""
         SUFFIX ".so")
 
 set_target_properties(mlx PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${libDirectory}
-        PREFIX ""
         SUFFIX ".so")
 
 set_target_properties(nibbler PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
