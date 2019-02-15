@@ -10,6 +10,7 @@ set(prefixSources   ${CMAKE_CURRENT_SOURCE_DIR}/project/sources/)
 set(prefixTests     ${CMAKE_CURRENT_SOURCE_DIR}/tests/)
 set(prefixNcurses   ${CMAKE_CURRENT_SOURCE_DIR}/ncurses_library/sources/)
 set(prefixMlx       ${CMAKE_CURRENT_SOURCE_DIR}/mlx_library/sources/)
+set(prefixSdl       ${CMAKE_CURRENT_SOURCE_DIR}/sdl_library/sources/)
 #set(prefixLib2 testLib2/sources/)
 set(libDirectory    ${CMAKE_CURRENT_SOURCE_DIR}/libs)
 
@@ -62,11 +63,19 @@ set(mlxFiles
 
 PREPEND(sourcesMlx      ${prefixMlx}        ${mlxFiles})
 
+# sdl
+set(sdlFiles
+        Graphics.cpp
+        )
+
+PREPEND(sourcesSdl      ${prefixSdl}        ${sdlFiles})
+
 #set(lib2Files PartA.cpp PartB.cpp)
 
 #PREPEND(sourcesLib2 ${prefixLib2} ${lib2Files})
 
 # libraries
+add_library(sdl SHARED      ${sourcesSdl}       project/includes/IGraphics.hpp)
 add_library(mlx SHARED      ${sourcesMlx}       project/includes/IGraphics.hpp)
 add_library(ncurses SHARED  ${sourcesNcurses}   project/includes/IGraphics.hpp)
 
@@ -94,10 +103,14 @@ set_target_properties(mlx PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${libDirectory}
         SUFFIX ".so")
 
+set_target_properties(sdl PROPERTIES
+        LIBRARY_OUTPUT_DIRECTORY ${libDirectory}
+        SUFFIX ".so")
+
 set_target_properties(nibbler PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 # links
 
-TARGET_LINK_LIBRARIES(nibbler ncurses mlx)
+TARGET_LINK_LIBRARIES(nibbler ncurses mlx sdl)
 
 #TARGET_LINK_LIBRARIES(nibbler lib2)
