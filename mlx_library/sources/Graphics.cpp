@@ -11,14 +11,17 @@ Graphics::Graphics(int x, int y) : xSize(x * 10), ySize((y + 5) * 10) {
     if (!this->mlxData.getWindow()) {throw UnableToInitWindow();}
     this->mlxData.setImg_addr(mlx_new_image(this->mlxData.getMlx(), this->xSize, this->ySize));
     if (!this->mlxData.getImg_addr()) {throw UnableToInitImageAddress();}
-    this->mlxData.setImg_content(mlx_get_data_addr(this->mlxData.getImg_addr(), this->mlxData.getBits_per_pixel(),
-                                                   this->mlxData.getSize_line(), this->mlxData.getEndian()));
+    std::cout << "segfault entre ici ..." << std::endl;
+    this->mlxData.setImg_content(mlx_get_data_addr(this->mlxData.getImg_addr(), this->mlxData.bits_per_pixel,
+                                                   this->mlxData.size_line, this->mlxData.endian));
+    std::cout << "... et ici" << std::endl;
     if (!this->mlxData.getImg_content()) {throw UnableToInitImageContent();}
+
     this->mlxData.setXSize(this->xSize);
     this->mlxData.setYSize(this->ySize);
 
-    this->inputs = Inputs(this->mlxData);
     this->display1 = Display(this->mlxData);
+    this->inputs = Inputs(this->mlxData);
 }
 /* ******************************* */
 /*            Accessors            */

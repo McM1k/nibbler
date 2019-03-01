@@ -2,12 +2,16 @@
 #ifndef MLX_GRAPHICS_HPP
 # define MLX_GRAPHICS_HPP
 
-# include "../../project/includes/IGraphics.hpp"
-#include "MlxData.hpp"
-#include "Inputs.hpp"
-#include "Display.hpp"
 # include <iostream>
-# include <mlx.h>
+extern "C" {
+#include <mlx.h>
+};
+# include "../../project/includes/IGraphics.hpp"
+# include "Display.hpp"
+# include "MlxData.hpp"
+# include "Inputs.hpp"
+
+
 
 class Graphics : public IGraphics {
 public:

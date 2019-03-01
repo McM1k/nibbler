@@ -3,7 +3,9 @@
 # define MLX_INPUTS_HPP
 
 # include <iostream>
-# include <mlx.h>
+extern "C" {
+    # include <mlx.h>
+};
 #include "MlxData.hpp"
 #include "../../project/includes/eInputs.hpp"
 
@@ -24,9 +26,9 @@ int     ft_destroy(void *param);
 class Inputs {
 public:
     Inputs(void) = default;
-    Inputs(MlxData _mlxData);
+    explicit Inputs(MlxData _mlxData);
     Inputs(Inputs const &src) = default;
-    virtual ~Inputs(void);
+    virtual ~Inputs() = default;
     Inputs &operator=(Inputs const &rhs) = default;
 
     eInputs getCurrent_input() const;
@@ -39,8 +41,8 @@ private:
 
 
     MlxData     mlxData;
-    int        (*destroy_ptr)(void *param);
-    int        (*events_ptr)(int keycode, void *param);
+//    int        (*destroy_ptr)(void *param);
+//    int        (*events_ptr)(int keycode, void *param);
     eInputs     current_input;
 };
 

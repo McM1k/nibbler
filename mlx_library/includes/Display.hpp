@@ -3,7 +3,10 @@
 # define MLX_DISPLAY_HPP
 
 # include <iostream>
+extern "C" {
 # include <mlx.h>
+};
+
 #include "MlxData.hpp"
 #include "../../project/includes/Map.hpp"
 #include "../../project/includes/UI.hpp"

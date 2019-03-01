@@ -42,14 +42,16 @@ public:
 
     void setYSize(int ySize);
 
+    int     *size_line;
+    int     *bits_per_pixel;
+    int     *endian;
+
 private:
     void    *mlx;
     void    *window;
     void    *img_addr;
     char    *img_content;
-    int     *size_line;
-    int     *bits_per_pixel;
-    int     *endian;
+
     int     xSize;
     int     ySize;
 };

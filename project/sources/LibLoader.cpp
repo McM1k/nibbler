@@ -22,11 +22,9 @@ LibLoader::LibLoader(eSharedLibs _libName) : libName(_libName), LIBSNUMBER(4) {
     libs[eSharedLibs::ncursesLib] = const_cast<char *>("libs/libncurses.so");
     libs[eSharedLibs::mlxLib] = const_cast<char *>("libs/libmlx.so");
 
-    dl_handle = dlopen(libs[libName], RTLD_NOW | RTLD_LOCAL);
+    dl_handle = dlopen(libs[this->libName], RTLD_NOW | RTLD_LOCAL);
 
-    if (!dl_handle) {
-        throw DLExceptions();
-    }
+    if (!dl_handle) { throw DLExceptions(); }
 }
 
 LibLoader::~LibLoader() {
@@ -52,11 +50,11 @@ std::ostream &operator<<(std::ostream &o, LibLoader const &instance) {
 /* ******************************* */
 
 eSharedLibs LibLoader::getLibName() const {
-    return libName;
+    return this->libName;
 }
 
 char *const *LibLoader::getLibs() const {
-    return libs;
+    return this->libs;
 }
 
 /* ******************************* */
