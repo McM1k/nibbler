@@ -4,7 +4,9 @@
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-Display::Display(MlxData _mlxData) : mlxData(_mlxData) {}
+Display::Display(MlxData _mlxData) : mlxData(_mlxData) {
+
+}
 /* ******************************* */
 /*            Accessors            */
 /* ******************************* */
@@ -17,8 +19,8 @@ Display::Display(MlxData _mlxData) : mlxData(_mlxData) {}
 /*            Functions            */
 /* ******************************* */
 void    Display::put_pixel(int x, int y, char transparency, char red, char green, char blue) {
-    auto lineSize = *this->mlxData.getSize_line();
-    auto pixelSize = *this->mlxData.getBits_per_pixel();
+    auto lineSize = this->mlxData.size_line;
+    auto pixelSize = this->mlxData.bits_per_pixel;
     auto imageContent = this->mlxData.getImg_content();
     auto xMax = this->mlxData.getXSize();
     auto yMax = this->mlxData.getYSize();

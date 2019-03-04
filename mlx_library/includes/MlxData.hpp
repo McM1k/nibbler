@@ -22,17 +22,17 @@ public:
 
     void setImg_content(char *img_content);
 
-    int *getSize_line() const;
+    int *getSize_line();
 
-    void setSize_line(int *size_line);
+    void setSize_line(int size_line);
 
-    int *getBits_per_pixel() const;
+    int *getBits_per_pixel();
 
-    void setBits_per_pixel(int *bits_per_pixel);
+    void setBits_per_pixel(int bits_per_pixel);
 
-    int *getEndian() const;
+    int *getEndian();
 
-    void setEndian(int *endian);
+    void setEndian(int endian);
 
     int getXSize() const;
 
@@ -42,9 +42,9 @@ public:
 
     void setYSize(int ySize);
 
-    int     *size_line;
-    int     *bits_per_pixel;
-    int     *endian;
+    int     size_line;
+    int     bits_per_pixel;
+    int     endian;
 
 private:
     void    *mlx;

@@ -1,4 +1,5 @@
 
+#include <thread>
 #include "../includes/Graphics.hpp"
 
 /* ******************************* */
@@ -7,15 +8,19 @@
 Graphics::Graphics(int x, int y) : xSize(x * 10), ySize((y + 5) * 10) {
     this->mlxData.setMlx(mlx_init());
     if (!this->mlxData.getMlx()) {throw UnableToInitMlx();}
+
     this->mlxData.setWindow(mlx_new_window(this->mlxData.getMlx(), this->xSize, this->ySize, (char *)"Nibbler - MLX"));
     if (!this->mlxData.getWindow()) {throw UnableToInitWindow();}
+
     this->mlxData.setImg_addr(mlx_new_image(this->mlxData.getMlx(), this->xSize, this->ySize));
     if (!this->mlxData.getImg_addr()) {throw UnableToInitImageAddress();}
-    std::cout << "segfault entre ici ..." << std::endl;
-    this->mlxData.setImg_content(mlx_get_data_addr(this->mlxData.getImg_addr(), this->mlxData.bits_per_pixel,
-                                                   this->mlxData.size_line, this->mlxData.endian));
-    std::cout << "... et ici" << std::endl;
+
+    this->mlxData.setImg_content(mlx_get_data_addr(this->mlxData.getImg_addr(), this->mlxData.getBits_per_pixel(),
+                                                   this->mlxData.getSize_line(), this->mlxData.getEndian()));
+
     if (!this->mlxData.getImg_content()) {throw UnableToInitImageContent();}
+
+    mlx_put_image_to_window(mlxData.getMlx(), mlxData.getWindow(), mlxData.getImg_addr(), 0, 0);
 
     this->mlxData.setXSize(this->xSize);
     this->mlxData.setYSize(this->ySize);

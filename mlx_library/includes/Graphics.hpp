@@ -11,8 +11,6 @@ extern "C" {
 # include "MlxData.hpp"
 # include "Inputs.hpp"
 
-
-
 class Graphics : public IGraphics {
 public:
     Graphics(void) = default;

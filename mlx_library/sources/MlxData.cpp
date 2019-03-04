@@ -40,27 +40,27 @@ void MlxData::setImg_content(char *img_content) {
     MlxData::img_content = img_content;
 }
 
-int *MlxData::getSize_line() const {
-    return size_line;
+int *MlxData::getSize_line() {
+    return &size_line;
 }
 
-void MlxData::setSize_line(int *size_line) {
+void MlxData::setSize_line(int size_line) {
     MlxData::size_line = size_line;
 }
 
-int *MlxData::getBits_per_pixel() const {
-    return bits_per_pixel;
+int *MlxData::getBits_per_pixel() {
+    return &bits_per_pixel;
 }
 
-void MlxData::setBits_per_pixel(int *bits_per_pixel) {
+void MlxData::setBits_per_pixel(int bits_per_pixel) {
     MlxData::bits_per_pixel = bits_per_pixel;
 }
 
-int *MlxData::getEndian() const {
-    return endian;
+int *MlxData::getEndian() {
+    return &endian;
 }
 
-void MlxData::setEndian(int *endian) {
+void MlxData::setEndian(int endian) {
     MlxData::endian = endian;
 }
 
