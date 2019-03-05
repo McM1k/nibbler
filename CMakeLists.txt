@@ -79,7 +79,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/includes)
 
 set_target_properties(ncurses PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${libDirectory}
-        PREFIX ""
+        PREFIX "lib"
         SUFFIX ".so")
 
 set_target_properties(nibbler PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
