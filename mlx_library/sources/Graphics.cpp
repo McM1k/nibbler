@@ -6,6 +6,7 @@
 /*    Constructors & destructor    */
 /* ******************************* */
 Graphics::Graphics(int x, int y) : xSize(x * 10), ySize((y + 5) * 10) {
+
     this->mlxData.setMlx(mlx_init());
     if (!this->mlxData.getMlx()) {throw UnableToInitMlx();}
 
@@ -19,8 +20,6 @@ Graphics::Graphics(int x, int y) : xSize(x * 10), ySize((y + 5) * 10) {
                                                    this->mlxData.getSize_line(), this->mlxData.getEndian()));
 
     if (!this->mlxData.getImg_content()) {throw UnableToInitImageContent();}
-
-    mlx_put_image_to_window(mlxData.getMlx(), mlxData.getWindow(), mlxData.getImg_addr(), 0, 0);
 
     this->mlxData.setXSize(this->xSize);
     this->mlxData.setYSize(this->ySize);

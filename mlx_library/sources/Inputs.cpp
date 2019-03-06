@@ -4,7 +4,7 @@
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-Inputs::Inputs(MlxData _mlxData) : mlxData(_mlxData) {
+Inputs::Inputs(MlxData _mlxData) : mlxData(_mlxData), current_input(eInputs::noInput) {
 //    this->events_ptr = &ft_events;
 //    this->destroy_ptr = &ft_destroy;
     mlx_hook(this->mlxData.getWindow(), 17, 0, (int (*)())(&ft_destroy), reinterpret_cast<void *>(this));
@@ -61,7 +61,6 @@ int     ft_events(int keycode, void *param)
 
     if (instance->getCurrent_input() == eInputs::quit)
         ft_destroy(reinterpret_cast<void *>(instance->getMlxData())); // TODO could lead to leaks
-
     return keycode;
 }
 
