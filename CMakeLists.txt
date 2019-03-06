@@ -9,7 +9,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lncurses -lmlx -framework OpenGL -frame
 set(prefixSources   ${CMAKE_CURRENT_SOURCE_DIR}/project/sources/)
 set(prefixTests     ${CMAKE_CURRENT_SOURCE_DIR}/tests/)
 set(prefixNcurses   ${CMAKE_CURRENT_SOURCE_DIR}/ncurses_library/sources/)
-set(prefixMlx       ${CMAKE_CURRENT_SOURCE_DIR}/mlx_library/sources/)
 #set(prefixLib2 testLib2/sources/)
 set(libDirectory    ${CMAKE_CURRENT_SOURCE_DIR}/libs)
 
