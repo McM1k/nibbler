@@ -55,6 +55,8 @@
 # include <iostream>
 # include <ncurses.h>
 
+#include <sstream>
+
 class Display{
 public:
     Display() = default;
@@ -80,7 +82,10 @@ private:
     void printSnake(std::list<Bloc> snake);
     void printFruit(Bloc fruit);
     void printObstacles(std::list<Bloc> obstacles);
-    void printBorders(int x, int y);
+
+    void printBorders();
+
+    void printUI(UI const &gameInfo);
 
     int         xSize;
     int         ySize;

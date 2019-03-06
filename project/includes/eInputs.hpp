@@ -25,7 +25,7 @@ typedef enum {
     noInput
 } eInputs;
 
-inline std::ostream& operator<<(std::ostream &o, eInputs &i) {
+inline std::ostream &operator<<(std::ostream &o, eInputs const &i) {
     switch (i) {
         case eInputs::quit :
             o << "quit input" << std::endl;
