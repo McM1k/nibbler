@@ -16,7 +16,7 @@
 /*    Constructors & destructor    */
 /* ******************************* */
 GameManager::GameManager(int x, int y) : state(eGameState::Pause), map(x, y) {
-    instantiateFromLib(eSharedLibs::ncursesLib);
+    instantiateFromLib(eSharedLibs::mlxLib);
 
     map_states.insert(std::pair<eGameState, ft_state >(eGameState::Pause, &GameManager::gamePause));
     map_states.insert(std::pair<eGameState, ft_state >(eGameState::Game, &GameManager::gameRun));

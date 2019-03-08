@@ -9,6 +9,7 @@ Inputs::Inputs(MlxData _mlxData) : mlxData(_mlxData), current_input(eInputs::noI
 //    this->destroy_ptr = &ft_destroy;
     mlx_hook(this->mlxData.getWindow(), 17, 0, (int (*)())(&ft_destroy), reinterpret_cast<void *>(this));
     mlx_hook(this->mlxData.getWindow(), 2, 0, (int (*)())(&ft_events), reinterpret_cast<void *>(getMlxData()));
+    std::thread mlxInputThread (mlx_loop, mlxData.getMlx());
 }
 
 
@@ -16,7 +17,7 @@ Inputs::Inputs(MlxData _mlxData) : mlxData(_mlxData), current_input(eInputs::noI
 /*            Accessors            */
 /* ******************************* */
 eInputs Inputs::getCurrent_input() const {
-    return current_input;
+    return this->current_input;
 }
 
 MlxData *Inputs::getMlxData(){
@@ -33,22 +34,31 @@ void Inputs::stockInput(int input) {
     switch(input) {
         case ESC_KEY:
             this->current_input = eInputs::quit;
+            break;
         case ONE_KEY:
             this->current_input = eInputs::lib1;
+            break;
         case TWO_KEY:
             this->current_input = eInputs::lib2;
+            break;
         case THREE_KEY:
             this->current_input = eInputs::lib3;
+            break;
         case SPACE_KEY:
             this->current_input = eInputs::pause;
+            break;
         case LEFT_KEY:
             this->current_input = eInputs::left;
+            break;
         case RIGHT_KEY:
             this->current_input = eInputs::right;
+            break;
         case UP_KEY:
             this->current_input = eInputs::up;
+            break;
         case DOWN_KEY:
             this->current_input = eInputs::down;
+            break;
         default:
             this->current_input = eInputs::noInput;
     }

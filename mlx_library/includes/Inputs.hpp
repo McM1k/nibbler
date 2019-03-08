@@ -8,6 +8,7 @@ extern "C" {
 };
 #include "MlxData.hpp"
 #include "../../project/includes/eInputs.hpp"
+#include <thread>
 
 
 #define ESC_KEY 53
@@ -38,11 +39,10 @@ public:
 
 private:
 
-
-
     MlxData     mlxData;
 //    int        (*destroy_ptr)(void *param);
 //    int        (*events_ptr)(int keycode, void *param);
+public:
     eInputs     current_input;
 };
 
