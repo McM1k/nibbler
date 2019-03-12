@@ -26,7 +26,7 @@ int     ft_destroy(void *param);
 
 class Inputs {
 public:
-    Inputs(void) = default;
+    Inputs() = default;
     explicit Inputs(MlxData _mlxData);
     Inputs(Inputs const &src) = default;
     virtual ~Inputs() = default;

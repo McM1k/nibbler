@@ -1,4 +1,5 @@
 
+#include <future>
 #include "../includes/Inputs.hpp"
 
 /* ******************************* */
@@ -9,7 +10,12 @@ Inputs::Inputs(MlxData _mlxData) : mlxData(_mlxData), current_input(eInputs::noI
 //    this->destroy_ptr = &ft_destroy;
     mlx_hook(this->mlxData.getWindow(), 17, 0, (int (*)())(&ft_destroy), reinterpret_cast<void *>(this));
     mlx_hook(this->mlxData.getWindow(), 2, 0, (int (*)())(&ft_events), reinterpret_cast<void *>(getMlxData()));
-    std::thread mlxInputThread (mlx_loop, mlxData.getMlx());
+
+    //mlx_loop( mlxData.getMlx());
+//    std::future<int> fut = std::async (std::launch::async, mlx_loop, mlxData.getMlx());
+ //   int ret = fut.get();
+    std::thread mlxInputThread(mlx_loop, mlxData.getMlx());
+    mlxInputThread.detach();
 }
 
 
