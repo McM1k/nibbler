@@ -34,13 +34,13 @@ CC =		clang++
 CFLAGS =	-Wall -Wextra -Werror -std=c++11
 SFLAGS =    -shared -fPIC -undefined dynamic_lookup
 L1FLAGS =   -lncurses
-L2FLAGS =   -lmlx -framework OpenGL -framework AppKit
+L2FLAGS =
 L3FLAGS =
 
 # binaries
 EXE =       nibbler
 LIB1 =      libncurses.so
-LIB2 =      libmlx.so
+LIB2 =
 LIB3 =
 
 # dir
@@ -49,7 +49,7 @@ INC_DIR =       includes
 OBJ_DIR =       obj
 PROJ_DIR =      project
 LIB1_DIR =      ncurses_library
-LIB2_DIR =      mlx_library
+LIB2_DIR =
 LIB3_DIR =
 LIBS_DIR =      libs
 
@@ -68,10 +68,7 @@ LIB1_SRC_LIST = Display.cpp \
                 Inputs.cpp \
                 Graphics.cpp
 
-LIB2_SRC_LIST = Graphics.cpp \
-                MlxData.cpp \
-                Inputs.cpp \
-                Display.cpp
+LIB2_SRC_LIST =
 
 LIB3_SRC_LIST =
 
@@ -95,7 +92,7 @@ LIB3_OBJ =	$(addprefix $(LIB3_DIR)/$(OBJ_DIR)/, $(LIB3_OBJ_LIST))
 
 all :		    $(EXE)
 
-$(EXE) :                    $(LIB1) $(LIB2) $(PROJ_SRC) $(PROJ_OBJ)
+$(EXE) :                    $(LIB1) $(PROJ_SRC) $(PROJ_OBJ)
 	                        @$(CC) $(PROJ_OBJ) -o $@
 	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(EXE) "$(CLEAR)$(LIG)"
 
