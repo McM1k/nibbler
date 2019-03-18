@@ -78,7 +78,9 @@ void GameManager::newGame() {
     map.spawnSnake();
     map.spawnFruit();
 
-    loopGame();
+    std::thread gameThread (&GameManager::loopGame);
+    gameThread.detach();
+
 }
 
 void GameManager::update() {

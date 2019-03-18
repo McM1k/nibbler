@@ -1,5 +1,6 @@
 
 #include <future>
+#include <tk.h>
 #include "../includes/Inputs.hpp"
 
 /* ******************************* */
@@ -8,14 +9,14 @@
 Inputs::Inputs(MlxData _mlxData) : mlxData(_mlxData), current_input(eInputs::noInput) {
 //    this->events_ptr = &ft_events;
 //    this->destroy_ptr = &ft_destroy;
-    mlx_hook(this->mlxData.getWindow(), 17, 0, (int (*)())(&ft_destroy), reinterpret_cast<void *>(this));
-    mlx_hook(this->mlxData.getWindow(), 2, 0, (int (*)())(&ft_events), reinterpret_cast<void *>(getMlxData()));
-
-    //mlx_loop( mlxData.getMlx());
+ //   mlx_hook(this->mlxData.getWindow(), 17, 0, (int (*)())(&ft_destroy), reinterpret_cast<void *>(this));
+   // mlx_hook(this->mlxData.getWindow(), 2, 0, (int (*)())(&ft_events), reinterpret_cast<void *>(getMlxData()));
+XEvent
+    //mlx_nonblocking_loop( mlxData.getMlx(),10000);
 //    std::future<int> fut = std::async (std::launch::async, mlx_loop, mlxData.getMlx());
  //   int ret = fut.get();
-    std::thread mlxInputThread(mlx_loop, mlxData.getMlx());
-    mlxInputThread.detach();
+  //  std::thread mlxInputThread(mlx_loop, mlxData.getMlx());
+  //  mlxInputThread.detach();
 }
 
 
