@@ -6,6 +6,12 @@ echo "Done";
 echo "brew install SDL2";
 brew install sdl2;
 
+echo "download openGLUT"
+curl "https://downloads.sourceforge.net/project/openglut/development/OpenGLUT-0.6.3/OpenGLUT-win32-i386-0.6.3.zip?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fopenglut%2Ffiles%2Flatest%2Fdownload&ts=1552932253"
+echo "unzip openGLUT"
+tar -vxf OpenGLUT-win32-i386-0.6.3.zip
+rm OpenGLUT-win32-i386-0.6.3.zip
+
 #echo "mlx install";
 #wget http://files.achedeuzot.me/42/mlx/mlx-macosx-sierra-2016-10-17.tgz;
 #tar -xzf mlx-macosx-sierra-2016-10-17.tgz;
