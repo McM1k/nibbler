@@ -3,13 +3,13 @@ echo "Brew Update";
 #brew update;
 echo "Done";
 
-echo "brew install SDL2";
-brew install sdl2;
+#echo "brew install SDL2";
+#brew install sdl2;
 
 echo "download openGLUT"
-curl "https://downloads.sourceforge.net/project/openglut/development/OpenGLUT-0.6.3/OpenGLUT-win32-i386-0.6.3.zip?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fopenglut%2Ffiles%2Flatest%2Fdownload&ts=1552932253"
+curl -L "https://sourceforge.net/projects/openglut/files/openglut-0.6.3.tar.bz2"
 echo "unzip openGLUT"
-tar -vxf OpenGLUT-win32-i386-0.6.3.zip
+tar -vxf OpenGLUT-win32-i386-0.6.3.zip -C openGL_library/includes/
 rm OpenGLUT-win32-i386-0.6.3.zip
 
 #echo "mlx install";

@@ -10,7 +10,7 @@ set(prefixSources   ${CMAKE_CURRENT_SOURCE_DIR}/project/sources/)
 set(prefixTests     ${CMAKE_CURRENT_SOURCE_DIR}/tests/)
 set(prefixNcurses   ${CMAKE_CURRENT_SOURCE_DIR}/ncurses_library/sources/)
 #set(prefixMlx ${CMAKE_CURRENT_SOURCE_DIR}/mlx_library/sources/)
-#set(prefixLib2 testLib2/sources/)
+set(prefixOpenGL    ${CMAKE_CURRENT_SOURCE_DIR}/openGL_library/sources/)
 set(libDirectory    ${CMAKE_CURRENT_SOURCE_DIR}/libs)
 
 # prepend path to files
@@ -62,15 +62,18 @@ PREPEND(sourcesNcurses  ${prefixNcurses}    ${ncursesFiles})
 
 #PREPEND(sourcesMlx      ${prefixMlx}        ${mlxFiles})
 
-#set(lib2Files PartA.cpp PartB.cpp)
+# openGL
+set(openGLFiles
+       Graphics.cpp
+       )
 
-#PREPEND(sourcesLib2 ${prefixLib2} ${lib2Files})
+PREPEND(sourcesOpenGL      ${prefixOpenGL}        ${openGLFiles})
+
 
 # libraries
-#add_library(mlx SHARED      ${sourcesMlx}       project/includes/IGraphics.hpp)
 add_library(ncurses SHARED  ${sourcesNcurses}   project/includes/IGraphics.hpp)
-
-#add_library(lib2 SHARED ${sourcesLib2})
+#add_library(mlx SHARED      ${sourcesMlx}       project/includes/IGraphics.hpp)
+add_library(openGL SHARED      ${sourcesOpenGL}       project/includes/IGraphics.hpp)
 
 # exe
 
@@ -94,6 +97,10 @@ set_target_properties(ncurses PROPERTIES
  #       LIBRARY_OUTPUT_DIRECTORY ${libDirectory}
  #       SUFFIX ".so")
 
+set_target_properties(openGL PROPERTIES
+       LIBRARY_OUTPUT_DIRECTORY ${libDirectory}
+       SUFFIX ".so")
+
 set_target_properties(nibbler PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 # links
@@ -101,3 +108,5 @@ set_target_properties(nibbler PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURREN
 TARGET_LINK_LIBRARIES(nibbler ncurses)
 
 #TARGET_LINK_LIBRARIES(nibbler lib2)
+
+TARGET_LINK_LIBRARIES(nibbler openGL)
