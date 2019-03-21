@@ -1,21 +1,32 @@
 
-#ifndef GRAPHICS_HPP
-# define GRAPHICS_HPP
+#ifndef OPENGL_GRAPHICS_HPP
+# define OPENGL_GRAPHICS_HPP
 
 # include <iostream>
-# include ""
-#include "../../project/includes/IGraphics.hpp"
+# include "OpenGLUT-0.6.3/openglut.h"
+# include "../../project/includes/IGraphics.hpp"
 
-class Graphics {
+class Graphics : public IGraphics{
 public:
-    Graphics(void) = default;
+    Graphics() = default;
     Graphics(Graphics const &src) = default;
     virtual ~Graphics(void) = default;
     Graphics &operator=(Graphics const &rhs) = default;
 
-private:
+    Graphics(int x, int y);
 
+    void display(Map const &map, UI const &gameInfo);
+    eInputs getInput() const;
+
+private:
+    int     xSize;
+    int     ySize;
 };
+
+extern "C" {
+Graphics *newGraphics(int x, int y);
+void deleteGraphics(Graphics *graphics);
+}
 
 
 #endif
