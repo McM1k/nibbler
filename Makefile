@@ -35,7 +35,7 @@ CFLAGS =	-Wall -Wextra -Werror -std=c++11 -Wno-deprecated-declarations
 SFLAGS =    -shared -fPIC -undefined dynamic_lookup
 L1FLAGS =   -lncurses
 L2FLAGS =
-L3FLAGS =
+L3FLAGS =   -framework OpenGL -framework GLUT
 
 # binaries
 EXE =       nibbler
