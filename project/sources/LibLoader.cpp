@@ -21,6 +21,7 @@ LibLoader::LibLoader(eSharedLibs _libName) : libName(_libName), LIBSNUMBER(4) {
 
     libs[eSharedLibs::ncursesLib] = const_cast<char *>("libs/libncurses.so");
     libs[eSharedLibs::mlxLib] = const_cast<char *>("libs/libmlx.so");
+    libs[eSharedLibs::openglLib] = const_cast<char *>("libs/libopengl.so");
 
     dl_handle = dlopen(libs[this->libName], RTLD_NOW | RTLD_LOCAL);
 

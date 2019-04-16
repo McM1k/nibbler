@@ -3,7 +3,13 @@
 # define OPENGL_GRAPHICS_HPP
 
 # include <iostream>
-# include "OpenGLUT-0.6.3/openglut.h"
+# include <stdlib.h>
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+//# include "OpenGLUT-0.6.3/openglut.h"
 # include "../../project/includes/IGraphics.hpp"
 
 class Graphics : public IGraphics{
@@ -21,9 +27,11 @@ public:
 private:
     int     xSize;
     int     ySize;
+    int     windowIdentifier;
 };
 
 extern "C" {
+void renderScene(void);
 Graphics *newGraphics(int x, int y);
 void deleteGraphics(Graphics *graphics);
 }

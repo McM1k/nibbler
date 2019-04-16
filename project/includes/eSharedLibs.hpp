@@ -14,7 +14,8 @@
 
 typedef enum {
     ncursesLib,
-    mlxLib
+    mlxLib,
+    openglLib
 } eSharedLibs;
 
 #endif

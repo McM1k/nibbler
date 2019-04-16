@@ -31,7 +31,7 @@ CR_DL =	\xe2\x95\x9a
 
 # comp
 CC =		clang++
-CFLAGS =	-Wall -Wextra -Werror -std=c++11
+CFLAGS =	-Wall -Wextra -Werror -std=c++11 -Wno-deprecated-declarations
 SFLAGS =    -shared -fPIC -undefined dynamic_lookup
 L1FLAGS =   -lncurses
 L2FLAGS =
@@ -41,7 +41,7 @@ L3FLAGS =
 EXE =       nibbler
 LIB1 =      libncurses.so
 LIB2 =
-LIB3 =
+LIB3 =      libopengl.so
 
 # dir
 SRC_DIR =       sources
@@ -50,7 +50,7 @@ OBJ_DIR =       obj
 PROJ_DIR =      project
 LIB1_DIR =      ncurses_library
 LIB2_DIR =
-LIB3_DIR =
+LIB3_DIR =      openGL_library
 LIBS_DIR =      libs
 
 # libs
@@ -70,7 +70,7 @@ LIB1_SRC_LIST = Display.cpp \
 
 LIB2_SRC_LIST =
 
-LIB3_SRC_LIST =
+LIB3_SRC_LIST = Graphics.cpp
 
 # objects
 PROJ_OBJ_LIST = $(PROJ_SRC_LIST:.cpp=.o)
@@ -92,7 +92,7 @@ LIB3_OBJ =	$(addprefix $(LIB3_DIR)/$(OBJ_DIR)/, $(LIB3_OBJ_LIST))
 
 all :		    $(EXE)
 
-$(EXE) :                    $(LIB1) $(PROJ_SRC) $(PROJ_OBJ)
+$(EXE) :                    $(LIB1) $(LIB3) $(PROJ_SRC) $(PROJ_OBJ)
 	                        @$(CC) $(PROJ_OBJ) -o $@
 	                        @echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$(EXE) "$(CLEAR)$(LIG)"
 

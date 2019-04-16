@@ -116,7 +116,7 @@ void GameManager::inputLib1() {changeLib(eSharedLibs::ncursesLib);}
 
 void GameManager::inputLib2() {changeLib(eSharedLibs::mlxLib);}//TODO change lib used
 
-void GameManager::inputLib3() {changeLib(eSharedLibs::ncursesLib);}// TODO change lib used
+void GameManager::inputLib3() {changeLib(eSharedLibs::openglLib);}// TODO change lib used
 
 void GameManager::inputPause() {
     if (this->state == eGameState::Pause)
