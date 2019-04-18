@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.9)
 project(nibbler)
 
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lncurses -undefined dynamic_lookup")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lncurses -undefined dynamic_lookup -framework OpenGL -framework GLUT")
 
 # Files paths
 
@@ -65,6 +65,8 @@ PREPEND(sourcesNcurses  ${prefixNcurses}    ${ncursesFiles})
 # openGL
 set(openGLFiles
        Graphics.cpp
+        Displayer.cpp
+        Inputs.cpp
        )
 
 PREPEND(sourcesOpenGL      ${prefixOpenGL}        ${openGLFiles})

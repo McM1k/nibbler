@@ -11,6 +11,8 @@
 #endif
 //# include "OpenGLUT-0.6.3/openglut.h"
 # include "../../project/includes/IGraphics.hpp"
+# include "../includes/Displayer.hpp"
+# include "../includes/Inputs.hpp"
 
 class Graphics : public IGraphics{
 public:
@@ -25,13 +27,14 @@ public:
     eInputs getInput() const;
 
 private:
-    int     xSize;
-    int     ySize;
-    int     windowIdentifier;
+    int         xSize;
+    int         ySize;
+    int         windowIdentifier;
+    Displayer   displayer;
+    Inputs      inputs;
 };
 
 extern "C" {
-void renderScene(void);
 Graphics *newGraphics(int x, int y);
 void deleteGraphics(Graphics *graphics);
 }

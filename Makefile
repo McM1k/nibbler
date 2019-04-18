@@ -71,6 +71,8 @@ LIB1_SRC_LIST = Display.cpp \
 LIB2_SRC_LIST =
 
 LIB3_SRC_LIST = Graphics.cpp
+                Displayer.cpp
+                Inputs.cpp
 
 # objects
 PROJ_OBJ_LIST = $(PROJ_SRC_LIST:.cpp=.o)
