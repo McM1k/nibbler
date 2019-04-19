@@ -34,8 +34,9 @@ Graphics::Graphics(int x, int y) : xSize((x + 5) * 20), ySize(y * 20){
 /* ******************************* */
 /*            Functions            */
 /* ******************************* */
-void Graphics::display(Map const &, UI const &) {
-
+void Graphics::display(Map const &map, UI const &gameInfo) {
+    Displayer::map = map;
+    Displayer::gameInfo = gameInfo;
 }
 
 eInputs Graphics::getInput() const {

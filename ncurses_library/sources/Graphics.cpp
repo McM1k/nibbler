@@ -24,7 +24,7 @@ Graphics::Graphics(int x, int y) {
     keypad(this->window, true);
     nodelay(this->window, true);
 
-    this->display1 = Display(x, y);
+    this->display1 = Displayer(x, y);
     this->inputs = Inputs(this->window);
 }
 

@@ -23,6 +23,12 @@ UI::UI() : score(0), gameState(eGameState::Game) {
 /* ******************************* */
 /*       operators  overload       */
 /* ******************************* */
+UI& UI::operator=(UI const &rhs) {
+    this->score = rhs.getScore();
+    this->gameState = rhs.getGameState();
+
+    return *this;
+}
 
 std::ostream &operator<<(std::ostream &o, UI const &instance) {
     o << "UI :" << std::endl;

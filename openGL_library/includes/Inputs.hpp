@@ -3,6 +3,7 @@
 # define OPENGL_INPUTS_HPP
 
 # include <iostream>
+
 # ifdef __APPLE__
 #  include <GLUT/glut.h>
 #  else

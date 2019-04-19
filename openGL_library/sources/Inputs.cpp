@@ -24,6 +24,8 @@ Inputs::Inputs() { lastInput = eInputs::noInput; }
 
 /* ******************************* */
 void processNormalKeys(unsigned char key, int x, int y) {
+    (void)x;
+    (void)y;
 
     switch(key) {
         case ' ' :
@@ -40,6 +42,9 @@ void processNormalKeys(unsigned char key, int x, int y) {
 }
 
 void processSpecialKeys(int key, int x, int y) {
+    (void)x;
+    (void)y;
+
     switch(key) {
         case GLUT_KEY_UP :
             Inputs::lastInput = eInputs::up;

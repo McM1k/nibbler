@@ -83,6 +83,16 @@ void Map::setSnake(const std::list<Bloc> &_snake) {
 /*
  * Operators
  */
+Map& Map::operator=(Map const &rhs) {
+    this->xSize = rhs.getXSize();
+    this->ySize = rhs.getYSize();
+    this->obstacles = rhs.getObstacles();
+    this->snake = rhs.getSnake();
+    this->fruit = rhs.getFruit();
+
+    return *this;
+}
+
  std::ostream& operator<<(std::ostream &o, Map &i) {
     o << "xSize = " << i.getXSize() << ", ySize = " << i.getYSize();
     for (auto obstacles_part : i.getObstacles()) { o << ", obstacles = " << obstacles_part; }

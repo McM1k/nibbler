@@ -4,7 +4,7 @@
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-Displayer::Displayer(int x, int y) : xSize(x), ySize(y) {}
+Displayer::Displayer(int x, int y) : xSize(x), ySize(y) {(void)xSize; (void)ySize;}
 
 /* ******************************* */
 /*            Accessors            */

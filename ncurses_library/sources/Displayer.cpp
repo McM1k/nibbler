@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Display.cpp                                        :+:      :+:    :+:   */
+/*   Displayer.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboudrie <gboudrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Display.hpp"
+#include "../includes/Displayer.hpp"
 
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-Display::Display(int x, int y) : xSize(x), ySize(y){
+Displayer::Displayer(int x, int y) : xSize(x), ySize(y){
     curs_set(0);
     start_color();
     init_pair(1, COLOR_BLACK, COLOR_RED);
@@ -34,7 +34,7 @@ Display::Display(int x, int y) : xSize(x), ySize(y){
 /* ******************************* */
 /*            Functions            */
 /* ******************************* */
-void Display::printSnake(std::list<Bloc> snake) {
+void Displayer::printSnake(std::list<Bloc> snake) {
     /*
     std::list<Bloc *>::const_iterator prev = snake.begin();
     std::list<Bloc *>::const_iterator next = snake.begin();
@@ -90,19 +90,19 @@ void Display::printSnake(std::list<Bloc> snake) {
     }
 }
 
-void Display::printFruit(Bloc fruit) {
+void Displayer::printFruit(Bloc fruit) {
     if (fruit.getX() >= 0 && fruit.getY() >= 0) {
         mvaddch(fruit.getY() + 1, fruit.getX() + 1, FRUIT);
     }
 }
 
-void Display::printObstacles(std::list<Bloc> obstacles) {
+void Displayer::printObstacles(std::list<Bloc> obstacles) {
     for (const auto &obstacle_part : obstacles) {
         mvaddch(obstacle_part.getY() + 1, obstacle_part.getX() + 1, OBSTACLE);
     }
 }
 
-void Display::printBorders() {
+void Displayer::printBorders() {
     for (int i = 0; i < xSize + 2; i++) {
         mvaddch(0, i, GENERIC_BORDER);
         mvaddch(ySize + 1, i, GENERIC_BORDER);
@@ -113,7 +113,7 @@ void Display::printBorders() {
     }
 }
 
-void Display::printUI(UI const &gameInfo) {
+void Displayer::printUI(UI const &gameInfo) {
     std::stringstream stringstream;
 
     stringstream << static_cast<eGameState>(gameInfo.getGameState());
@@ -121,7 +121,7 @@ void Display::printUI(UI const &gameInfo) {
     mvprintw(ySize + 2, 0, "Game State : %s | Score : %d", stringstream.str().c_str(), gameInfo.getScore());
 }
 
-void Display::display(const Map &map, const UI &gameInfo) {
+void Displayer::display(const Map &map, const UI &gameInfo) {
     clear();
     //wclear(this->window);
 //    wborder(this->window, LEFT_BORDER, RIGHT_BORDER, UP_BORDER, DOWN_BORDER,
@@ -143,10 +143,10 @@ void Display::display(const Map &map, const UI &gameInfo) {
 /* ******************************* */
 /*            Exceptions           */
 /* ******************************* */
-const char *Display::UnableToDeleteWindowException::what() const noexcept {
+const char *Displayer::UnableToDeleteWindowException::what() const noexcept {
     return "Unable to delete nCurses window";
 }
 
-const char *Display::BrokenSnakeException::what() const noexcept {
+const char *Displayer::BrokenSnakeException::what() const noexcept {
     return "Snake is broken";
 }

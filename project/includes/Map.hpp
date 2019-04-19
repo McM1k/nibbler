@@ -26,7 +26,7 @@ public:
     Map(Map const &src) = default;
     virtual ~Map() = default;
 
-    Map &operator=(Map const &rhs) = delete;
+    Map &operator=(Map const &rhs);
 
 
 
@@ -59,8 +59,8 @@ public:
         const char *what() const noexcept override;
     };
 private:
-    int const           xSize{};
-    int const           ySize{};
+    int                 xSize{};
+    int                 ySize{};
     std::list<Bloc>     obstacles;
     std::list<Bloc>     snake;
     Bloc                fruit;

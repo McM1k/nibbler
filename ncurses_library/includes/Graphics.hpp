@@ -16,7 +16,7 @@
 # include <iostream>
 # include <ncurses.h>
 # include "../../project/includes/IGraphics.hpp"
-#include "Display.hpp"
+#include "Displayer.hpp"
 #include "Inputs.hpp"
 
 class Graphics : public IGraphics {
@@ -32,7 +32,7 @@ public:
 
 private:
     WINDOW *window;
-    Display display1;
+    Displayer display1;
     Inputs inputs;
 
 };

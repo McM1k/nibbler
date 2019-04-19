@@ -20,8 +20,8 @@
 class UI {
 public:
     UI();
-
     virtual ~UI() = default;
+    UI &operator=(UI const &rhs);
 
     int getScore() const;
 
@@ -41,7 +41,7 @@ public:
 private:
     UI(UI const &src) = default;
 
-    UI &operator=(UI const &) = default;
+
 
     int score;
     eGameState gameState;

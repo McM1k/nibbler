@@ -45,7 +45,7 @@ PREPEND(tests ${prefixTests} ${sourcesTests})
 
 # ncurses
 set(ncursesFiles
-        Display.cpp
+        Displayer.cpp
         Inputs.cpp
         Graphics.cpp
         )
@@ -57,7 +57,7 @@ PREPEND(sourcesNcurses  ${prefixNcurses}    ${ncursesFiles})
  #       Graphics.cpp
  #       MlxData.cpp
  #       Inputs.cpp
- #       Display.cpp
+ #       Displayer.cpp
  #       )
 
 #PREPEND(sourcesMlx      ${prefixMlx}        ${mlxFiles})

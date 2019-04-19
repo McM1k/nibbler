@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Display.hpp                                        :+:      :+:    :+:   */
+/*   Displayer.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboudrie <gboudrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -57,14 +57,14 @@
 
 #include <sstream>
 
-class Display{
+class Displayer{
 public:
-    Display() = default;
-    Display(Display const &src) = default;
-    virtual ~Display() = default;
-    Display &operator=(Display const &rhs) = default;
+    Displayer() = default;
+    Displayer(Displayer const &src) = default;
+    virtual ~Displayer() = default;
+    Displayer &operator=(Displayer const &rhs) = default;
 
-    Display(int x, int y);
+    Displayer(int x, int y);
 
     void display(Map const &map, UI const &gameInfo);
 

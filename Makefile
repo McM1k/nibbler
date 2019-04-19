@@ -64,14 +64,14 @@ PROJ_SRC_LIST = main.cpp \
                 GameManager.cpp \
                 ObstaclesFactory.cpp
 
-LIB1_SRC_LIST = Display.cpp \
+LIB1_SRC_LIST = Displayer.cpp \
                 Inputs.cpp \
                 Graphics.cpp
 
 LIB2_SRC_LIST =
 
-LIB3_SRC_LIST = Graphics.cpp
-                Displayer.cpp
+LIB3_SRC_LIST = Graphics.cpp \
+                Displayer.cpp \
                 Inputs.cpp
 
 # objects
